@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import '../index.css'; // Explicitly import CSS
 
 const Home = () => {
+  useEffect(() => {
+    // Force re-render on component mount to ensure styles are applied
+    document.body.className = document.body.className;
+  }, []);
+
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8 bg-white min-h-screen">
       <header className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-2 text-gray-800">Bienvenido a Mi Portafolio</h1>
         <p className="text-xl text-gray-600">Descubre mis proyectos y habilidades</p>
@@ -16,11 +22,11 @@ const Home = () => {
         <h2 className="text-2xl font-semibold mb-4 border-b-2 border-blue-500 pb-2 inline-block">Mis Proyectos</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
           {/* Aquí puedes agregar tus proyectos */}
-          <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6">
+          <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6 border border-gray-200">
             <h3 className="text-xl font-medium mb-2 text-blue-600">Proyecto 1</h3>
             <p className="text-gray-700">Descripción del proyecto</p>
           </div>
-          <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6">
+          <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6 border border-gray-200">
             <h3 className="text-xl font-medium mb-2 text-blue-600">Proyecto 2</h3>
             <p className="text-gray-700">Descripción del proyecto</p>
           </div>

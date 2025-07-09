@@ -4,10 +4,13 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <BrowserRouter basename="/">
-      <App />
-    </BrowserRouter>
-  </StrictMode>,
-)
+// Add a small delay to ensure styles are loaded
+setTimeout(() => {
+  createRoot(document.getElementById('root')).render(
+    <StrictMode>
+      <BrowserRouter basename="/">
+        <App />
+      </BrowserRouter>
+    </StrictMode>,
+  )
+}, 10)
