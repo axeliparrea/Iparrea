@@ -6,7 +6,7 @@
   "homepage": "https://axeliparrea.com",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp ../CNAME dist/ && touch dist/.nojekyll",
+    "build": "vite build && echo axeliparrea.com > dist/CNAME && touch dist/.nojekyll",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
