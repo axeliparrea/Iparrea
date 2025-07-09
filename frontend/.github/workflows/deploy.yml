@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Configura esto según la rama principal de tu proyecto (main o master)
+      - main  
 
 permissions:
   contents: write
@@ -35,7 +35,7 @@ jobs:
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: frontend/dist  # Carpeta donde Vite genera los archivos de distribución
-          branch: gh-pages  # Rama donde se subirá el código compilado
-          clean: true  # Limpia los archivos antiguos
+          folder: frontend/dist  
+          branch: gh-pages  
+          clean: true  
 
