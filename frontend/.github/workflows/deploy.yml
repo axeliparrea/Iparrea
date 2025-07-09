@@ -1,0 +1,41 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Configura esto según la rama principal de tu proyecto (main o master)
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 📦
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18  
+
+      - name: Install dependencies 🔧
+        run: |
+          cd frontend
+          npm ci
+          
+      - name: Build 🏗️
+        run: |
+          cd frontend
+          npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Deploy to GitHub Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: frontend/dist  # Carpeta donde Vite genera los archivos de distribución
+          branch: gh-pages  # Rama donde se subirá el código compilado
+          clean: true  # Limpia los archivos antiguos
+
