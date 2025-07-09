@@ -32,10 +32,20 @@ jobs:
         env:
           NODE_ENV: production
 
+      - name: Copy CNAME file 📝
+        run: |
+          if [ -f "CNAME" ]; then
+            cp CNAME frontend/dist/
+            echo "CNAME file copied to build directory"
+          fi
+
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: frontend/dist  
           branch: gh-pages  
           clean: true  
+          clean-exclude: |
+            CNAME
+            .nojekyll
 
