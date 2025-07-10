@@ -1,51 +1,140 @@
-import React, { useEffect } from 'react';
-import '../index.css'; // Explicitly import CSS
+import React, { useEffect, useState } from 'react';
+import { useTheme } from '../hook/ThemeContext';
+import { useLanguage } from '../hook/LanguageContext';
 
 const Home = () => {
+  const { colors, isDark } = useTheme();
+  const { t } = useLanguage();
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
-    // Force re-render on component mount to ensure styles are applied
-    document.body.className = document.body.className;
-  }, []);
+    setIsLoaded(true);
+    console.log('Home loaded, colors:', colors);
+    console.log('isDark:', isDark);
+  }, [colors, isDark]);
+
+  const containerStyle = {
+    background: colors.background,
+    color: colors.text,
+    minHeight: '100vh',
+    position: 'relative',
+    overflow: 'hidden',
+    paddingTop: '80px',
+  };
+
+  const heroStyle = {
+    background: `linear-gradient(135deg, ${colors.background} 0%, ${colors.surface} 50%, ${colors.background} 100%)`,
+    minHeight: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    position: 'relative',
+    padding: '20px',
+  };
+
+  const profileImageStyle = {
+    width: '200px',
+    height: '200px',
+    borderRadius: '50%',
+    background: `linear-gradient(135deg, ${colors.primary}20, ${colors.secondary}20, ${colors.accent}20)`,
+    border: `3px solid ${colors.primary}`,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '3rem',
+    fontWeight: 'bold',
+    color: colors.primary,
+    margin: '0 auto',
+    boxShadow: `0 0 30px ${colors.primary}40`,
+    fontFamily: 'JetBrains Mono, monospace',
+  };
+
+  const titleStyle = {
+    fontSize: '3rem',
+    fontWeight: 'bold',
+    color: colors.text,
+    marginBottom: '20px',
+    textShadow: `0 0 20px ${colors.primary}40`,
+    fontFamily: 'JetBrains Mono, monospace',
+    textAlign: 'center',
+  };
+
+  const descriptionStyle = {
+    fontSize: '1.2rem',
+    color: colors.textMuted,
+    marginBottom: '30px',
+    lineHeight: '1.6',
+    fontFamily: 'Inter, sans-serif',
+    textAlign: 'center',
+  };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 bg-white min-h-screen">
-      <header className="text-center mb-12">
-        <h1 className="text-4xl font-bold mb-2 text-gray-800">Bienvenido a Mi Portafolio</h1>
-        <p className="text-xl text-gray-600">Descubre mis proyectos y habilidades</p>
-      </header>
-      
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4 border-b-2 border-blue-500 pb-2 inline-block">Sobre Mí</h2>
-        <p className="text-gray-700">Soy un desarrollador web apasionado por crear soluciones digitales innovadoras.</p>      </section>
-      
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4 border-b-2 border-blue-500 pb-2 inline-block">Mis Proyectos</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-          {/* Aquí puedes agregar tus proyectos */}
-          <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6 border border-gray-200">
-            <h3 className="text-xl font-medium mb-2 text-blue-600">Proyecto 1</h3>
-            <p className="text-gray-700">Descripción del proyecto</p>
-          </div>
-          <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6 border border-gray-200">
-            <h3 className="text-xl font-medium mb-2 text-blue-600">Proyecto 2</h3>
-            <p className="text-gray-700">Descripción del proyecto</p>
+    <div style={containerStyle}>
+      <div className="container-fluid">
+        <div className="row justify-content-center align-items-center min-vh-100">
+          <div className="col-12 col-md-8 col-lg-6 text-center">
+            
+            {/* Profile Image */}
+            <div style={profileImageStyle}>
+              <span style={{ textShadow: `0 0 20px ${colors.primary}` }}>
+                A
+              </span>
+            </div>
+
+            {/* Title */}
+            <h1 style={titleStyle}>
+              AIR Portfolio
+            </h1>
+
+            {/* Description */}
+            <p style={descriptionStyle}>
+              {t('dataEngineerDesc')}
+            </p>
+
+            {/* Tech Stack */}
+            <div className="d-flex flex-wrap gap-2 justify-content-center mb-4">
+              {['Python', 'React', 'Azure', 'SAP'].map((tech, index) => (
+                <span 
+                  key={tech}
+                  style={{
+                    background: `linear-gradient(135deg, ${colors.primary}20, ${colors.accent}20)`,
+                    color: colors.primary,
+                    padding: '8px 16px',
+                    borderRadius: '20px',
+                    border: `1px solid ${colors.primary}30`,
+                    fontSize: '14px',
+                    fontWeight: 'bold',
+                    fontFamily: 'JetBrains Mono, monospace',
+                    boxShadow: `0 0 15px ${colors.primary}20`,
+                  }}
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            {/* Debug Info */}
+            <div style={{
+              position: 'fixed',
+              top: '100px',
+              left: '10px',
+              padding: '10px',
+              background: 'rgba(0,0,0,0.8)',
+              color: 'white',
+              fontSize: '12px',
+              fontFamily: 'monospace',
+              zIndex: 1000,
+              borderRadius: '4px',
+            }}>
+              <div>Theme: {isDark ? 'dark' : 'light'}</div>
+              <div>Background: {colors.background}</div>
+              <div>Text: {colors.text}</div>
+              <div>Primary: {colors.primary}</div>
+              <div>isLoaded: {isLoaded ? 'true' : 'false'}</div>
+            </div>
+
           </div>
         </div>
-      </section>
-      
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4 border-b-2 border-blue-500 pb-2 inline-block">Mis Habilidades</h2>
-        <ul className="flex flex-wrap gap-3 mt-4">
-          <li className="bg-blue-500 text-white px-4 py-2 rounded-full">React</li>
-          <li className="bg-yellow-500 text-white px-4 py-2 rounded-full">JavaScript</li>
-          <li className="bg-orange-500 text-white px-4 py-2 rounded-full">HTML/CSS</li>
-          <li className="bg-green-500 text-white px-4 py-2 rounded-full">Node.js</li>
-        </ul>
-      </section>
-      
-      <footer className="mt-16 pt-8 border-t border-gray-200 text-center text-gray-500">
-        <p>&copy; {new Date().getFullYear()} - Mi Portafolio Personal</p>
-      </footer>
+      </div>
     </div>
   );
 };

@@ -1,29 +1,40 @@
-import { useState, useEffect } from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Home from "./pages/Home";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider, useTheme } from './hook/ThemeContext';
+import { LanguageProvider } from './hook/LanguageContext';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import './App.css';
 
-const App = () => {
-  // Force a rerender when the app is mounted to ensure styles are applied
-  const [forceRender, setForceRender] = useState(0);
+function AppContent() {
+  const { isDark } = useTheme();
   
-  useEffect(() => {
-    // Force a rerender after a small delay
-    const timer = setTimeout(() => setForceRender(prev => prev + 1), 100);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
-    <>
-      <ToastContainer position="top-right" autoClose={3000} />
-      <Routes>
-        <Route path="/" element={<Home key={forceRender} />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </>
+    <div className={`App ${isDark ? 'dark' : 'light'}`}>
+      <Navbar />
+      <main className="main-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<div>About Page</div>} />
+          <Route path="/book" element={<div>Book Page</div>} />
+          <Route path="/portfolio" element={<div>Portfolio Page</div>} />
+          <Route path="/blog" element={<div>Blog Page</div>} />
+          <Route path="/contact" element={<div>Contact Page</div>} />
+        </Routes>
+      </main>
+    </div>
   );
-};
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <LanguageProvider>
+        <Router>
+          <AppContent />
+        </Router>
+      </LanguageProvider>
+    </ThemeProvider>
+  );
+}
 
 export default App;
