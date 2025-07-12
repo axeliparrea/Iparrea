@@ -1,139 +1,98 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axel Iparrea - Software Engineer</title>
+  <meta name="description" content="Axel Iparrea - Software Engineer specialized in Data Engineering and Full Stack Development">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- SEO Meta Tags -->
+  <meta name="author" content="Axel Iparrea">
+  <meta name="keywords" content="Axel Iparrea, Software Engineer, Data Engineer, Full Stack Developer, Python, SAP, React">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Axel Iparrea - Software Engineer">
+  <meta property="og:description" content="Software Engineer specialized in Data Engineering and Full Stack Development">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://axeliparrea.com">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Axel Iparrea - Software Engineer">
+  <meta name="twitter:description" content="Software Engineer specialized in Data Engineering and Full Stack Development">
+  
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#007bff">
+  
+  <style>
+    /* Critical CSS for initial load */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    html {
+      scroll-behavior: smooth;
+    }
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f8f9fa;
+    }
     
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    #root {
+      min-height: 100vh;
+    }
     
-    <title>AIR - Axel Iparrea Portfolio</title>
+    /* Loading state */
+    .loading-fallback {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #f8f9fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
     
-    <style>
-      /* Loading Animation */
-      .loading-screen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #0a0a0a;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-        transition: opacity 0.5s ease;
-      }
-      
-      .loading-screen.hidden {
-        opacity: 0;
-        pointer-events: none;
-      }
-      
-      .loading-logo {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 4rem;
-        font-weight: bold;
-        color: #00ff88;
-        text-shadow: 0 0 30px #00ff88;
-        animation: loadingPulse 2s ease-in-out infinite;
-      }
-      
-      @keyframes loadingPulse {
-        0%, 100% {
-          opacity: 0.5;
-          transform: scale(1);
-        }
-        50% {
-          opacity: 1;
-          transform: scale(1.05);
-        }
-      }
-      
-      .loading-text {
-        position: absolute;
-        bottom: 30%;
-        font-family: 'JetBrains Mono', monospace;
-        color: #00ff88;
-        font-size: 1rem;
-        animation: loadingDots 1.5s infinite;
-      }
-      
-      @keyframes loadingDots {
-        0%, 20% {
-          content: 'loading';
-        }
-        40% {
-          content: 'loading.';
-        }
-        60% {
-          content: 'loading..';
-        }
-        80%, 100% {
-          content: 'loading...';
-        }
-      }
-      
-      .loading-text::after {
-        content: 'loading';
-        animation: loadingDots 1.5s infinite;
-      }
-      
-      @keyframes loadingDots {
-        0%, 20% {
-          content: 'loading';
-        }
-        40% {
-          content: 'loading.';
-        }
-        60% {
-          content: 'loading..';
-        }
-        80%, 100% {
-          content: 'loading...';
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Loading Screen -->
-    <div id="loading-screen" class="loading-screen">
-      <div class="text-center">
-        <div class="loading-logo">AIR</div>
-        <div class="loading-text">loading...</div>
-      </div>
+    .loading-spinner {
+      border: 3px solid #e9ecef;
+      border-top: 3px solid #007bff;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <!-- Loading fallback -->
+    <div class="loading-fallback">
+      <div class="loading-spinner"></div>
     </div>
-    
-    <div id="root"></div>
-    
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Loading Script -->
-    <script>
-      // Hide loading screen after page loads
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          const loadingScreen = document.getElementById('loading-screen');
-          if (loadingScreen) {
-            loadingScreen.classList.add('hidden');
-            setTimeout(() => {
-              loadingScreen.style.display = 'none';
-            }, 500);
-          }
-        }, 1000); // Show loading for at least 1 second
-      });
-    </script>
-    
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+  </div>
+  
+  <script type="module" src="/src/main.jsx"></script>
+</body>
 </html>

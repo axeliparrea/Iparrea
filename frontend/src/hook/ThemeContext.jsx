@@ -30,17 +30,18 @@ export const ThemeProvider = ({ children }) => {
     isDark,
     toggleTheme,
     colors: isDark ? {
-      // Dark/Hacker theme
-      primary: '#00ff88', // Neon green
-      secondary: '#ff0080', // Neon pink
-      accent: '#00d4ff', // Neon blue
+      // Dark Hacker theme - softer colors
+      primary: '#00cc6a', // Softer green
+      secondary: '#00a6cc', // Softer blue
+      accent: '#cc0066', // Softer pink
       background: '#0a0a0a', // Deep black
       surface: '#111111', // Dark surface
       card: '#1a1a1a', // Card background
       text: '#ffffff', // White text
+      textSecondary: '#a0a0a0', // Secondary text
       textMuted: '#a0a0a0', // Muted text
       border: '#333333', // Border color
-      gradient: 'linear-gradient(135deg, #00ff88 0%, #00d4ff 50%, #ff0080 100%)',
+      gradient: 'linear-gradient(135deg, #00cc6a 0%, #00a6cc 100%)',
       codeBackground: '#0d1117',
     } : {
       // Light theme
@@ -51,9 +52,10 @@ export const ThemeProvider = ({ children }) => {
       surface: '#f8fafc', // Light surface
       card: '#ffffff', // Card background
       text: '#1f2937', // Dark text
+      textSecondary: '#6b7280', // Secondary text
       textMuted: '#6b7280', // Muted text
       border: '#e5e7eb', // Border color
-      gradient: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #059669 100%)',
+      gradient: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)',
       codeBackground: '#f6f8fa',
     }
   };

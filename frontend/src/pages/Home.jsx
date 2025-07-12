@@ -1,277 +1,449 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '../hook/ThemeContext';
-import { useLanguage } from '../hook/LanguageContext';
-import ParticleBackground from '../components/ParticleBackground';
+import { motion } from 'framer-motion';
 import LoadingScreen from '../components/LoadingScreen';
 import AboutSection from '../components/AboutSection';
-import ProjectsSection from '../components/ProjectsSection';
-import SkillsSection from '../components/SkillsSection';
 import ExperienceSection from '../components/ExperienceSection';
+import ProjectsSection from '../components/ProjectsSection';
+import TerminalComponent from '../components/TerminalComponent';
+import MatrixBackground from '../components/MatrixBackground';
 
 const Home = () => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
-  const { t } = useLanguage();
   const [isLoading, setIsLoading] = useState(true);
-  const [currentRole, setCurrentRole] = useState('dataEngineer');
-  const [isVisible, setIsVisible] = useState(false);
+  const [showTerminal, setShowTerminal] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-      setIsVisible(true);
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentRole(prev => prev === 'dataEngineer' ? 'fullStackDev' : 'dataEngineer');
-    }, 4000);
-
-    return () => clearInterval(interval);
   }, []);
 
   if (isLoading) {
     return <LoadingScreen />;
   }
 
-  const heroStyle = {
-    minHeight: '100vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'relative',
-    background: `linear-gradient(135deg, ${colors.background} 0%, ${colors.surface} 100%)`,
-    overflow: 'hidden',
-  };
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = 120;
+      const elementPosition = element.offsetTop;
+      const offsetPosition = elementPosition - headerOffset;
 
-  const contentStyle = {
-    textAlign: 'center',
-    zIndex: 2,
-    position: 'relative',
-    maxWidth: '800px',
-    padding: '0 20px',
-  };
-
-  const nameStyle = {
-    fontSize: '3.5rem',
-    fontWeight: 'bold',
-    color: colors.text,
-    marginBottom: '20px',
-    fontFamily: 'JetBrains Mono, monospace',
-    textShadow: `0 0 30px ${colors.primary}30`,
-    opacity: isVisible ? 1 : 0,
-    transform: `translateY(${isVisible ? 0 : 50}px)`,
-    transition: 'all 1s ease-out',
-  };
-
-  const roleStyle = {
-    fontSize: '1.8rem',
-    color: colors.primary,
-    marginBottom: '30px',
-    fontFamily: 'JetBrains Mono, monospace',
-    textShadow: `0 0 20px ${colors.primary}50`,
-    opacity: isVisible ? 1 : 0,
-    transform: `translateY(${isVisible ? 0 : 30}px)`,
-    transition: 'all 1s ease-out 0.3s',
-  };
-
-  const descriptionStyle = {
-    fontSize: '1.2rem',
-    color: colors.textMuted,
-    lineHeight: '1.6',
-    marginBottom: '40px',
-    opacity: isVisible ? 1 : 0,
-    transform: `translateY(${isVisible ? 0 : 30}px)`,
-    transition: 'all 1s ease-out 0.6s',
-  };
-
-  const profileContainerStyle = {
-    position: 'relative',
-    width: '200px',
-    height: '200px',
-    margin: '40px auto',
-    borderRadius: '50%',
-    background: `linear-gradient(135deg, ${colors.primary}40, ${colors.accent}40)`,
-    padding: '4px',
-    boxShadow: `0 0 50px ${colors.primary}30`,
-    opacity: isVisible ? 1 : 0,
-    transform: `scale(${isVisible ? 1 : 0.8})`,
-    transition: 'all 1s ease-out 0.9s',
-  };
-
-  const profileImageStyle = {
-    width: '100%',
-    height: '100%',
-    borderRadius: '50%',
-    background: `linear-gradient(135deg, ${colors.surface}, ${colors.background})`,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '4rem',
-    color: colors.primary,
-    fontFamily: 'JetBrains Mono, monospace',
-    fontWeight: 'bold',
-  };
-
-  const downloadButtonStyle = {
-    background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})`,
-    color: colors.background,
-    border: 'none',
-    borderRadius: '50px',
-    padding: '15px 30px',
-    fontSize: '1rem',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-    transition: 'all 0.3s ease',
-    boxShadow: `0 10px 30px ${colors.primary}40`,
-    fontFamily: 'JetBrains Mono, monospace',
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: '10px',
-    marginTop: '20px',
-    opacity: isVisible ? 1 : 0,
-    transform: `translateY(${isVisible ? 0 : 30}px)`,
-    transition: 'all 1s ease-out 1.2s',
-  };
-
-  const scrollIndicatorStyle = {
-    position: 'absolute',
-    bottom: '30px',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    color: colors.textMuted,
-    fontSize: '0.9rem',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: '10px',
-    opacity: isVisible ? 1 : 0,
-    animation: 'bounce 2s infinite',
-  };
-
-  const getCurrentRoleDesc = () => {
-    return currentRole === 'dataEngineer' ? t('dataEngineerDesc') : t('fullStackDesc');
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
-    <div style={{ minHeight: '100vh' }}>
-      <ParticleBackground />
+    <div style={{
+      background: colors.background,
+      color: colors.text,
+      fontFamily: 'Inter, sans-serif',
+      position: 'relative'
+    }}>
+      {/* Matrix Background */}
+      <MatrixBackground />
       
       {/* Hero Section */}
-      <section style={heroStyle}>
-        <div style={contentStyle}>
-          <h1 style={nameStyle}>
-            Axel Iparrea Software Engineer
-          </h1>
-          
-          <h2 style={roleStyle}>
-            {t(currentRole)}
-          </h2>
-          
-          <p style={descriptionStyle}>
-            {getCurrentRoleDesc()}
-          </p>
-          
-          <div style={profileContainerStyle}>
-            <div style={profileImageStyle}>
-              A
-            </div>
-          </div>
-          
-          <button
-            style={downloadButtonStyle}
-            onClick={() => {
-              const link = document.createElement('a');
-              link.href = '/Axel_Iparrea_CV.pdf';
-              link.download = 'Axel_Iparrea_CV.pdf';
-              link.click();
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.transform = 'translateY(-5px)';
-              e.target.style.boxShadow = `0 15px 40px ${colors.primary}60`;
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.transform = 'translateY(0)';
-              e.target.style.boxShadow = `0 10px 30px ${colors.primary}40`;
+      <section style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: window.innerWidth < 768 ? '1rem' : '2rem',
+        paddingTop: window.innerWidth < 768 ? '7rem' : '8rem',
+        position: 'relative'
+      }}>
+        <div style={{
+          maxWidth: '1200px',
+          width: '100%',
+          display: 'grid',
+          gridTemplateColumns: window.innerWidth < 768 ? '1fr' : 'repeat(auto-fit, minmax(350px, 1fr))',
+          gap: window.innerWidth < 768 ? '2rem' : '4rem',
+          alignItems: 'center'
+        }}>
+          {/* Left Side - Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            style={{
+              textAlign: 'left'
             }}
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-              <polyline points="14,2 14,8 20,8"/>
-              <line x1="16" y1="13" x2="8" y2="13"/>
-              <line x1="16" y1="17" x2="8" y2="17"/>
-              <polyline points="10,9 9,9 8,9"/>
-            </svg>
-            {t('downloadCV')}
-          </button>
-        </div>
-        
-        <div style={scrollIndicatorStyle}>
-          <span>Scroll to explore</span>
-          <div style={{
-            width: '2px',
-            height: '30px',
-            background: `linear-gradient(to bottom, ${colors.primary}, transparent)`,
-            borderRadius: '1px',
-          }}></div>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              style={{
+                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                fontWeight: '700',
+                marginBottom: '1rem',
+                letterSpacing: '-0.02em',
+                lineHeight: '1.1',
+                color: colors.text
+              }}
+            >
+              Axel Iparrea
+            </motion.h1>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              style={{
+                fontSize: 'clamp(1.2rem, 2vw, 1.8rem)',
+                color: colors.textSecondary,
+                marginBottom: '1rem',
+                fontWeight: '500',
+                lineHeight: '1.4'
+              }}
+            >
+              {t('dataEngineer')} & {t('fullStackDev')}
+            </motion.p>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              style={{
+                fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
+                color: colors.textSecondary,
+                marginBottom: '2rem',
+                lineHeight: '1.6'
+              }}
+            >
+              {t('specialized')} {t('in')} SAP data {t('solutions')}, AI/ML, {t('and')} cybersecurity. 
+              Award-winning developer {t('building')} innovative {t('solutions')} {t('in')} Monterrey, Mexico.
+            </motion.p>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              style={{
+                display: 'flex',
+                gap: '1.5rem',
+                flexWrap: 'wrap',
+                marginBottom: '2rem'
+              }}
+            >
+              <button
+                onClick={() => scrollToSection('projects')}
+                style={{
+                  background: colors.primary,
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '8px',
+                  padding: '0.75rem 1.5rem',
+                  fontSize: '0.95rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  boxShadow: `0 2px 8px ${colors.primary}30`,
+                  fontFamily: 'Inter, sans-serif'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.opacity = '0.9';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.opacity = '1';
+                }}
+              >
+                {t('viewMyWork')}
+              </button>
+              
+              <a
+                href="/Axel_Iparrea_ComputerScience.pdf"
+                download="Axel_Iparrea_CV.pdf"
+                style={{
+                  background: 'transparent',
+                  color: colors.text,
+                  border: `1px solid ${colors.border}`,
+                  borderRadius: '8px',
+                  padding: '0.75rem 1.5rem',
+                  fontSize: '0.95rem',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  textDecoration: 'none',
+                  display: 'inline-block',
+                  fontFamily: 'Inter, sans-serif'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = colors.primary;
+                  e.target.style.color = '#ffffff';
+                  e.target.style.borderColor = colors.primary;
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = 'transparent';
+                  e.target.style.color = colors.text;
+                  e.target.style.borderColor = colors.border;
+                }}
+              >
+                {t('downloadCV')}
+              </a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1 }}
+              style={{
+                display: 'flex',
+                gap: '1rem',
+                alignItems: 'center',
+                marginBottom: '2rem'
+              }}
+            >
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.5rem 1rem',
+                background: `${colors.primary}20`,
+                borderRadius: '20px',
+                border: `1px solid ${colors.primary}30`
+              }}>
+                <div style={{
+                  width: '8px',
+                  height: '8px',
+                  backgroundColor: '#22c55e',
+                  borderRadius: '50%',
+                  animation: 'pulse 2s infinite'
+                }}></div>
+                <span style={{
+                  fontSize: '0.9rem',
+                  color: colors.primary,
+                  fontWeight: '500'
+                }}>
+                  {t('availableForOpportunities')}
+                </span>
+              </div>
+            </motion.div>
+
+            <motion.button
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+              onClick={() => setShowTerminal(!showTerminal)}
+              style={{
+                background: `${colors.surface}`,
+                color: colors.text,
+                border: `1px solid ${colors.border}`,
+                borderRadius: '8px',
+                padding: '0.75rem 1.5rem',
+                fontSize: '0.9rem',
+                fontWeight: '500',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                fontFamily: 'Monaco, monospace'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = colors.primary;
+                e.target.style.color = '#ffffff';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = colors.surface;
+                e.target.style.color = colors.text;
+              }}
+            >
+              {showTerminal ? t('hideTerminal') : t('showTerminal')}
+            </motion.button>
+          </motion.div>
+          
+          {/* Right Side - Terminal */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            {showTerminal ? (
+              <TerminalComponent />
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                style={{
+                  width: window.innerWidth < 768 ? '300px' : '400px',
+                  height: window.innerWidth < 768 ? '300px' : '400px',
+                  background: colors.surface,
+                  borderRadius: '12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: `1px solid ${colors.border}`,
+                  position: 'relative',
+                  overflow: 'hidden'
+                }}
+              >
+                <div style={{
+                  fontSize: '6rem',
+                  fontWeight: '700',
+                  color: `${colors.primary}30`,
+                  fontFamily: 'Monaco, monospace'
+                }}>
+                  {'{ }'}
+                </div>
+                <div style={{
+                  position: 'absolute',
+                  bottom: '2rem',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  color: colors.textSecondary,
+                  fontSize: '0.9rem',
+                  fontFamily: 'Monaco, monospace'
+                }}>
+                  {t('clickToExplore')}
+                </div>
+              </motion.div>
+            )}
+          </motion.div>
         </div>
       </section>
 
       {/* About Section */}
-      <AboutSection />
+      <section id="about">
+        <AboutSection />
+      </section>
 
       {/* Experience Section */}
-      <ExperienceSection />
+      <section id="experience">
+        <ExperienceSection />
+      </section>
 
       {/* Projects Section */}
-      <ProjectsSection />
+      <section id="projects">
+        <ProjectsSection />
+      </section>
 
-      {/* Skills Section */}
-      <SkillsSection />
-
-      {/* Contact Section Placeholder */}
-      <section id="contact-section" style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: `linear-gradient(135deg, ${colors.background} 0%, ${colors.surface} 100%)`,
-        padding: '100px 0'
+      {/* Contact Section */}
+      <section id="contact" style={{
+        padding: window.innerWidth < 768 ? '3rem 1rem' : '5rem 0',
+        background: colors.surface,
+        textAlign: 'center'
       }}>
         <div style={{
-          textAlign: 'center',
-          color: colors.textMuted,
-          fontFamily: 'JetBrains Mono, monospace'
+          maxWidth: '800px',
+          margin: '0 auto',
+          padding: '0 2rem'
         }}>
-          <h2 style={{ color: colors.primary, fontSize: '2rem', marginBottom: '20px' }}>
-            Contact Section
-          </h2>
-          <p>Coming soon...</p>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            style={{
+              fontSize: '2.5rem',
+              fontWeight: '600',
+              marginBottom: '2rem',
+              color: colors.text
+            }}
+          >
+            {t('contactTitle')}
+          </motion.h2>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            style={{
+              fontSize: '1.2rem',
+              color: colors.textSecondary,
+              lineHeight: '1.6',
+              marginBottom: '3rem'
+            }}
+          >
+            {t('contactDescription')}
+          </motion.p>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            style={{
+              display: 'flex',
+              gap: '2rem',
+              justifyContent: 'center',
+              flexWrap: 'wrap'
+            }}
+          >
+            <a
+              href="mailto:axeliparrea@gmail.com"
+              style={{
+                background: colors.primary,
+                color: '#ffffff',
+                textDecoration: 'none',
+                padding: '0.75rem 1.5rem',
+                borderRadius: '8px',
+                fontWeight: '600',
+                transition: 'all 0.3s ease',
+                display: 'inline-block',
+                fontSize: '0.95rem'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.opacity = '0.9';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.opacity = '1';
+              }}
+            >
+              {t('sendEmail')}
+            </a>
+            
+            <a
+              href="https://linkedin.com/in/axel-iparrea"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                background: 'transparent',
+                color: colors.text,
+                textDecoration: 'none',
+                padding: '0.75rem 1.5rem',
+                borderRadius: '8px',
+                fontWeight: '600',
+                transition: 'all 0.3s ease',
+                display: 'inline-block',
+                border: `1px solid ${colors.border}`,
+                fontSize: '0.95rem'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = colors.primary;
+                e.target.style.color = '#ffffff';
+                e.target.style.borderColor = colors.primary;
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = 'transparent';
+                e.target.style.color = colors.text;
+                e.target.style.borderColor = colors.border;
+              }}
+            >
+              {t('connectOnLinkedIn')}
+            </a>
+          </motion.div>
         </div>
       </section>
 
-      {/* Blog Section Placeholder */}
-      <section id="blog-section" style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: `linear-gradient(135deg, ${colors.surface} 0%, ${colors.background} 100%)`,
-        padding: '100px 0'
-      }}>
-        <div style={{
-          textAlign: 'center',
-          color: colors.textMuted,
-          fontFamily: 'JetBrains Mono, monospace'
-        }}>
-          <h2 style={{ color: colors.primary, fontSize: '2rem', marginBottom: '20px' }}>
-            Blog Section
-          </h2>
-          <p>Coming soon...</p>
-        </div>
-      </section>
+      {/* CSS Animation */}
+      <style jsx>{`
+        @keyframes pulse {
+          0% { opacity: 1; }
+          50% { opacity: 0.5; }
+          100% { opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 };
