@@ -13,7 +13,7 @@ const Home = () => {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const [isLoading, setIsLoading] = useState(true);
-  const [showTerminal, setShowTerminal] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -21,6 +21,15 @@ const Home = () => {
     }, 2000);
 
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   if (isLoading) {
@@ -57,16 +66,17 @@ const Home = () => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: window.innerWidth < 768 ? '1rem' : '2rem',
-        paddingTop: window.innerWidth < 768 ? '7rem' : '8rem',
+        padding: isMobile ? '1rem' : '2rem',
+        paddingTop: isMobile ? '6rem' : '8rem',
+        paddingBottom: isMobile ? '2rem' : '4rem',
         position: 'relative'
       }}>
         <div style={{
-          maxWidth: '1200px',
+          maxWidth: '1400px',
           width: '100%',
           display: 'grid',
-          gridTemplateColumns: window.innerWidth < 768 ? '1fr' : 'repeat(auto-fit, minmax(350px, 1fr))',
-          gap: window.innerWidth < 768 ? '2rem' : '4rem',
+          gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+          gap: isMobile ? '3rem' : '5rem',
           alignItems: 'center'
         }}>
           {/* Left Side - Info */}
@@ -75,7 +85,7 @@ const Home = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             style={{
-              textAlign: 'left'
+              textAlign: isMobile ? 'center' : 'left'
             }}
           >
             <motion.h1
@@ -83,7 +93,7 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               style={{
-                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                fontSize: isMobile ? 'clamp(2rem, 8vw, 3rem)' : 'clamp(2.5rem, 5vw, 4rem)',
                 fontWeight: '700',
                 marginBottom: '1rem',
                 letterSpacing: '-0.02em',
@@ -99,7 +109,7 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               style={{
-                fontSize: 'clamp(1.2rem, 2vw, 1.8rem)',
+                fontSize: isMobile ? 'clamp(1rem, 4vw, 1.2rem)' : 'clamp(1.2rem, 2vw, 1.8rem)',
                 color: colors.textSecondary,
                 marginBottom: '1rem',
                 fontWeight: '500',
@@ -114,10 +124,11 @@ const Home = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
               style={{
-                fontSize: 'clamp(1rem, 1.5vw, 1.2rem)',
+                fontSize: isMobile ? 'clamp(0.9rem, 3vw, 1rem)' : 'clamp(1rem, 1.5vw, 1.2rem)',
                 color: colors.textSecondary,
                 marginBottom: '2rem',
-                lineHeight: '1.6'
+                lineHeight: '1.6',
+                maxWidth: isMobile ? '100%' : '90%'
               }}
             >
               {t('specialized')} {t('in')} SAP data {t('solutions')}, AI/ML, {t('and')} cybersecurity. 
@@ -130,31 +141,27 @@ const Home = () => {
               transition={{ duration: 0.8, delay: 0.8 }}
               style={{
                 display: 'flex',
-                gap: '1.5rem',
+                gap: isMobile ? '1rem' : '1.5rem',
                 flexWrap: 'wrap',
-                marginBottom: '2rem'
+                marginBottom: '2rem',
+                justifyContent: isMobile ? 'center' : 'flex-start'
               }}
             >
               <button
                 onClick={() => scrollToSection('projects')}
+                className="btn btn-primary"
                 style={{
                   background: colors.primary,
                   color: '#ffffff',
                   border: 'none',
                   borderRadius: '8px',
-                  padding: '0.75rem 1.5rem',
-                  fontSize: '0.95rem',
+                  padding: isMobile ? '0.6rem 1.2rem' : '0.75rem 1.5rem',
+                  fontSize: isMobile ? '0.85rem' : '0.95rem',
                   fontWeight: '600',
                   cursor: 'pointer',
                   transition: 'all 0.3s ease',
                   boxShadow: `0 2px 8px ${colors.primary}30`,
                   fontFamily: 'Inter, sans-serif'
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.opacity = '0.9';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.opacity = '1';
                 }}
               >
                 {t('viewMyWork')}
@@ -163,29 +170,20 @@ const Home = () => {
               <a
                 href="/Axel_Iparrea_ComputerScience.pdf"
                 download="Axel_Iparrea_CV.pdf"
+                className="btn btn-secondary"
                 style={{
                   background: 'transparent',
                   color: colors.text,
                   border: `1px solid ${colors.border}`,
                   borderRadius: '8px',
-                  padding: '0.75rem 1.5rem',
-                  fontSize: '0.95rem',
+                  padding: isMobile ? '0.6rem 1.2rem' : '0.75rem 1.5rem',
+                  fontSize: isMobile ? '0.85rem' : '0.95rem',
                   fontWeight: '600',
                   cursor: 'pointer',
                   transition: 'all 0.3s ease',
                   textDecoration: 'none',
                   display: 'inline-block',
                   fontFamily: 'Inter, sans-serif'
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.background = colors.primary;
-                  e.target.style.color = '#ffffff';
-                  e.target.style.borderColor = colors.primary;
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.background = 'transparent';
-                  e.target.style.color = colors.text;
-                  e.target.style.borderColor = colors.border;
                 }}
               >
                 {t('downloadCV')}
@@ -200,14 +198,15 @@ const Home = () => {
                 display: 'flex',
                 gap: '1rem',
                 alignItems: 'center',
-                marginBottom: '2rem'
+                marginBottom: '2rem',
+                justifyContent: isMobile ? 'center' : 'flex-start'
               }}
             >
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.5rem',
-                padding: '0.5rem 1rem',
+                padding: isMobile ? '0.4rem 0.8rem' : '0.5rem 1rem',
                 background: `${colors.primary}20`,
                 borderRadius: '20px',
                 border: `1px solid ${colors.primary}30`
@@ -220,7 +219,7 @@ const Home = () => {
                   animation: 'pulse 2s infinite'
                 }}></div>
                 <span style={{
-                  fontSize: '0.9rem',
+                  fontSize: isMobile ? '0.8rem' : '0.9rem',
                   color: colors.primary,
                   fontWeight: '500'
                 }}>
@@ -229,37 +228,39 @@ const Home = () => {
               </div>
             </motion.div>
 
-            <motion.button
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-              onClick={() => setShowTerminal(!showTerminal)}
-              style={{
-                background: `${colors.surface}`,
-                color: colors.text,
-                border: `1px solid ${colors.border}`,
-                borderRadius: '8px',
-                padding: '0.75rem 1.5rem',
-                fontSize: '0.9rem',
-                fontWeight: '500',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
-                fontFamily: 'Monaco, monospace'
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.background = colors.primary;
-                e.target.style.color = '#ffffff';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.background = colors.surface;
-                e.target.style.color = colors.text;
-              }}
-            >
-              {showTerminal ? t('hideTerminal') : t('showTerminal')}
-            </motion.button>
+            {/* Mobile Terminal Note */}
+            {isMobile && (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.2 }}
+                style={{
+                  background: `${colors.surface}80`,
+                  padding: '1rem',
+                  borderRadius: '8px',
+                  border: `1px solid ${colors.border}`,
+                  marginBottom: '2rem',
+                  textAlign: 'center'
+                }}
+              >
+                <p style={{
+                  fontSize: '0.9rem',
+                  color: colors.textSecondary,
+                  marginBottom: '0.5rem'
+                }}>
+                  💻 {t('terminalInteractiveBelow')}
+                </p>
+                <p style={{
+                  fontSize: '0.8rem',
+                  color: colors.textSecondary
+                }}>
+                  {t('exploreSkillsProjects')}
+                </p>
+              </motion.div>
+            )}
           </motion.div>
           
-          {/* Right Side - Terminal */}
+          {/* Right Side - Terminal (Always Active) */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -267,50 +268,11 @@ const Home = () => {
             style={{
               display: 'flex',
               justifyContent: 'center',
-              alignItems: 'center'
+              alignItems: 'center',
+              width: '100%'
             }}
           >
-            {showTerminal ? (
-              <TerminalComponent />
-            ) : (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6 }}
-                style={{
-                  width: window.innerWidth < 768 ? '300px' : '400px',
-                  height: window.innerWidth < 768 ? '300px' : '400px',
-                  background: colors.surface,
-                  borderRadius: '12px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  border: `1px solid ${colors.border}`,
-                  position: 'relative',
-                  overflow: 'hidden'
-                }}
-              >
-                <div style={{
-                  fontSize: '6rem',
-                  fontWeight: '700',
-                  color: `${colors.primary}30`,
-                  fontFamily: 'Monaco, monospace'
-                }}>
-                  {'{ }'}
-                </div>
-                <div style={{
-                  position: 'absolute',
-                  bottom: '2rem',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  color: colors.textSecondary,
-                  fontSize: '0.9rem',
-                  fontFamily: 'Monaco, monospace'
-                }}>
-                  {t('clickToExplore')}
-                </div>
-              </motion.div>
-            )}
+            <TerminalComponent />
           </motion.div>
         </div>
       </section>
@@ -332,21 +294,21 @@ const Home = () => {
 
       {/* Contact Section */}
       <section id="contact" style={{
-        padding: window.innerWidth < 768 ? '3rem 1rem' : '5rem 0',
+        padding: isMobile ? '3rem 1rem' : '5rem 0',
         background: colors.surface,
         textAlign: 'center'
       }}>
         <div style={{
           maxWidth: '800px',
           margin: '0 auto',
-          padding: '0 2rem'
+          padding: isMobile ? '0 1rem' : '0 2rem'
         }}>
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             style={{
-              fontSize: '2.5rem',
+              fontSize: isMobile ? '2rem' : '2.5rem',
               fontWeight: '600',
               marginBottom: '2rem',
               color: colors.text
@@ -360,7 +322,7 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             style={{
-              fontSize: '1.2rem',
+              fontSize: isMobile ? '1rem' : '1.2rem',
               color: colors.textSecondary,
               lineHeight: '1.6',
               marginBottom: '3rem'
@@ -375,29 +337,24 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             style={{
               display: 'flex',
-              gap: '2rem',
+              gap: isMobile ? '1rem' : '2rem',
               justifyContent: 'center',
               flexWrap: 'wrap'
             }}
           >
             <a
               href="mailto:axeliparrea@gmail.com"
+              className="btn btn-primary"
               style={{
                 background: colors.primary,
                 color: '#ffffff',
                 textDecoration: 'none',
-                padding: '0.75rem 1.5rem',
+                padding: isMobile ? '0.6rem 1.2rem' : '0.75rem 1.5rem',
                 borderRadius: '8px',
                 fontWeight: '600',
                 transition: 'all 0.3s ease',
                 display: 'inline-block',
-                fontSize: '0.95rem'
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.opacity = '0.9';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.opacity = '1';
+                fontSize: isMobile ? '0.85rem' : '0.95rem'
               }}
             >
               {t('sendEmail')}
@@ -407,27 +364,18 @@ const Home = () => {
               href="https://linkedin.com/in/axel-iparrea"
               target="_blank"
               rel="noopener noreferrer"
+              className="btn btn-secondary"
               style={{
                 background: 'transparent',
                 color: colors.text,
                 textDecoration: 'none',
-                padding: '0.75rem 1.5rem',
+                padding: isMobile ? '0.6rem 1.2rem' : '0.75rem 1.5rem',
                 borderRadius: '8px',
                 fontWeight: '600',
                 transition: 'all 0.3s ease',
                 display: 'inline-block',
                 border: `1px solid ${colors.border}`,
-                fontSize: '0.95rem'
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.background = colors.primary;
-                e.target.style.color = '#ffffff';
-                e.target.style.borderColor = colors.primary;
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.background = 'transparent';
-                e.target.style.color = colors.text;
-                e.target.style.borderColor = colors.border;
+                fontSize: isMobile ? '0.85rem' : '0.95rem'
               }}
             >
               {t('connectOnLinkedIn')}

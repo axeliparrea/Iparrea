@@ -1,0 +1,94 @@
+{
+  "aboutTitle": "Acerca de Mí",
+  "experience": "Experiencia",
+  "projectsNav": "Proyectos", 
+  "contact": "Contacto",
+  "about": "Acerca de",
+  "projectsTitle": "Proyectos Destacados",
+  "educationTitle": "Educación",
+  "fullName": "Axel Eduardo Iparrea Ramos",
+  "email": "axeliparrea@gmail.com",
+  "phone": "+52 (81) 8888-8888",
+  "location": "Monterrey, México",
+  "projectDetails": "Ver Detalles del Proyecto →",
+  "loading": "Cargando...",
+  "hackathonsTitle": "Hackathons y Competencias",
+  "winner": "Ganador",
+  "participant": "Participante", 
+  "completed": "Completado",
+  "inProgress": "En Progreso",
+  "planning": "Planeando",
+  "dataEngineer": "Ingeniero de Datos",
+  "fullStackDev": "Desarrollador Full Stack",
+  "specialized": "Especializado",
+  "in": "en",
+  "solutions": "soluciones",
+  "and": "y",
+  "building": "construyendo",
+  "viewMyWork": "Ver Mi Trabajo",
+  "downloadCV": "Descargar CV",
+  "availableForOpportunities": "Disponible para nuevas oportunidades",
+  "contactTitle": "Contacto",
+  "contactDescription": "Siempre estoy abierto a discutir nuevas oportunidades, proyectos innovadores o posibles colaboraciones. ¡Conectemos y exploremos cómo podemos trabajar juntos!",
+  "sendEmail": "Enviar Email",
+  "connectOnLinkedIn": "Conectar en LinkedIn",
+  "aboutDescription": "Soy un estudiante apasionado de Ciencias de la Computación en el Tecnológico de Monterrey con un fuerte enfoque en ingeniería de datos, desarrollo full-stack e inteligencia artificial. Actualmente trabajando como Ingeniero de Automatización de Datos y Nube en ESAB, me especializo en crear flujos de datos eficientes y construir soluciones innovadoras que generan valor empresarial.",
+  "languages": "Idiomas",
+  "terminalInteractiveBelow": "Terminal interactiva disponible abajo",
+  "exploreSkillsProjects": "Explora mis habilidades y proyectos",
+  "terminalWhoami": "Axel Eduardo Iparrea Ramos\nIngeniero de Datos y Desarrollador Full Stack\nEstudiante del Tecnológico de Monterrey\nBaseado en Monterrey, México",
+  "terminalSkills": "JavaScript, Python, C#, C++, Java, Kotlin\nReact, Node.js, .NET Core, Unity\nSQL, MongoDB, Power BI, SAP S/4HANA\nAzure, Git, Linux, Agile",
+  "terminalLocation": "📍 Monterrey, Nuevo León, México\n🏢 Actualmente en ESAB\n🎓 Tecnológico de Monterrey",
+  "terminalGitStatus": "En rama main\nTu rama está actualizada con 'origin/main'\n✅ Todas las habilidades actualizadas\n🚀 Listo para nuevos desafíos",
+  "terminalPassion": "Construyendo soluciones innovadoras que marcan la diferencia\n💡 Siempre aprendiendo y explorando nuevas tecnologías\n🎯 Enfocado en crear valor a través del código",
+  "projects": {
+    "sapitos": {
+      "title": "SAPitos 2.0",
+      "subtitle": "Cadena de Suministro Inteligente con IA",
+      "description": "Ganador del SAP Labs Final Showcase 2025. Una solución galardonada de cadena de suministro inteligente para PYME de ropa boutique, enfocada en automatizar y optimizar la logística usando tecnologías SAP con características impulsadas por IA.",
+      "category": "IA y Empresarial"
+    },
+    "awakDashboard": {
+      "title": "AWAK Dashboard",
+      "subtitle": "Visualización de Progreso de Usuario",
+      "description": "Un dashboard integral para visualizar el progreso de los usuarios en su proceso de incorporación. Construido con C# y tecnologías web modernas, esta herramienta proporciona información detallada sobre el engagement y análisis de progresión del usuario.",
+      "category": "Aplicación Web"
+    },
+    "awakGame": {
+      "title": "AWAK Game",
+      "subtitle": "Desarrollo de Juego en Unity",
+      "description": "Proyecto de juego interactivo en Unity desarrollado como parte de un esfuerzo colaborativo en equipo. Presenta mecánicas de juego atractivas y prácticas modernas de desarrollo de juegos usando el motor Unity y C#.",
+      "category": "Desarrollo de Juegos"
+    },
+    "sistemaMultiagente": {
+      "title": "Sistema Multi-Agente",
+      "subtitle": "Simulación de Sistema Multi-Agente",
+      "description": "Simulación avanzada de sistema multi-agente desarrollada en C#. Este proyecto demuestra interacciones complejas entre agentes autónomos y muestra comprensión de conceptos de inteligencia artificial y sistemas distribuidos.",
+      "category": "IA y Simulación"
+    },
+    "cybersecurityIntegration": {
+      "title": "Integración de Ciberseguridad",
+      "subtitle": "Proyecto de Clase de Seguridad",
+      "description": "Proyecto integral de ciberseguridad desarrollado en Kotlin enfocándose en integración e implementación de seguridad. Este proyecto académico demuestra conceptos avanzados de seguridad y aplicación práctica de principios de ciberseguridad.",
+      "category": "Ciberseguridad"
+    },
+    "portfolio": {
+      "title": "Portafolio Personal",
+      "subtitle": "Portafolio Web Profesional",
+      "description": "Un sitio web de portafolio moderno y responsivo que muestra mi trabajo profesional y habilidades técnicas. Construido con React y optimizado para rendimiento con animaciones suaves y elementos interactivos.",
+      "category": "Frontend"
+    }
+  },
+  "hackathons": {
+    "sapLabs": {
+      "title": "SAP Labs Final Showcase 2025",
+      "status": "Ganador",
+      "description": "Solución de cadena de suministro inteligente con IA para PYME de ropa boutique usando tecnologías SAP"
+    },
+    "hackMty": {
+      "title": "Hack MTY 2022",
+      "status": "Participante",
+      "description": "Desarrollé una aplicación web atractiva para atraer y retener demografías más jóvenes"
+    }
+  }
+} 

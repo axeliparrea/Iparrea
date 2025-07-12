@@ -107,7 +107,7 @@ const AboutSection = () => {
             boxShadow: `0 8px 24px ${colors.primary}25`
           }}>
             <img
-              src="/src/assets/pictures/poseaxel.png"
+              src="/assets/pictures/poseaxel.png"
               alt="Axel Eduardo Iparrea Ramos"
               style={{
                 width: '100%',

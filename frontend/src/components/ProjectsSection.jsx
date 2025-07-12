@@ -32,79 +32,79 @@ const ProjectsSection = () => {
   const projects = [
     {
       id: 'sapitos',
-      title: 'SAPitos 2.0',
-      subtitle: 'AI-Powered Smart Supply Chain',
-      description: 'Winner of SAP Labs Final Showcase 2025. An award-winning smart supply chain solution for boutique apparel SME, focused on automating and optimizing logistics using SAP technologies with AI-powered features.',
-      image: '/src/assets/pictures/AIRCLOUD.png',
+      title: t('projects.sapitos.title'),
+      subtitle: t('projects.sapitos.subtitle'),
+      description: t('projects.sapitos.description'),
+      image: '/assets/pictures/AIRCLOUD.png',
       videoId: null, // Solo imagen
       technologies: ['JavaScript', 'SAP S/4HANA', 'SAP Analytics Cloud', 'Machine Learning', 'AI Assistant'],
-      status: 'Completed',
-      category: 'AI & Enterprise',
+      status: t('completed'),
+      category: t('projects.sapitos.category'),
       period: '2025',
       color: '#00A86B'
     },
     {
       id: 'awak-dashboard',
-      title: 'AWAK Dashboard',
-      subtitle: 'User Progress Visualization',
-      description: 'A comprehensive dashboard for visualizing user progress in their onboarding process. Built with C# and modern web technologies, this tool provides detailed insights into user engagement and progression analytics.',
-      image: '/src/assets/pictures/poseaxel.png',
+      title: t('projects.awakDashboard.title'),
+      subtitle: t('projects.awakDashboard.subtitle'),
+      description: t('projects.awakDashboard.description'),
+      image: '/assets/pictures/poseaxel.png',
       videoId: null, // Solo imagen
       technologies: ['C#', '.NET', 'SQL Server', 'Bootstrap', 'Chart.js'],
-      status: 'Completed',
-      category: 'Web Application',
+      status: t('completed'),
+      category: t('projects.awakDashboard.category'),
       period: '2024',
       color: '#4F46E5'
     },
     {
       id: 'awak-game',
-      title: 'AWAK Game',
-      subtitle: 'Unity Game Development',
-      description: 'Interactive Unity game project developed as part of a collaborative team effort. Features engaging gameplay mechanics and modern game development practices using Unity engine and C#.',
-      image: '/src/assets/pictures/AIRCLOUD.png',
+      title: t('projects.awakGame.title'),
+      subtitle: t('projects.awakGame.subtitle'),
+      description: t('projects.awakGame.description'),
+      image: '/assets/pictures/AIRCLOUD.png',
       videoId: null, // Solo imagen
       technologies: ['Unity', 'C#', 'Game Development', 'Collaborative Development'],
-      status: 'Completed',
-      category: 'Game Development',
+      status: t('completed'),
+      category: t('projects.awakGame.category'),
       period: '2024',
       color: '#FF6B6B'
     },
     {
       id: 'sistema-multiagente',
-      title: 'Sistema Multiagente',
-      subtitle: 'Multi-Agent System Simulation',
-      description: 'Advanced multi-agent system simulation developed in C#. This project demonstrates complex interactions between autonomous agents and showcases understanding of artificial intelligence and distributed systems concepts.',
-      image: '/src/assets/pictures/poseaxel.png',
+      title: t('projects.sistemaMultiagente.title'),
+      subtitle: t('projects.sistemaMultiagente.subtitle'),
+      description: t('projects.sistemaMultiagente.description'),
+      image: '/assets/pictures/poseaxel.png',
       videoId: null, // Solo imagen
       technologies: ['C#', '.NET', 'AI Algorithms', 'System Simulation', 'Multi-Agent Systems'],
-      status: 'Completed',
-      category: 'AI & Simulation',
+      status: t('completed'),
+      category: t('projects.sistemaMultiagente.category'),
       period: '2024',
       color: '#10B981'
     },
     {
       id: 'cybersecurity-integration',
-      title: 'Cybersecurity Integration',
-      subtitle: 'Security Class Project',
-      description: 'Comprehensive cybersecurity project developed in Kotlin focusing on security integration and implementation. This academic project demonstrates advanced security concepts and practical application of cybersecurity principles.',
-      image: '/src/assets/pictures/AIRCLOUD.png',
+      title: t('projects.cybersecurityIntegration.title'),
+      subtitle: t('projects.cybersecurityIntegration.subtitle'),
+      description: t('projects.cybersecurityIntegration.description'),
+      image: '/assets/pictures/AIRCLOUD.png',
       videoId: null, // Solo imagen
       technologies: ['Kotlin', 'Cybersecurity', 'Security Integration', 'Mobile Security'],
-      status: 'Completed',
-      category: 'Cybersecurity',
+      status: t('completed'),
+      category: t('projects.cybersecurityIntegration.category'),
       period: '2024',
       color: '#F59E0B'
     },
     {
       id: 'portfolio',
-      title: 'Personal Portfolio',
-      subtitle: 'Professional Web Portfolio',
-      description: 'A modern, responsive portfolio website showcasing my professional work and technical skills. Built with React and optimized for performance with smooth animations and interactive elements.',
-      image: '/src/assets/pictures/poseaxel.png',
+      title: t('projects.portfolio.title'),
+      subtitle: t('projects.portfolio.subtitle'),
+      description: t('projects.portfolio.description'),
+      image: '/assets/pictures/poseaxel.png',
       videoId: null, // Aquí puedes poner el ID del video de YouTube
       technologies: ['React', 'Vite', 'CSS3', 'Framer Motion', 'JavaScript'],
-      status: 'Completed',
-      category: 'Frontend',
+      status: t('completed'),
+      category: t('projects.portfolio.category'),
       period: '2024',
       color: '#8B5CF6'
     }
@@ -112,15 +112,15 @@ const ProjectsSection = () => {
 
   const hackathons = [
     {
-      title: 'SAP Labs Final Showcase 2025',
-      status: 'Winner',
-      description: 'AI-powered smart supply chain solution for boutique apparel SME using SAP technologies',
+      title: t('hackathons.sapLabs.title'),
+      status: t('hackathons.sapLabs.status'),
+      description: t('hackathons.sapLabs.description'),
       color: '#22c55e'
     },
     {
-      title: 'Hack MTY 2022',
-      status: 'Participant',
-      description: 'Developed engaging web application for attracting and retaining younger demographics',
+      title: t('hackathons.hackMty.title'),
+      status: t('hackathons.hackMty.status'),
+      description: t('hackathons.hackMty.description'),
       color: '#3b82f6'
     }
   ];
@@ -163,9 +163,10 @@ const ProjectsSection = () => {
         boxShadow: `0 4px 12px ${colors.shadow}`,
         cursor: navigating ? 'wait' : 'pointer',
         position: 'relative',
-        transition: 'all 0.3s ease',
+        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
         transform: hoveredProject === project.id ? 'translateY(-8px)' : 'translateY(0)',
-        opacity: navigating ? 0.7 : 1
+        opacity: navigating ? 0.7 : 1,
+        willChange: 'transform, box-shadow'
       }}
       onMouseEnter={() => !navigating && setHoveredProject(project.id)}
       onMouseLeave={() => !navigating && setHoveredProject(null)}
@@ -197,8 +198,9 @@ const ProjectsSection = () => {
               fontSize: '3rem',
               color: `${project.color}80`,
               fontWeight: '700',
-              transition: 'all 0.3s ease',
-              transform: hoveredProject === project.id ? 'translate(-50%, -50%) scale(1.1)' : 'translate(-50%, -50%) scale(1)'
+              transition: 'transform 0.3s ease',
+              transform: hoveredProject === project.id ? 'translate(-50%, -50%) scale(1.1)' : 'translate(-50%, -50%) scale(1)',
+              willChange: 'transform'
             }}
           >
             {project.title.charAt(0)}
@@ -345,14 +347,15 @@ const ProjectsSection = () => {
             fontWeight: '600',
             fontSize: '14px',
             cursor: navigating ? 'wait' : 'pointer',
-            transition: 'all 0.3s ease',
+            transition: 'transform 0.2s ease, box-shadow 0.2s ease',
             opacity: navigating ? 0.7 : 1,
             transform: hoveredProject === project.id ? 'translateY(-2px)' : 'translateY(0)',
-            boxShadow: hoveredProject === project.id ? `0 6px 20px ${project.color}40` : `0 2px 10px ${project.color}20`
+            boxShadow: hoveredProject === project.id ? `0 6px 20px ${project.color}40` : `0 2px 10px ${project.color}20`,
+            willChange: 'transform, box-shadow'
           }}
           onClick={(e) => handleProjectClick(project.id, e)}
         >
-          {navigating ? 'Loading...' : 'View Project Details →'}
+          {navigating ? t('loading') : t('viewProjectDetails')}
         </div>
       </div>
     </motion.div>

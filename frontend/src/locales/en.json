@@ -1,0 +1,94 @@
+{
+  "aboutTitle": "About Me",
+  "experience": "Experience", 
+  "projectsNav": "Projects",
+  "contact": "Contact",
+  "about": "About",
+  "projectsTitle": "Featured Projects",
+  "educationTitle": "Education",
+  "fullName": "Axel Eduardo Iparrea Ramos",
+  "email": "axeliparrea@gmail.com",
+  "phone": "+52 (81) 8888-8888",
+  "location": "Monterrey, México",
+  "projectDetails": "View Project Details →",
+  "loading": "Loading...",
+  "hackathonsTitle": "Hackathons & Competitions",
+  "winner": "Winner",
+  "participant": "Participant",
+  "completed": "Completed",
+  "inProgress": "In Progress",
+  "planning": "Planning",
+  "dataEngineer": "Data Engineer",
+  "fullStackDev": "Full Stack Developer",
+  "specialized": "Specialized",
+  "in": "in",
+  "solutions": "solutions",
+  "and": "and",
+  "building": "building",
+  "viewMyWork": "View My Work",
+  "downloadCV": "Download CV",
+  "availableForOpportunities": "Available for new opportunities",
+  "contactTitle": "Get In Touch",
+  "contactDescription": "I'm always open to discussing new opportunities, innovative projects, or potential collaborations. Let's connect and explore how we can work together!",
+  "sendEmail": "Send Email",
+  "connectOnLinkedIn": "Connect on LinkedIn",
+  "aboutDescription": "I'm a passionate Computer Science student at Tecnológico de Monterrey with a strong focus on data engineering, full-stack development, and artificial intelligence. Currently working as a Data Automation & Cloud Engineer at ESAB, I specialize in creating efficient data workflows and building innovative solutions that drive business value.",
+  "languages": "Languages",
+  "terminalInteractiveBelow": "Interactive terminal available below",
+  "exploreSkillsProjects": "Explore my skills and projects",
+  "terminalWhoami": "Axel Eduardo Iparrea Ramos\nData Engineer & Full Stack Developer\nTecnológico de Monterrey Student\nBased in Monterrey, México",
+  "terminalSkills": "JavaScript, Python, C#, C++, Java, Kotlin\nReact, Node.js, .NET Core, Unity\nSQL, MongoDB, Power BI, SAP S/4HANA\nAzure, Git, Linux, Agile",
+  "terminalLocation": "📍 Monterrey, Nuevo León, México\n🏢 Currently at ESAB\n🎓 Tecnológico de Monterrey",
+  "terminalGitStatus": "On branch main\nYour branch is up to date with 'origin/main'\n✅ All skills up to date\n🚀 Ready for new challenges",
+  "terminalPassion": "Building innovative solutions that make a difference\n💡 Always learning and exploring new technologies\n🎯 Focused on creating value through code",
+  "projects": {
+    "sapitos": {
+      "title": "SAPitos 2.0",
+      "subtitle": "AI-Powered Smart Supply Chain",
+      "description": "Winner of SAP Labs Final Showcase 2025. An award-winning smart supply chain solution for boutique apparel SME, focused on automating and optimizing logistics using SAP technologies with AI-powered features.",
+      "category": "AI & Enterprise"
+    },
+    "awakDashboard": {
+      "title": "AWAK Dashboard",
+      "subtitle": "User Progress Visualization", 
+      "description": "A comprehensive dashboard for visualizing user progress in their onboarding process. Built with C# and modern web technologies, this tool provides detailed insights into user engagement and progression analytics.",
+      "category": "Web Application"
+    },
+    "awakGame": {
+      "title": "AWAK Game",
+      "subtitle": "Unity Game Development",
+      "description": "Interactive Unity game project developed as part of a collaborative team effort. Features engaging gameplay mechanics and modern game development practices using Unity engine and C#.",
+      "category": "Game Development"
+    },
+    "sistemaMultiagente": {
+      "title": "Multi-Agent System",
+      "subtitle": "Multi-Agent System Simulation", 
+      "description": "Advanced multi-agent system simulation developed in C#. This project demonstrates complex interactions between autonomous agents and showcases understanding of artificial intelligence and distributed systems concepts.",
+      "category": "AI & Simulation"
+    },
+    "cybersecurityIntegration": {
+      "title": "Cybersecurity Integration",
+      "subtitle": "Security Class Project",
+      "description": "Comprehensive cybersecurity project developed in Kotlin focusing on security integration and implementation. This academic project demonstrates advanced security concepts and practical application of cybersecurity principles.",
+      "category": "Cybersecurity"
+    },
+    "portfolio": {
+      "title": "Personal Portfolio",
+      "subtitle": "Professional Web Portfolio",
+      "description": "A modern, responsive portfolio website showcasing my professional work and technical skills. Built with React and optimized for performance with smooth animations and interactive elements.",
+      "category": "Frontend"
+    }
+  },
+  "hackathons": {
+    "sapLabs": {
+      "title": "SAP Labs Final Showcase 2025",
+      "status": "Winner",
+      "description": "AI-powered smart supply chain solution for boutique apparel SME using SAP technologies"
+    },
+    "hackMty": {
+      "title": "Hack MTY 2022", 
+      "status": "Participant",
+      "description": "Developed engaging web application for attracting and retaining younger demographics"
+    }
+  }
+} 

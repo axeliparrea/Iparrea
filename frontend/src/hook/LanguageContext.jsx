@@ -1,8 +1,10 @@
 import { createContext, useContext, useEffect } from 'react';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import enTranslations from '../locales/en.json';
+import esTranslations from '../locales/es.json';
 
-// Translation resources
+// Translation resources - combining existing with new translations
 const resources = {
   en: {
     translation: {
@@ -25,11 +27,11 @@ const resources = {
       clickToExplore: 'Click to explore',
       
       // About Section
-      aboutTitle: 'About Me',
-      fullName: 'Axel Eduardo Iparrea Ramos',
+      aboutTitle: enTranslations.aboutTitle,
+      fullName: enTranslations.fullName,
       phone: '+52 871-113-7953',
-      email: 'axeliparrea@gmail.com',
-      location: 'Monterrey, Mexico',
+      email: enTranslations.email,
+      location: enTranslations.location,
       aboutDescription: 'I am a Computer Science student at Tecnológico de Monterrey with a passion for artificial intelligence and cybersecurity. I enjoy building innovative solutions that combine modern web technologies with AI capabilities, and I am always looking to collaborate on Python projects where I can apply AI and security concepts.',
       
       // Skills
@@ -39,7 +41,7 @@ const resources = {
       tools: 'Tools & Platforms',
       
       // Education
-      educationTitle: 'Education',
+      educationTitle: enTranslations.educationTitle,
       degree: 'Computer Science Engineering',
       university: 'Tecnológico de Monterrey',
       graduationYear: '2022 - 2026',
@@ -58,23 +60,23 @@ const resources = {
       esabEngineer: 'ESAB Engineer',
       
       // Projects
-      projectsTitle: 'Featured Projects',
+      projectsTitle: enTranslations.projectsTitle,
       projectsSubtitle: 'A collection of projects showcasing my expertise in data engineering, full-stack development, and innovative solutions.',
       viewProject: 'View Project',
-      viewProjectDetails: 'View Project Details',
-      loading: 'Loading...',
+      viewProjectDetails: enTranslations.projectDetails,
+      loading: enTranslations.loading,
       technologies: 'Technologies',
       status: 'Status',
       category: 'Category',
-      completed: 'Completed',
-      inProgress: 'In Progress',
-      planning: 'Planning',
-      winner: 'Winner',
-      participant: 'Participant',
+      completed: enTranslations.completed,
+      inProgress: enTranslations.inProgress,
+      planning: enTranslations.planning,
+      winner: enTranslations.winner,
+      participant: enTranslations.participant,
       mobile: 'Mobile',
       web: 'Web',
       automation: 'Automation',
-      hackathonsTitle: 'Hackathons & Competitions',
+      hackathonsTitle: enTranslations.hackathonsTitle,
       backToPortfolio: 'Back to Portfolio',
       projectOverview: 'Project Overview',
       technologiesUsed: 'Technologies Used',
@@ -111,38 +113,8 @@ const resources = {
       cybersecurity: 'Cybersecurity',
       frontend: 'Frontend',
       
-      // Company Names
-      tecMonterrey: 'Tecnológico de Monterrey',
-      hackMty: 'Hack MTY 2022',
-      personalDevelopment: 'Personal & Academic Development',
-      academicExcellence: 'Academic Excellence & Industry Focus',
-      sapLabsEsab: 'SAP Labs & ESAB',
-      
-      // Months
-      january: 'January',
-      february: 'February',
-      march: 'March',
-      april: 'April',
-      may: 'May',
-      june: 'June',
-      july: 'July',
-      august: 'August',
-      september: 'September',
-      october: 'October',
-      november: 'November',
-      december: 'December',
-      
-      // Common
-      and: 'and',
-      based: 'Based',
-      specialized: 'Specialized',
-      building: 'Building',
-      solutions: 'solutions',
-      applications: 'applications',
-      with: 'with',
-      focus: 'focus',
-      on: 'on',
-      in: 'in'
+      // Project data from JSON
+      ...enTranslations
     }
   },
   es: {
@@ -166,11 +138,11 @@ const resources = {
       clickToExplore: 'Haz clic para explorar',
       
       // About Section
-      aboutTitle: 'Acerca de Mí',
-      fullName: 'Axel Eduardo Iparrea Ramos',
+      aboutTitle: esTranslations.aboutTitle,
+      fullName: esTranslations.fullName,
       phone: '+52 871-113-7953',
-      email: 'axeliparrea@gmail.com',
-      location: 'Monterrey, México',
+      email: esTranslations.email,
+      location: esTranslations.location,
       aboutDescription: 'Soy estudiante de Ingeniería en Ciencias de la Computación en el Tecnológico de Monterrey con pasión por la inteligencia artificial y la ciberseguridad. Disfruto construir soluciones innovadoras que combinan tecnologías web modernas con capacidades de IA, y siempre busco colaborar en proyectos Python donde pueda aplicar conceptos de IA y seguridad.',
       
       // Skills
@@ -180,7 +152,7 @@ const resources = {
       tools: 'Herramientas y Plataformas',
       
       // Education
-      educationTitle: 'Educación',
+      educationTitle: esTranslations.educationTitle,
       degree: 'Ingeniería en Ciencias de la Computación',
       university: 'Tecnológico de Monterrey',
       graduationYear: '2022 - 2026',
@@ -199,23 +171,23 @@ const resources = {
       esabEngineer: 'Ingeniero ESAB',
       
       // Projects
-      projectsTitle: 'Proyectos Destacados',
+      projectsTitle: esTranslations.projectsTitle,
       projectsSubtitle: 'Una colección de proyectos que muestran mi experiencia en ingeniería de datos, desarrollo full-stack y soluciones innovadoras.',
       viewProject: 'Ver Proyecto',
-      viewProjectDetails: 'Ver Detalles del Proyecto',
-      loading: 'Cargando...',
+      viewProjectDetails: esTranslations.projectDetails,
+      loading: esTranslations.loading,
       technologies: 'Tecnologías',
       status: 'Estado',
       category: 'Categoría',
-      completed: 'Completado',
-      inProgress: 'En Progreso',
-      planning: 'Planificación',
-      winner: 'Ganador',
-      participant: 'Participante',
+      completed: esTranslations.completed,
+      inProgress: esTranslations.inProgress,
+      planning: esTranslations.planning,
+      winner: esTranslations.winner,
+      participant: esTranslations.participant,
       mobile: 'Móvil',
       web: 'Web',
       automation: 'Automatización',
-      hackathonsTitle: 'Hackathons y Competencias',
+      hackathonsTitle: esTranslations.hackathonsTitle,
       backToPortfolio: 'Volver al Portafolio',
       projectOverview: 'Resumen del Proyecto',
       technologiesUsed: 'Tecnologías Utilizadas',
@@ -252,38 +224,8 @@ const resources = {
       cybersecurity: 'Ciberseguridad',
       frontend: 'Frontend',
       
-      // Company Names
-      tecMonterrey: 'Tecnológico de Monterrey',
-      hackMty: 'Hack MTY 2022',
-      personalDevelopment: 'Desarrollo Personal y Académico',
-      academicExcellence: 'Excelencia Académica y Enfoque Industrial',
-      sapLabsEsab: 'SAP Labs y ESAB',
-      
-      // Months
-      january: 'Enero',
-      february: 'Febrero',
-      march: 'Marzo',
-      april: 'Abril',
-      may: 'Mayo',
-      june: 'Junio',
-      july: 'Julio',
-      august: 'Agosto',
-      september: 'Septiembre',
-      october: 'Octubre',
-      november: 'Noviembre',
-      december: 'Diciembre',
-      
-      // Common
-      and: 'y',
-      based: 'Basado',
-      specialized: 'Especializado',
-      building: 'Construyendo',
-      solutions: 'soluciones',
-      applications: 'aplicaciones',
-      with: 'con',
-      focus: 'enfoque',
-      on: 'en',
-      in: 'en'
+      // Project data from JSON
+      ...esTranslations
     }
   }
 };
