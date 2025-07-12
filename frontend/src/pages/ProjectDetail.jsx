@@ -20,7 +20,7 @@ const ProjectDetail = () => {
       description: 'Winner of SAP Labs Final Showcase 2025. An award-winning smart supply chain solution for boutique apparel SME, focused on automating and optimizing logistics using SAP technologies with AI-powered features.',
       fullDescription: 'SAPitos 2.0 is an innovative smart supply chain solution that won the SAP Labs Final Showcase 2025. This project was developed for a boutique apparel SME, focusing on automating and optimizing their logistics operations using cutting-edge SAP technologies combined with AI capabilities. The solution includes predictive analytics for inventory management, automated ordering systems, and real-time supply chain monitoring. The AI assistant feature helps business owners make data-driven decisions and provides intelligent recommendations for supply chain optimization.',
       detailedDescription: 'This comprehensive supply chain management system revolutionizes how boutique apparel companies handle their logistics. Built with a focus on small and medium enterprises (SMEs), SAPitos 2.0 integrates seamlessly with existing SAP S/4HANA systems while adding powerful AI capabilities. The system features predictive demand forecasting using machine learning algorithms, automated inventory replenishment, real-time supplier performance monitoring, and intelligent cost optimization recommendations. The AI assistant provides natural language querying capabilities, allowing users to ask business questions and receive data-driven insights instantly.',
-      image: '/src/assets/pictures/AIRCLOUD.png',
+      image: '/assets/pictures/sapitos.jpg',
       videoId: 'kBZe4lqsfXc', // Video demo de SAPitos 2.0
       technologies: ['JavaScript', 'SAP S/4HANA', 'SAP Analytics Cloud', 'Machine Learning', 'AI Assistant', 'Predictive Analytics', 'Supply Chain Management'],
       status: 'Completed',
@@ -48,12 +48,12 @@ const ProjectDetail = () => {
       ]
     },
     'awak-dashboard': {
-      title: 'AWAK Dashboard',
+      title: 'AWAQ WEB ALL',
       subtitle: 'User Progress Visualization',
       description: 'A comprehensive dashboard for visualizing user progress in their onboarding process. Built with C# and modern web technologies, this tool provides detailed insights into user engagement and progression analytics.',
-      fullDescription: 'The AWAK Dashboard is a sophisticated web application designed to visualize and track user progress throughout their onboarding journey. Built using C# and modern web technologies, this dashboard provides administrators with comprehensive insights into user engagement, progression analytics, and performance metrics. The application features interactive charts, real-time data updates, and customizable reporting tools that help organizations understand user behavior patterns and optimize their onboarding processes.',
+      fullDescription: 'The AWAQ WEB ALL is a sophisticated web application designed to visualize and track user progress throughout their onboarding journey. Built using C# and modern web technologies, this dashboard provides administrators with comprehensive insights into user engagement, progression analytics, and performance metrics. The application features interactive charts, real-time data updates, and customizable reporting tools that help organizations understand user behavior patterns and optimize their onboarding processes.',
       detailedDescription: 'This enterprise-grade dashboard solution transforms how organizations monitor and improve their user onboarding processes. Built with ASP.NET Core and modern frontend technologies, the system provides real-time tracking of user interactions, engagement metrics, and completion rates. The dashboard features customizable widgets, drill-down analytics, automated reporting, and alert systems for identifying users who may need additional support. Integration with SQL Server ensures robust data management and quick query performance even with large datasets.',
-      image: '/src/assets/pictures/poseaxel.png',
+      image: '/assets/pictures/AWAQ WEB ALL.png',
       videoId: 'HiyWYd23EK4', // Video demo de AWAQ WEB Dashboard
       technologies: ['C#', '.NET', 'SQL Server', 'Bootstrap', 'Chart.js', 'JavaScript', 'HTML5', 'CSS3'],
       status: 'Completed',
@@ -86,8 +86,8 @@ const ProjectDetail = () => {
       description: 'Interactive Unity game project developed as part of a collaborative team effort. Features engaging gameplay mechanics and modern game development practices using Unity engine and C#.',
       fullDescription: 'AWAK Game is an interactive Unity-based game project that showcases modern game development practices and collaborative software development. Built using Unity engine and C#, this game demonstrates advanced gameplay mechanics, engaging user experiences, and professional game development workflows. The project involved working closely with a team of developers, implementing version control practices, and following industry-standard development methodologies.',
       detailedDescription: 'This collaborative game development project demonstrates professional game development practices using Unity 2D/3D engine. The game features engaging gameplay mechanics, smooth character controls, interactive environments, and polished visual effects. The development process included sprint planning, code reviews, asset management, and continuous integration practices. The team utilized Git for version control, implemented design patterns for maintainable code, and followed agile development methodologies to deliver a high-quality gaming experience.',
-      image: '/src/assets/pictures/AIRCLOUD.png',
-      videoId: null, // Aquí puedes agregar el ID del video de YouTube del gameplay
+      image: '/assets/pictures/awaq game.jpg',
+      videoId: 'LzgI_GqKoh4', // Video demo de AWAQ GAME
       technologies: ['Unity', 'C#', 'Game Development', 'Collaborative Development', 'Version Control', 'Agile Methodology'],
       status: 'Completed',
       category: 'Game Development',
@@ -119,7 +119,7 @@ const ProjectDetail = () => {
       description: 'Advanced multi-agent system simulation developed in C#. This project demonstrates complex interactions between autonomous agents and showcases understanding of artificial intelligence and distributed systems concepts.',
       fullDescription: 'Sistema Multiagente is a sophisticated simulation project that demonstrates advanced concepts in artificial intelligence and distributed systems. Developed in C#, this project implements complex interactions between autonomous agents, showcasing understanding of multi-agent systems, AI algorithms, and distributed computing principles. The system simulates real-world scenarios where multiple intelligent agents interact, cooperate, and compete within a shared environment.',
       detailedDescription: 'This advanced artificial intelligence project implements a comprehensive multi-agent system where autonomous agents demonstrate emergent behaviors through complex interactions. The simulation includes various agent types with different behavioral patterns, communication protocols, and decision-making algorithms. Agents can collaborate, compete, learn from their environment, and adapt their strategies based on outcomes. The system features real-time visualization of agent interactions, performance metrics tracking, and configurable simulation parameters for research and educational purposes.',
-      image: '/src/assets/pictures/poseaxel.png',
+      image: '/assets/pictures/MuliAgentes.jpg',
       videoId: 'mT7RA7i_xBg', // Video demo de Sistema Multiagente
       technologies: ['C#', '.NET', 'AI Algorithms', 'System Simulation', 'Multi-Agent Systems', 'Distributed Computing', 'Object-Oriented Programming'],
       status: 'Completed',
@@ -152,8 +152,8 @@ const ProjectDetail = () => {
       description: 'Comprehensive cybersecurity project developed in Kotlin focusing on security integration and implementation. This academic project demonstrates advanced security concepts and practical application of cybersecurity principles.',
       fullDescription: 'This comprehensive cybersecurity project was developed as part of advanced security coursework, focusing on practical implementation of cybersecurity principles and security integration techniques. Built using Kotlin, the project demonstrates understanding of modern security practices, threat assessment, vulnerability management, and security architecture design. The project includes implementation of various security protocols, encryption techniques, and security monitoring systems.',
       detailedDescription: 'This advanced cybersecurity implementation project showcases practical application of security principles in mobile and web environments. The project includes implementation of multiple encryption algorithms, secure authentication systems, threat detection mechanisms, and vulnerability assessment tools. Built with Kotlin for Android platforms, the application demonstrates secure coding practices, data protection techniques, and security protocol implementation. The project also includes comprehensive security testing, penetration testing scenarios, and security audit capabilities.',
-      image: '/src/assets/pictures/AIRCLOUD.png',
-      videoId: null, // Aquí puedes agregar el ID del video de YouTube demostrando las funcionalidades de seguridad
+      image: '/assets/pictures/kali-Linux.jpg',
+      videoId: null, // Sin video - usar imagen como preview
       technologies: ['Kotlin', 'Cybersecurity', 'Security Integration', 'Mobile Security', 'Encryption', 'Security Protocols', 'Threat Assessment'],
       status: 'Completed',
       category: 'Cybersecurity',
@@ -185,8 +185,8 @@ const ProjectDetail = () => {
       description: 'A modern, responsive portfolio website showcasing my professional work and technical skills. Built with React and optimized for performance with smooth animations and interactive elements.',
       fullDescription: 'This personal portfolio website represents a modern, responsive web application built with React and optimized for performance. The portfolio showcases professional work, technical skills, and personal projects through an engaging and interactive user interface. Built with Vite for fast development and optimized bundling, the site features smooth animations powered by Framer Motion, responsive design principles, and modern web development practices.',
       detailedDescription: 'This comprehensive portfolio website demonstrates advanced frontend development skills using modern React ecosystem tools. The application features a fully responsive design that works seamlessly across desktop, tablet, and mobile devices. Built with performance in mind, the site uses code splitting, lazy loading, and optimized bundling to ensure fast load times. The design includes smooth animations, interactive elements, multi-language support, dark/light theme switching, and SEO optimization. The site serves as both a showcase of technical skills and a practical example of modern web development best practices.',
-      image: '/src/assets/pictures/poseaxel.png',
-      videoId: null, // Aquí puedes agregar el ID del video de YouTube recorriendo el portfolio
+      image: '/assets/pictures/portfolio.png',
+      videoId: null, // Sin video - usar imagen como preview
       technologies: ['React', 'Vite', 'CSS3', 'Framer Motion', 'JavaScript', 'Responsive Design', 'Modern Web Development'],
       status: 'Completed',
       category: 'Frontend',

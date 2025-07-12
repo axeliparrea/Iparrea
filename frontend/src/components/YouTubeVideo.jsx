@@ -126,9 +126,9 @@ const YouTubeVideo = ({
         height="100%"
         src={embedUrl}
         title={title || `YouTube video ${validVideoId}`}
-        frameBorder="0"
+        frameBorder={0}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen
+        allowFullScreen={true}
         onLoad={handleLoad}
         onError={handleError}
         style={{

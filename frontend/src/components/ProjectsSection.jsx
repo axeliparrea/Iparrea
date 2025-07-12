@@ -45,7 +45,7 @@ const ProjectsSection = () => {
       subtitle: t('projects.sapitos.subtitle'),
       description: t('projects.sapitos.description'),
       descriptionMobile: 'SAP Labs winner 2025. AI-powered supply chain solution using SAP technologies.',
-      image: '/assets/pictures/AIRCLOUD.png',
+      image: '/assets/pictures/sapitos.jpg',
       videoId: null,
       technologies: ['JavaScript', 'SAP S/4HANA', 'SAP Analytics Cloud', 'Machine Learning', 'AI Assistant'],
       technologiesMobile: ['SAP', 'AI', 'JavaScript'],
@@ -60,9 +60,9 @@ const ProjectsSection = () => {
       subtitle: t('projects.awakDashboard.subtitle'),
       description: t('projects.awakDashboard.description'),
       descriptionMobile: 'Dashboard for user progress visualization with real-time analytics.',
-      image: '/assets/pictures/poseaxel.png',
+      image: '/assets/pictures/AWAQ WEB ALL.png',
       videoId: null,
-      technologies: ['C#', '.NET', 'SQL Server', 'Bootstrap', 'Chart.js'],
+      technologies: ['C#', '.NET', 'SQL Server', 'Bootstrap', 'Chart.js', 'JavaScript', 'HTML5', 'CSS3'],
       technologiesMobile: ['C#', '.NET', 'SQL'],
       status: t('completed'),
       category: t('projects.awakDashboard.category'),
@@ -75,8 +75,8 @@ const ProjectsSection = () => {
       subtitle: t('projects.awakGame.subtitle'),
       description: t('projects.awakGame.description'),
       descriptionMobile: 'Interactive Unity game with modern gameplay mechanics.',
-      image: '/assets/pictures/AIRCLOUD.png',
-      videoId: null,
+      image: '/assets/pictures/awaq game.jpg',
+      videoId: 'LzgI_GqKoh4',
       technologies: ['Unity', 'C#', 'Game Development', 'Collaborative Development'],
       technologiesMobile: ['Unity', 'C#', 'Game Dev'],
       status: t('completed'),
@@ -90,7 +90,7 @@ const ProjectsSection = () => {
       subtitle: t('projects.sistemaMultiagente.subtitle'),
       description: t('projects.sistemaMultiagente.description'),
       descriptionMobile: 'AI multi-agent system simulation with complex agent interactions.',
-      image: '/assets/pictures/poseaxel.png',
+      image: '/assets/pictures/MuliAgentes.jpg',
       videoId: null,
       technologies: ['C#', '.NET', 'AI Algorithms', 'System Simulation', 'Multi-Agent Systems'],
       technologiesMobile: ['C#', 'AI', 'Simulation'],
@@ -105,7 +105,7 @@ const ProjectsSection = () => {
       subtitle: t('projects.cybersecurityIntegration.subtitle'),
       description: t('projects.cybersecurityIntegration.description'),
       descriptionMobile: 'Security integration project with advanced cybersecurity principles.',
-      image: '/assets/pictures/AIRCLOUD.png',
+      image: '/assets/pictures/kali-Linux.jpg',
       videoId: null,
       technologies: ['Kotlin', 'Cybersecurity', 'Security Integration', 'Mobile Security'],
       technologiesMobile: ['Kotlin', 'Security', 'Mobile'],
@@ -120,7 +120,7 @@ const ProjectsSection = () => {
       subtitle: t('projects.portfolio.subtitle'),
       description: t('projects.portfolio.description'),
       descriptionMobile: 'Modern responsive portfolio with smooth animations.',
-      image: '/assets/pictures/poseaxel.png',
+      image: '/assets/pictures/portfolio.png',
       videoId: null,
       technologies: ['React', 'Vite', 'CSS3', 'Framer Motion', 'JavaScript'],
       technologiesMobile: ['React', 'CSS3', 'Animation'],
@@ -211,14 +211,28 @@ const ProjectsSection = () => {
           filter: 'blur(15px)'
         }}></div>
         
-        <div style={{
-          fontSize: '1.8rem',
-          color: project.color,
-          fontWeight: '700',
-          textShadow: `0 2px 8px ${project.color}30`
-        }}>
-          {project.title.charAt(0)}
-        </div>
+        {project.videoId ? (
+          <YouTubeVideo 
+            videoId={project.videoId}
+            title={`${project.title} - Demo Video`}
+            width="100%"
+            height="100%"
+            aspectRatio="16/9"
+            showControls={false}
+            autoplay={false}
+          />
+        ) : (
+          <img
+            src={project.image}
+            alt={project.title}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              borderRadius: '8px'
+            }}
+          />
+        )}
         
         <div style={{
           position: 'absolute',
@@ -388,21 +402,18 @@ const ProjectsSection = () => {
             autoplay={false}
           />
         ) : (
-          <div
+          <img
+            src={project.image}
+            alt={project.title}
             style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              fontSize: '3rem',
-              color: `${project.color}80`,
-              fontWeight: '700',
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
               transition: 'transform 0.3s ease',
-              transform: hoveredProject === project.id ? 'translate(-50%, -50%) scale(1.1)' : 'translate(-50%, -50%) scale(1)',
+              transform: hoveredProject === project.id ? 'scale(1.1)' : 'scale(1)',
               willChange: 'transform'
             }}
-          >
-            {project.title.charAt(0)}
-          </div>
+          />
         )}
         
         <div style={{
