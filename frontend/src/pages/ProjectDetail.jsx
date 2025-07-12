@@ -11,6 +11,7 @@ const ProjectDetail = () => {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const [project, setProject] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const projectData = {
     'sapitos': {
@@ -223,6 +224,15 @@ const ProjectDetail = () => {
     window.scrollTo(0, 0);
   }, [projectId]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   if (!project) {
     return (
       <div style={{
@@ -247,11 +257,11 @@ const ProjectDetail = () => {
     <div style={{
       minHeight: '100vh',
       background: colors.background,
-      paddingTop: '80px'
+      paddingTop: isMobile ? '60px' : '80px'
     }}>
       {/* Back Button */}
       <section style={{
-        padding: '1rem 0',
+        padding: isMobile ? '0.5rem 0' : '1rem 0',
         borderBottom: `1px solid ${colors.border}`
       }}>
         <div className="container">
@@ -267,10 +277,10 @@ const ProjectDetail = () => {
               background: 'none',
               border: `2px solid ${colors.border}`,
               color: colors.text,
-              padding: '0.75rem 1.5rem',
+              padding: isMobile ? '0.5rem 1rem' : '0.75rem 1.5rem',
               borderRadius: '8px',
               cursor: 'pointer',
-              fontSize: '14px',
+              fontSize: isMobile ? '12px' : '14px',
               fontWeight: '500',
               display: 'flex',
               alignItems: 'center',
@@ -285,7 +295,7 @@ const ProjectDetail = () => {
       {/* Hero Section */}
       <section style={{
         background: `linear-gradient(135deg, ${project.color}10, ${colors.surface})`,
-        padding: '4rem 0',
+        padding: isMobile ? '2rem 0' : '4rem 0',
         borderBottom: `1px solid ${colors.border}`
       }}>
         <div className="container">
@@ -295,8 +305,8 @@ const ProjectDetail = () => {
             transition={{ duration: 0.8 }}
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '3rem',
+              gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: isMobile ? '2rem' : '3rem',
               alignItems: 'center'
             }}
           >
@@ -323,10 +333,10 @@ const ProjectDetail = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
                 style={{
-                  fontSize: '3rem',
+                  fontSize: isMobile ? '2rem' : '3rem',
                   fontWeight: '700',
                   color: colors.text,
-                  marginTop: '1rem',
+                  marginTop: isMobile ? '0.5rem' : '1rem',
                   marginBottom: '0.5rem'
                 }}
               >
@@ -338,10 +348,10 @@ const ProjectDetail = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
                 style={{
-                  fontSize: '1.3rem',
+                  fontSize: isMobile ? '1rem' : '1.3rem',
                   color: project.color,
                   fontWeight: '500',
-                  marginBottom: '1.5rem'
+                  marginBottom: isMobile ? '1rem' : '1.5rem'
                 }}
               >
                 {project.subtitle}
@@ -352,13 +362,13 @@ const ProjectDetail = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
                 style={{
-                  fontSize: '1.1rem',
+                  fontSize: isMobile ? '0.9rem' : '1.1rem',
                   color: colors.textSecondary,
                   lineHeight: '1.6',
-                  marginBottom: '2rem'
+                  marginBottom: isMobile ? '1.5rem' : '2rem'
                 }}
               >
-                {project.description}
+                {isMobile ? project.description : project.description}
               </motion.p>
               
               <motion.div
@@ -367,63 +377,74 @@ const ProjectDetail = () => {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 style={{
                   display: 'flex',
-                  gap: '1rem',
-                  flexWrap: 'wrap'
+                  gap: isMobile ? '0.75rem' : '1rem',
+                  flexWrap: 'wrap',
+                  flexDirection: isMobile ? 'column' : 'row'
                 }}
               >
-                {project.githubUrl && (
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      background: `linear-gradient(135deg, ${project.color}, ${project.color}80)`,
-                      color: '#fff',
-                      padding: '0.75rem 1.5rem',
-                      borderRadius: '8px',
-                      textDecoration: 'none',
-                      fontWeight: '600',
-                      transition: 'all 0.3s ease'
-                    }}
-                  >
-                    View on GitHub
-                  </a>
-                )}
-                
-                {project.demoUrl && (
-                  <a
-                    href={project.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      background: colors.surface,
-                      color: colors.text,
-                      padding: '0.75rem 1.5rem',
-                      borderRadius: '8px',
-                      textDecoration: 'none',
-                      fontWeight: '600',
-                      border: `1px solid ${colors.border}`,
-                      transition: 'all 0.3s ease'
-                    }}
-                  >
-                    Live Demo
-                  </a>
-                )}
+                <div style={{
+                  display: 'flex',
+                  gap: isMobile ? '0.75rem' : '1rem',
+                  flexWrap: 'wrap'
+                }}>
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        background: `linear-gradient(135deg, ${project.color}, ${project.color}80)`,
+                        color: '#fff',
+                        padding: isMobile ? '0.6rem 1.2rem' : '0.75rem 1.5rem',
+                        borderRadius: '8px',
+                        textDecoration: 'none',
+                        fontWeight: '600',
+                        transition: 'all 0.3s ease',
+                        fontSize: isMobile ? '0.85rem' : '1rem'
+                      }}
+                    >
+                      View on GitHub
+                    </a>
+                  )}
+                  
+                  {project.demoUrl && (
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        background: colors.surface,
+                        color: colors.text,
+                        padding: isMobile ? '0.6rem 1.2rem' : '0.75rem 1.5rem',
+                        borderRadius: '8px',
+                        textDecoration: 'none',
+                        fontWeight: '600',
+                        border: `1px solid ${colors.border}`,
+                        transition: 'all 0.3s ease',
+                        fontSize: isMobile ? '0.85rem' : '1rem'
+                      }}
+                    >
+                      Live Demo
+                    </a>
+                  )}
+                </div>
                 
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '1rem'
+                  gap: isMobile ? '0.75rem' : '1rem',
+                  flexDirection: isMobile ? 'column' : 'row',
+                  alignItems: isMobile ? 'flex-start' : 'center'
                 }}>
                   <span style={{
                     color: colors.textSecondary,
-                    fontSize: '14px'
+                    fontSize: isMobile ? '12px' : '14px'
                   }}>
                     Status: <strong style={{ color: colors.text }}>{project.status}</strong>
                   </span>
                   <span style={{
                     color: colors.textSecondary,
-                    fontSize: '14px'
+                    fontSize: isMobile ? '12px' : '14px'
                   }}>
                     Period: <strong style={{ color: colors.text }}>{project.period}</strong>
                   </span>
@@ -472,12 +493,12 @@ const ProjectDetail = () => {
       </section>
 
       {/* Main Content */}
-      <section style={{ padding: '4rem 0' }}>
+      <section style={{ padding: isMobile ? '2rem 0' : '4rem 0' }}>
         <div className="container">
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '3rem'
+            gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: isMobile ? '1.5rem' : '3rem'
           }}>
             {/* Project Overview */}
             <div style={{ gridColumn: '1 / -1' }}>
@@ -487,7 +508,7 @@ const ProjectDetail = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 style={{
                   background: colors.surface,
-                  padding: '2rem',
+                  padding: isMobile ? '1.5rem' : '2rem',
                   borderRadius: '12px',
                   border: `1px solid ${colors.border}`,
                   boxShadow: `0 4px 12px ${colors.shadow}`

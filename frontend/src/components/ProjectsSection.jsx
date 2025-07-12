@@ -11,6 +11,7 @@ const ProjectsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [hoveredProject, setHoveredProject] = useState(null);
   const [navigating, setNavigating] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,10 +24,18 @@ const ProjectsSection = () => {
       }
     };
 
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
     handleScroll();
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const projects = [
@@ -35,9 +44,11 @@ const ProjectsSection = () => {
       title: t('projects.sapitos.title'),
       subtitle: t('projects.sapitos.subtitle'),
       description: t('projects.sapitos.description'),
+      descriptionMobile: 'SAP Labs winner 2025. AI-powered supply chain solution using SAP technologies.',
       image: '/assets/pictures/AIRCLOUD.png',
-      videoId: null, // Solo imagen
+      videoId: null,
       technologies: ['JavaScript', 'SAP S/4HANA', 'SAP Analytics Cloud', 'Machine Learning', 'AI Assistant'],
+      technologiesMobile: ['SAP', 'AI', 'JavaScript'],
       status: t('completed'),
       category: t('projects.sapitos.category'),
       period: '2025',
@@ -48,9 +59,11 @@ const ProjectsSection = () => {
       title: t('projects.awakDashboard.title'),
       subtitle: t('projects.awakDashboard.subtitle'),
       description: t('projects.awakDashboard.description'),
+      descriptionMobile: 'Dashboard for user progress visualization with real-time analytics.',
       image: '/assets/pictures/poseaxel.png',
-      videoId: null, // Solo imagen
+      videoId: null,
       technologies: ['C#', '.NET', 'SQL Server', 'Bootstrap', 'Chart.js'],
+      technologiesMobile: ['C#', '.NET', 'SQL'],
       status: t('completed'),
       category: t('projects.awakDashboard.category'),
       period: '2024',
@@ -61,9 +74,11 @@ const ProjectsSection = () => {
       title: t('projects.awakGame.title'),
       subtitle: t('projects.awakGame.subtitle'),
       description: t('projects.awakGame.description'),
+      descriptionMobile: 'Interactive Unity game with modern gameplay mechanics.',
       image: '/assets/pictures/AIRCLOUD.png',
-      videoId: null, // Solo imagen
+      videoId: null,
       technologies: ['Unity', 'C#', 'Game Development', 'Collaborative Development'],
+      technologiesMobile: ['Unity', 'C#', 'Game Dev'],
       status: t('completed'),
       category: t('projects.awakGame.category'),
       period: '2024',
@@ -74,9 +89,11 @@ const ProjectsSection = () => {
       title: t('projects.sistemaMultiagente.title'),
       subtitle: t('projects.sistemaMultiagente.subtitle'),
       description: t('projects.sistemaMultiagente.description'),
+      descriptionMobile: 'AI multi-agent system simulation with complex agent interactions.',
       image: '/assets/pictures/poseaxel.png',
-      videoId: null, // Solo imagen
+      videoId: null,
       technologies: ['C#', '.NET', 'AI Algorithms', 'System Simulation', 'Multi-Agent Systems'],
+      technologiesMobile: ['C#', 'AI', 'Simulation'],
       status: t('completed'),
       category: t('projects.sistemaMultiagente.category'),
       period: '2024',
@@ -87,9 +104,11 @@ const ProjectsSection = () => {
       title: t('projects.cybersecurityIntegration.title'),
       subtitle: t('projects.cybersecurityIntegration.subtitle'),
       description: t('projects.cybersecurityIntegration.description'),
+      descriptionMobile: 'Security integration project with advanced cybersecurity principles.',
       image: '/assets/pictures/AIRCLOUD.png',
-      videoId: null, // Solo imagen
+      videoId: null,
       technologies: ['Kotlin', 'Cybersecurity', 'Security Integration', 'Mobile Security'],
+      technologiesMobile: ['Kotlin', 'Security', 'Mobile'],
       status: t('completed'),
       category: t('projects.cybersecurityIntegration.category'),
       period: '2024',
@@ -100,9 +119,11 @@ const ProjectsSection = () => {
       title: t('projects.portfolio.title'),
       subtitle: t('projects.portfolio.subtitle'),
       description: t('projects.portfolio.description'),
+      descriptionMobile: 'Modern responsive portfolio with smooth animations.',
       image: '/assets/pictures/poseaxel.png',
-      videoId: null, // Aquí puedes poner el ID del video de YouTube
+      videoId: null,
       technologies: ['React', 'Vite', 'CSS3', 'Framer Motion', 'JavaScript'],
+      technologiesMobile: ['React', 'CSS3', 'Animation'],
       status: t('completed'),
       category: t('projects.portfolio.category'),
       period: '2024',
@@ -133,7 +154,6 @@ const ProjectsSection = () => {
     
     setNavigating(true);
     
-    // Add a small delay to prevent double clicks and improve user experience
     setTimeout(() => {
       navigate(`/project/${projectId}`);
       setNavigating(false);
@@ -149,7 +169,185 @@ const ProjectsSection = () => {
     }
   };
 
-  const ProjectCard = ({ project, index }) => (
+  // Componente para versión móvil simplificada (2 columnas)
+  const MobileProjectCard = ({ project, index }) => (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      style={{
+        background: `linear-gradient(135deg, ${colors.surface} 0%, ${project.color}08 100%)`,
+        borderRadius: '16px',
+        overflow: 'hidden',
+        border: `1px solid ${project.color}30`,
+        boxShadow: `0 8px 24px ${project.color}15`,
+        cursor: navigating ? 'wait' : 'pointer',
+        opacity: navigating ? 0.7 : 1,
+        position: 'relative'
+      }}
+      onClick={(e) => handleProjectClick(project.id, e)}
+    >
+      {/* Header ultra-compacto */}
+      <div style={{
+        height: '80px',
+        background: `linear-gradient(135deg, ${project.color}25, ${project.color}15)`,
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden'
+      }}>
+        {/* Efecto de fondo dinámico */}
+        <div style={{
+          position: 'absolute',
+          top: '-20px',
+          right: '-20px',
+          width: '60px',
+          height: '60px',
+          background: `${project.color}20`,
+          borderRadius: '50%',
+          filter: 'blur(15px)'
+        }}></div>
+        
+        <div style={{
+          fontSize: '1.8rem',
+          color: project.color,
+          fontWeight: '700',
+          textShadow: `0 2px 8px ${project.color}30`
+        }}>
+          {project.title.charAt(0)}
+        </div>
+        
+        <div style={{
+          position: 'absolute',
+          top: '0.4rem',
+          right: '0.4rem',
+          background: project.color,
+          color: '#fff',
+          padding: '0.2rem 0.4rem',
+          borderRadius: '8px',
+          fontSize: '8px',
+          fontWeight: '700',
+          boxShadow: `0 2px 8px ${project.color}40`
+        }}>
+          {project.period}
+        </div>
+      </div>
+
+      {/* Contenido ultra-compacto */}
+      <div style={{ padding: '0.8rem' }}>
+        {/* Título y categoría */}
+        <div style={{ marginBottom: '0.5rem' }}>
+          <h3 style={{
+            fontSize: '0.85rem',
+            fontWeight: '700',
+            color: colors.text,
+            marginBottom: '0.2rem',
+            lineHeight: '1.2',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap'
+          }}>
+            {project.title}
+          </h3>
+          <span style={{
+            background: `${project.color}20`,
+            color: project.color,
+            padding: '0.1rem 0.4rem',
+            borderRadius: '6px',
+            fontSize: '7px',
+            fontWeight: '600',
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px'
+          }}>
+            {project.category.split(' ')[0]} {/* Solo primera palabra */}
+          </span>
+        </div>
+
+        {/* Descripción mínima */}
+        <p style={{
+          fontSize: '0.7rem',
+          color: colors.textSecondary,
+          lineHeight: '1.3',
+          marginBottom: '0.6rem',
+          display: '-webkit-box',
+          WebkitLineClamp: 2,
+          WebkitBoxOrient: 'vertical',
+          overflow: 'hidden'
+        }}>
+          {project.descriptionMobile}
+        </p>
+
+        {/* Tecnologías súper mínimas */}
+        <div style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '0.2rem',
+          marginBottom: '0.6rem'
+        }}>
+          {project.technologiesMobile.slice(0, 2).map((tech, techIndex) => (
+            <span
+              key={techIndex}
+              style={{
+                background: `${colors.primary}15`,
+                color: colors.primary,
+                padding: '0.1rem 0.3rem',
+                borderRadius: '4px',
+                fontSize: '7px',
+                fontWeight: '600'
+              }}
+            >
+              {tech}
+            </span>
+          ))}
+          <span style={{
+            color: colors.textSecondary,
+            fontSize: '7px',
+            alignSelf: 'center',
+            fontWeight: '500'
+          }}>
+            +{project.technologies.length - 2}
+          </span>
+        </div>
+
+        {/* Botón minimalista */}
+        <div
+          style={{
+            background: `linear-gradient(135deg, ${project.color}, ${project.color}cc)`,
+            color: '#fff',
+            padding: '0.4rem',
+            borderRadius: '8px',
+            textAlign: 'center',
+            fontWeight: '700',
+            fontSize: '8px',
+            cursor: navigating ? 'wait' : 'pointer',
+            boxShadow: `0 4px 12px ${project.color}30`,
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px'
+          }}
+        >
+          {navigating ? t('loading') : 'Ver →'}
+        </div>
+      </div>
+
+      {/* Indicador de estado minimalista */}
+      <div style={{
+        position: 'absolute',
+        top: '0.4rem',
+        left: '0.4rem',
+        width: '6px',
+        height: '6px',
+        background: getStatusColor(project.status),
+        borderRadius: '50%',
+        boxShadow: `0 0 8px ${getStatusColor(project.status)}`
+      }}></div>
+    </motion.div>
+  );
+
+  // Componente para versión desktop completa
+  const DesktopProjectCard = ({ project, index }) => (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 50 }}
@@ -261,9 +459,7 @@ const ProjectsSection = () => {
       </div>
 
       {/* Project Content */}
-      <div style={{ 
-        padding: window.innerWidth < 768 ? '1.25rem' : '1.5rem' 
-      }}>
+      <div style={{ padding: '1.5rem' }}>
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -365,7 +561,7 @@ const ProjectsSection = () => {
     <section
       id="projects"
       style={{
-        padding: window.innerWidth < 768 ? '3rem 1rem' : '5rem 0',
+        padding: isMobile ? '2rem 1rem' : '5rem 0',
         background: `linear-gradient(135deg, ${colors.surface} 0%, ${colors.background} 100%)`,
         borderBottom: `1px solid ${colors.border}`
       }}
@@ -375,10 +571,10 @@ const ProjectsSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
           transition={{ duration: 0.8 }}
-          style={{ textAlign: 'center', marginBottom: '4rem' }}
+          style={{ textAlign: 'center', marginBottom: isMobile ? '2rem' : '4rem' }}
         >
           <h2 style={{
-            fontSize: '2.5rem',
+            fontSize: isMobile ? '2rem' : '2.5rem',
             fontWeight: '600',
             color: colors.text,
             marginBottom: '1rem'
@@ -393,59 +589,65 @@ const ProjectsSection = () => {
             borderRadius: '2px'
           }}></div>
           <p style={{
-            fontSize: '1.1rem',
+            fontSize: isMobile ? '0.9rem' : '1.1rem',
             color: colors.textSecondary,
             marginTop: '1rem',
             maxWidth: '600px',
             margin: '1rem auto 0'
           }}>
-            A collection of projects showcasing my expertise in data engineering, full-stack development, and innovative solutions.
+            {isMobile ? 
+              'Key projects and achievements' : 
+              'A collection of projects showcasing my expertise in data engineering, full-stack development, and innovative solutions.'
+            }
           </p>
         </motion.div>
 
         {/* Projects Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: window.innerWidth < 768 ? '1fr' : 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: window.innerWidth < 768 ? '2rem' : '2rem',
-          marginBottom: window.innerWidth < 768 ? '3rem' : '4rem',
-          padding: window.innerWidth < 768 ? '0 0.5rem' : '0'
+          gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: isMobile ? '0.75rem' : '2rem',
+          marginBottom: isMobile ? '2rem' : '4rem',
+          padding: isMobile ? '0' : '0'
         }}>
-          {projects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
-          ))}
+          {projects.map((project, index) => 
+            isMobile ? (
+              <MobileProjectCard key={project.id} project={project} index={index} />
+            ) : (
+              <DesktopProjectCard key={project.id} project={project} index={index} />
+            )
+          )}
         </div>
 
-        {/* Hackathons Section */}
+        {/* Hackathons Section - Simplificado en móvil */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           style={{
             background: colors.surface,
-            padding: window.innerWidth < 768 ? '1.5rem' : '2rem',
+            padding: isMobile ? '1.5rem' : '2rem',
             borderRadius: '16px',
             border: `1px solid ${colors.border}`,
-            boxShadow: `0 4px 12px ${colors.shadow}`,
-            margin: window.innerWidth < 768 ? '0 0.5rem' : '0'
+            boxShadow: `0 4px 12px ${colors.shadow}`
           }}
         >
           <h3 style={{
-            fontSize: '1.8rem',
+            fontSize: isMobile ? '1.3rem' : '1.8rem',
             fontWeight: '600',
             color: colors.text,
             marginBottom: '1rem',
             textAlign: 'center'
           }}>
-            Hackathons & Competitions
+            {isMobile ? 'Competitions' : 'Hackathons & Competitions'}
           </h3>
           
           <div style={{
-            display: 'grid',
-            gridTemplateColumns: window.innerWidth < 768 ? '1fr' : 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: window.innerWidth < 768 ? '1.5rem' : '1.5rem',
-            marginTop: window.innerWidth < 768 ? '1.5rem' : '2rem',
-            padding: window.innerWidth < 768 ? '0 0.5rem' : '0'
+            display: isMobile ? 'flex' : 'grid',
+            flexDirection: isMobile ? 'column' : undefined,
+            gridTemplateColumns: isMobile ? undefined : 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: isMobile ? '1rem' : '1.5rem',
+            marginTop: isMobile ? '1rem' : '2rem'
           }}>
             {hackathons.map((hackathon, index) => (
               <motion.div
@@ -453,30 +655,31 @@ const ProjectsSection = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.9 }}
                 transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: isMobile ? 1 : 1.05 }}
                 style={{
                   background: colors.background,
-                  padding: window.innerWidth < 768 ? '1.25rem' : '1.5rem',
+                  padding: isMobile ? '1rem' : '1.5rem',
                   borderRadius: '12px',
                   border: `1px solid ${colors.border}`,
                   textAlign: 'center'
                 }}
               >
                 <h4 style={{
-                  fontSize: '1.2rem',
+                  fontSize: isMobile ? '1rem' : '1.2rem',
                   fontWeight: '600',
                   color: colors.text,
-                  marginBottom: '0.75rem'
+                  marginBottom: '0.75rem',
+                  lineHeight: '1.2'
                 }}>
-                  {hackathon.title}
+                  {isMobile ? hackathon.title.replace('Final Showcase', '').trim() : hackathon.title}
                 </h4>
                 
                 <span style={{
                   background: hackathon.color,
                   color: '#fff',
-                  padding: '0.5rem 1rem',
+                  padding: isMobile ? '0.25rem 0.75rem' : '0.5rem 1rem',
                   borderRadius: '20px',
-                  fontSize: '12px',
+                  fontSize: isMobile ? '10px' : '12px',
                   fontWeight: '600',
                   display: 'inline-block',
                   marginBottom: '1rem'
@@ -484,13 +687,15 @@ const ProjectsSection = () => {
                   {hackathon.status}
                 </span>
                 
-                <p style={{
-                  fontSize: '0.95rem',
-                  color: colors.textSecondary,
-                  lineHeight: '1.5'
-                }}>
-                  {hackathon.description}
-                </p>
+                {!isMobile && (
+                  <p style={{
+                    fontSize: '0.95rem',
+                    color: colors.textSecondary,
+                    lineHeight: '1.5'
+                  }}>
+                    {hackathon.description}
+                  </p>
+                )}
               </motion.div>
             ))}
           </div>
