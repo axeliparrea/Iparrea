@@ -166,7 +166,6 @@ const TerminalComponent = () => {
   }, []);
 
   useEffect(() => {
-  useEffect(() => {
     if (!isDemo) return;
     
     if (currentIndex < demoCommands.length) {
