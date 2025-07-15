@@ -459,7 +459,6 @@ const ProjectDetail = () => {
                 
                 <div style={{
                   display: 'flex',
-                  alignItems: 'center',
                   gap: isMobile ? '0.75rem' : '1rem',
                   flexDirection: isMobile ? 'column' : 'row',
                   alignItems: isMobile ? 'flex-start' : 'center'

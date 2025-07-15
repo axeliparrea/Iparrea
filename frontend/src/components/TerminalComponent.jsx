@@ -30,19 +30,19 @@ const TerminalComponent = () => {
       }
     },
     'whoami': {
-      description: i18n.language === 'es' ? 'Muestra información sobre Axel' : 'Shows information about Axel',
+      description: i18n.language === 'es' ? 'Muestra informacin sobre Axel' : 'Shows information about Axel',
       output: () => t('terminalWhoami')
     },
     'skills': {
-      description: i18n.language === 'es' ? 'Lista habilidades técnicas' : 'Lists technical skills',
+      description: i18n.language === 'es' ? 'Lista habilidades tcnicas' : 'Lists technical skills',
       output: () => t('terminalSkills')
     },
     'location': {
-      description: i18n.language === 'es' ? 'Muestra ubicación actual' : 'Shows current location',
+      description: i18n.language === 'es' ? 'Muestra ubicacin actual' : 'Shows current location',
       output: () => t('terminalLocation')
     },
     'contact': {
-      description: i18n.language === 'es' ? 'Muestra información de contacto' : 'Shows contact information',
+      description: i18n.language === 'es' ? 'Muestra informacin de contacto' : 'Shows contact information',
       output: () => i18n.language === 'es' ? 
         'Email: axeliparrea@gmail.com\nLinkedIn: linkedin.com/in/axel-iparrea\nGitHub: github.com/axeliparrea' :
         'Email: axeliparrea@gmail.com\nLinkedIn: linkedin.com/in/axel-iparrea\nGitHub: github.com/axeliparrea'
@@ -50,20 +50,20 @@ const TerminalComponent = () => {
     'projects': {
       description: i18n.language === 'es' ? 'Lista proyectos destacados' : 'Lists featured projects',
       output: () => i18n.language === 'es' ? 
-        'Proyectos destacados:\n• Sistema de gestión SAP\n• Aplicación de streaming\n• Plataforma de análisis de datos\n• Juego Unity con ML\n\nUsa "scroll projects" para ver la sección de proyectos' :
-        'Featured projects:\n• SAP management system\n• Streaming application\n• Data analysis platform\n• Unity game with ML\n\nUse "scroll projects" to see the projects section'
+        'Proyectos destacados:\n Sistema de gestin SAP\n Aplicacin de streaming\n Plataforma de anlisis de datos\n Juego Unity con ML\n\nUsa "scroll projects" para ver la seccin de proyectos' :
+        'Featured projects:\n SAP management system\n Streaming application\n Data analysis platform\n Unity game with ML\n\nUse "scroll projects" to see the projects section'
     },
     'education': {
-      description: i18n.language === 'es' ? 'Muestra información educativa' : 'Shows education information',
+      description: i18n.language === 'es' ? 'Muestra informacin educativa' : 'Shows education information',
       output: () => i18n.language === 'es' ? 
-        'Educación:\n• Ingeniería en Ciencias de la Computación\n• Tecnológico de Monterrey\n• GPA: 4.0\n• Periodo: 2022-2026' :
-        'Education:\n• Computer Science Engineering\n• Tecnológico de Monterrey\n• GPA: 4.0\n• Period: 2022-2026'
+        'Educacin:\n Ingeniera en Ciencias de la Computacin\n Tecnolgico de Monterrey\n GPA: 4.0\n Periodo: 2022-2026' :
+        'Education:\n Computer Science Engineering\n Tecnolgico de Monterrey\n GPA: 4.0\n Period: 2022-2026'
     },
     'achievements': {
       description: i18n.language === 'es' ? 'Muestra logros y reconocimientos' : 'Shows achievements and awards',
       output: () => i18n.language === 'es' ? 
-        'Logros:\n• Ganador SAP Labs 2025\n• GPA 4.0\n• Participante en hackathons\n• Desarrollador Full Stack certificado' :
-        'Achievements:\n• SAP Labs Winner 2025\n• GPA 4.0\n• Hackathon participant\n• Certified Full Stack developer'
+        'Logros:\n Ganador SAP Labs 2025\n GPA 4.0\n Participante en hackathons\n Desarrollador Full Stack certificado' :
+        'Achievements:\n SAP Labs Winner 2025\n GPA 4.0\n Hackathon participant\n Certified Full Stack developer'
     },
     'date': {
       description: i18n.language === 'es' ? 'Muestra fecha y hora actuales' : 'Shows current date and time',
@@ -78,7 +78,7 @@ const TerminalComponent = () => {
       output: () => '__CLEAR__'
     },
     'demo': {
-      description: i18n.language === 'es' ? 'Inicia el modo demo automático' : 'Starts automatic demo mode',
+      description: i18n.language === 'es' ? 'Inicia el modo demo automtico' : 'Starts automatic demo mode',
       output: () => {
         setIsDemo(true);
         setIsInteractive(false);
@@ -98,7 +98,7 @@ const TerminalComponent = () => {
       }
     },
     'scroll': {
-      description: i18n.language === 'es' ? 'Hace scroll a una sección (about, projects, experience, contact)' : 'Scrolls to a section (about, projects, experience, contact)',
+      description: i18n.language === 'es' ? 'Hace scroll a una seccin (about, projects, experience, contact)' : 'Scrolls to a section (about, projects, experience, contact)',
       output: (args) => {
         const section = args[0];
         if (section && ['about', 'projects', 'experience', 'contact'].includes(section)) {
@@ -112,7 +112,7 @@ const TerminalComponent = () => {
               behavior: 'smooth'
             });
             return i18n.language === 'es' ? 
-              `Navegando a la sección ${section}...` :
+              `Navegando a la seccin ${section}...` :
               `Navigating to ${section} section...`;
           }
         }
@@ -402,7 +402,7 @@ const TerminalComponent = () => {
                     transition: 'opacity 0.1s',
                     color: colors.primary
                   }}>
-                    █
+                    
                   </span>
                 </div>
               </div>
@@ -438,7 +438,7 @@ const TerminalComponent = () => {
                 transition: 'opacity 0.1s',
                 color: colors.primary
               }}>
-                █
+                
               </span>
             </div>
           </>
