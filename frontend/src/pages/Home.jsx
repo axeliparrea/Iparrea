@@ -57,10 +57,8 @@ const Home = () => {
       fontFamily: 'Inter, sans-serif',
       position: 'relative'
     }}>
-      {/* Matrix Background */}
       <MatrixBackground />
       
-      {/* Hero Section */}
       <section style={{
         minHeight: '100vh',
         display: 'flex',
@@ -79,7 +77,6 @@ const Home = () => {
           gap: isMobile ? '3rem' : '5rem',
           alignItems: 'center'
         }}>
-          {/* Left Side - Info */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -228,7 +225,6 @@ const Home = () => {
               </div>
             </motion.div>
 
-            {/* Mobile Terminal Note */}
             {isMobile && (
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -244,13 +240,6 @@ const Home = () => {
                 }}
               >
                 <p style={{
-                  fontSize: '0.9rem',
-                  color: colors.textSecondary,
-                  marginBottom: '0.5rem'
-                }}>
-                  💻 {t('terminalInteractiveBelow')}
-                </p>
-                <p style={{
                   fontSize: '0.8rem',
                   color: colors.textSecondary
                 }}>
@@ -260,7 +249,6 @@ const Home = () => {
             )}
           </motion.div>
           
-          {/* Right Side - Terminal (Always Active) */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -277,22 +265,17 @@ const Home = () => {
         </div>
       </section>
 
-      {/* About Section */}
       <section id="about">
         <AboutSection />
       </section>
 
-      {/* Experience Section */}
       <section id="experience">
         <ExperienceSection />
       </section>
 
-      {/* Projects Section */}
       <section id="projects">
         <ProjectsSection />
       </section>
-
-      {/* Contact Section */}
       <section id="contact" style={{
         padding: isMobile ? '3rem 1rem' : '5rem 0',
         background: colors.surface,
@@ -384,7 +367,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CSS Animation */}
       <style jsx>{`
         @keyframes pulse {
           0% { opacity: 1; }

@@ -158,7 +158,6 @@ const TerminalComponent = () => {
     }
   ];
 
-  // Cursor blinking effect
   useEffect(() => {
     const interval = setInterval(() => {
       setShowCursor(prev => !prev);
@@ -166,7 +165,7 @@ const TerminalComponent = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Demo mode typing effect
+  useEffect(() => {
   useEffect(() => {
     if (!isDemo) return;
     
@@ -194,7 +193,6 @@ const TerminalComponent = () => {
     }
   }, [currentText, currentIndex, demoCommands, isDemo, i18n.language]);
 
-  // Handle user input
   const handleInputChange = (e) => {
     setUserInput(e.target.value);
   };
@@ -271,7 +269,6 @@ const TerminalComponent = () => {
       });
     }
     
-    // Scroll to bottom
     setTimeout(() => {
       if (terminalRef.current) {
         terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
@@ -387,7 +384,6 @@ const TerminalComponent = () => {
       </div>
       
       <div ref={terminalRef} style={contentStyle}>
-        {/* Demo Mode */}
         {isDemo && (
           <>
             {demoCommands.slice(0, currentIndex).map((cmd, index) => (
@@ -414,7 +410,6 @@ const TerminalComponent = () => {
           </>
         )}
 
-        {/* Interactive Mode */}
         {isInteractive && (
           <>
             {commandHistory.map((item, index) => (
@@ -449,7 +444,6 @@ const TerminalComponent = () => {
           </>
         )}
 
-        {/* Initial prompt for first-time users */}
         {!isDemo && !isInteractive && (
           <div style={{
             textAlign: 'center',

@@ -267,7 +267,7 @@ const Navbar = () => {
               {t('contact')}
             </NavLink>
             
-            {/* Social Links */}
+            
             <SocialLink href="https://linkedin.com/in/axel-iparrea">
               LinkedIn
             </SocialLink>
@@ -300,7 +300,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        
         <div style={mobileMenuStyle}>
           <span
             style={{
@@ -381,7 +381,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Add CSS animations */}
+      
       <style jsx>{`
         @keyframes slideDown {
           from {

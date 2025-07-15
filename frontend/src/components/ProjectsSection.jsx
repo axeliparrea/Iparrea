@@ -14,7 +14,6 @@ const ProjectsSection = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Set animation to played immediately when component mounts
     setAnimationPlayed(true);
     
     const handleResize = () => {
@@ -159,7 +158,6 @@ const ProjectsSection = () => {
     }
   };
 
-  // Componente para versión móvil simplificada (2 columnas)
   const MobileProjectCard = ({ project, index }) => (
     <motion.div
       initial={{ opacity: 1, y: 0 }}
@@ -189,7 +187,6 @@ const ProjectsSection = () => {
       }}
       onClick={(e) => handleProjectClick(project.id, e)}
     >
-      {/* Header ultra-compacto */}
       <div style={{
         height: '80px',
         background: `linear-gradient(135deg, ${project.color}25, ${project.color}15)`,
@@ -199,7 +196,6 @@ const ProjectsSection = () => {
         justifyContent: 'center',
         overflow: 'hidden'
       }}>
-        {/* Efecto de fondo dinámico */}
         <div style={{
           position: 'absolute',
           top: '-20px',
@@ -250,9 +246,7 @@ const ProjectsSection = () => {
         </div>
       </div>
 
-      {/* Contenido ultra-compacto */}
       <div style={{ padding: '0.8rem' }}>
-        {/* Título y categoría */}
         <div style={{ marginBottom: '0.5rem' }}>
           <h3 style={{
             fontSize: '0.85rem',
@@ -276,11 +270,10 @@ const ProjectsSection = () => {
             textTransform: 'uppercase',
             letterSpacing: '0.5px'
           }}>
-            {project.category.split(' ')[0]} {/* Solo primera palabra */}
+            {project.category.split(' ')[0]}
           </span>
         </div>
 
-        {/* Descripción mínima */}
         <p style={{
           fontSize: '0.7rem',
           color: colors.textSecondary,
@@ -294,7 +287,7 @@ const ProjectsSection = () => {
           {project.descriptionMobile}
         </p>
 
-        {/* Tecnologías súper mínimas */}
+        
         <div style={{
           display: 'flex',
           flexWrap: 'wrap',
@@ -326,7 +319,7 @@ const ProjectsSection = () => {
           </span>
         </div>
 
-        {/* Botón minimalista */}
+        
         <div
           style={{
             background: `linear-gradient(135deg, ${project.color}, ${project.color}cc)`,
@@ -346,7 +339,7 @@ const ProjectsSection = () => {
         </div>
       </div>
 
-      {/* Indicador de estado minimalista */}
+      
       <div style={{
         position: 'absolute',
         top: '0.4rem',
@@ -360,7 +353,7 @@ const ProjectsSection = () => {
     </motion.div>
   );
 
-  // Componente para versión desktop completa
+
   const DesktopProjectCard = ({ project, index }) => (
     <motion.div
       initial={{ opacity: 1, y: 0 }}
@@ -394,7 +387,7 @@ const ProjectsSection = () => {
       }}
       onClick={(e) => handleProjectClick(project.id, e)}
     >
-      {/* Project Image or Video */}
+      
       <div style={{
         height: '200px',
         background: `linear-gradient(135deg, ${project.color}20, ${project.color}40)`,
@@ -476,7 +469,7 @@ const ProjectsSection = () => {
         )}
       </div>
 
-      {/* Project Content */}
+      
       <div style={{ 
         padding: '1.5rem',
         display: 'flex',
@@ -528,7 +521,7 @@ const ProjectsSection = () => {
           {project.description}
         </p>
 
-        {/* Technologies */}
+        
         <div style={{
           display: 'flex',
           flexWrap: 'wrap',
@@ -564,7 +557,7 @@ const ProjectsSection = () => {
           ))}
         </div>
 
-        {/* Action Button - Pushed to bottom */}
+        
         <motion.div
           className="project-button"
           whileHover={{ 
@@ -640,7 +633,7 @@ const ProjectsSection = () => {
           </p>
         </motion.div>
 
-        {/* Projects Grid */}
+        
         <div style={{
           display: 'grid',
           gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(auto-fit, minmax(320px, 1fr))',
@@ -657,7 +650,7 @@ const ProjectsSection = () => {
           )}
         </div>
 
-        {/* Hackathons Section - Simplificado en móvil */}
+        
         <motion.div
           initial={{ opacity: 1, y: 0 }}
           style={{

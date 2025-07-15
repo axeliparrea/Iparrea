@@ -20,7 +20,7 @@ const ExperienceSection = () => {
     };
   }, []);
 
-  // Versión completa para desktop
+
   const experiences = [
     {
       id: 1,
@@ -79,7 +79,7 @@ const ExperienceSection = () => {
     }
   ];
 
-  // Versión simplificada para móviles
+
   const mobileExperiences = [
     {
       id: 1,
@@ -138,7 +138,7 @@ const ExperienceSection = () => {
     return yearColors[year] || colors.primary;
   };
 
-  // Componente para versión desktop
+
   const DesktopExperience = ({ exp, index }) => (
     <motion.div
       initial={{ opacity: 1, x: 0 }}
@@ -153,7 +153,7 @@ const ExperienceSection = () => {
         position: 'relative'
       }}
     >
-      {/* Year Badge */}
+      
       <div
         style={{
           position: 'absolute',
@@ -227,7 +227,7 @@ const ExperienceSection = () => {
         {exp.description}
       </p>
 
-      {/* Skills Tags */}
+      
       <div style={{
         display: 'flex',
         flexWrap: 'wrap',
@@ -252,7 +252,7 @@ const ExperienceSection = () => {
         ))}
       </div>
 
-      {/* Learning & Growth */}
+      
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
@@ -315,7 +315,7 @@ const ExperienceSection = () => {
     </motion.div>
   );
 
-  // Componente para versión móvil simplificada
+
   const MobileExperience = ({ exp, index }) => (
     <motion.div
       initial={{ opacity: 1, y: 0 }}
@@ -329,7 +329,7 @@ const ExperienceSection = () => {
         position: 'relative'
       }}
     >
-      {/* Year Badge móvil */}
+      
       <div
         style={{
           position: 'absolute',
@@ -352,7 +352,7 @@ const ExperienceSection = () => {
         {exp.year.slice(-2)}
       </div>
 
-      {/* Header compacto */}
+      
       <div style={{
         display: 'flex',
         justifyContent: 'space-between',
@@ -391,7 +391,7 @@ const ExperienceSection = () => {
         </span>
       </div>
 
-      {/* Punto clave */}
+      
       <p style={{
         fontSize: '0.85rem',
         color: colors.textSecondary,
@@ -401,7 +401,7 @@ const ExperienceSection = () => {
         {exp.keyPoint}
       </p>
 
-      {/* Skills mínimos */}
+      
       <div style={{
         display: 'flex',
         flexWrap: 'wrap',
@@ -478,13 +478,13 @@ const ExperienceSection = () => {
           </p>
         </motion.div>
 
-        {/* Timeline */}
+        
         <div style={{
           maxWidth: '1000px',
           margin: '0 auto',
           position: 'relative'
         }}>
-          {/* Timeline Line */}
+          
           {!isMobile && (
             <motion.div
               initial={{ height: '100%' }}
@@ -501,7 +501,7 @@ const ExperienceSection = () => {
             ></motion.div>
           )}
 
-          {/* Renderizar versión según dispositivo */}
+          
           {isMobile ? 
             mobileExperiences.map((exp, index) => (
               <MobileExperience key={exp.id} exp={exp} index={index} />
@@ -512,7 +512,7 @@ const ExperienceSection = () => {
           }
         </div>
 
-        {/* Current Status - Simplificado en móvil */}
+        
         <motion.div
           initial={{ opacity: 1, y: 0 }}
           style={{

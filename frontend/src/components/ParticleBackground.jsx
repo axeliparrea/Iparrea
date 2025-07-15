@@ -20,7 +20,6 @@ const ParticleBackground = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Particle class
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width;
@@ -36,13 +35,11 @@ const ParticleBackground = () => {
         this.x += this.vx;
         this.y += this.vy;
 
-        // Wrap around screen
         if (this.x < 0) this.x = canvas.width;
         if (this.x > canvas.width) this.x = 0;
         if (this.y < 0) this.y = canvas.height;
         if (this.y > canvas.height) this.y = 0;
 
-        // Pulse opacity
         this.opacity += Math.sin(Date.now() * 0.001) * 0.01;
         this.opacity = Math.max(0.1, Math.min(0.7, this.opacity));
       }
@@ -55,7 +52,6 @@ const ParticleBackground = () => {
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.fill();
         
-        // Add glow effect
         ctx.shadowColor = this.color;
         ctx.shadowBlur = 10;
         ctx.fill();
@@ -63,7 +59,6 @@ const ParticleBackground = () => {
       }
     }
 
-    // Create particles
     const createParticles = () => {
       particlesRef.current = [];
       const particleCount = Math.floor((canvas.width * canvas.height) / 10000);
@@ -73,11 +68,9 @@ const ParticleBackground = () => {
       }
     };
 
-    // Animation loop
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Draw connections between nearby particles
       for (let i = 0; i < particlesRef.current.length; i++) {
         for (let j = i + 1; j < particlesRef.current.length; j++) {
           const dx = particlesRef.current[i].x - particlesRef.current[j].x;
@@ -98,7 +91,6 @@ const ParticleBackground = () => {
         }
       }
       
-      // Update and draw particles
       particlesRef.current.forEach(particle => {
         particle.update();
         particle.draw();
@@ -110,7 +102,6 @@ const ParticleBackground = () => {
     createParticles();
     animate();
 
-    // Cleanup
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       if (animationRef.current) {

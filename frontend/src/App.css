@@ -1,4 +1,4 @@
-/* Global Styles */
+
 * {
   margin: 0;
   padding: 0;
@@ -16,7 +16,7 @@ body {
   line-height: 1.6;
 }
 
-/* Scrollbar Styles */
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -40,7 +40,7 @@ body {
   padding: 0 2rem;
 }
 
-/* Responsive Container */
+
 @media (max-width: 1024px) {
   .container {
     padding: 0 1.5rem;
@@ -59,7 +59,7 @@ body {
   }
 }
 
-/* Enhanced Animations */
+
 .fade-in {
   animation: fadeIn 0.8s ease-in-out;
 }
@@ -96,7 +96,7 @@ body {
   animation: glow 2s ease-in-out infinite alternate;
 }
 
-/* Keyframes */
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -214,7 +214,7 @@ body {
   51%, 100% { opacity: 0; }
 }
 
-/* Enhanced Button Styles */
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -275,7 +275,7 @@ body {
   border-color: var(--primary);
 }
 
-/* Enhanced Card Styles */
+
 .card {
   background: var(--surface);
   border-radius: 12px;
@@ -309,7 +309,7 @@ body {
   opacity: 1;
 }
 
-/* Text Styles */
+
 .text-gradient {
   background: linear-gradient(45deg, var(--primary), var(--secondary, var(--primary)));
   -webkit-background-clip: text;
@@ -321,7 +321,7 @@ body {
   text-shadow: 0 0 10px var(--primary);
 }
 
-/* Loading Spinner */
+
 .spinner {
   width: 40px;
   height: 40px;
@@ -331,7 +331,7 @@ body {
   animation: spin 1s linear infinite;
 }
 
-/* Responsive Typography */
+
 .text-xs { font-size: 0.75rem; }
 .text-sm { font-size: 0.875rem; }
 .text-base { font-size: 1rem; }
@@ -356,7 +356,7 @@ body {
   .text-5xl { font-size: 1.875rem; }
 }
 
-/* Utility Classes */
+
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
 .items-center { align-items: center; }
@@ -402,7 +402,7 @@ body {
 .shadow-lg { box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); }
 .shadow-xl { box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1); }
 
-/* Mobile-first responsive grid */
+
 .grid {
   display: grid;
   gap: 1rem;
@@ -428,13 +428,13 @@ body {
   .lg\:grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
 }
 
-/* Focus States */
+
 .focus-ring:focus {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
-/* Smooth Transitions */
+
 .transition-all {
   transition: all 0.3s ease;
 }
@@ -447,7 +447,7 @@ body {
   transition: transform 0.3s ease;
 }
 
-/* Hide scrollbar but keep functionality */
+
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -457,7 +457,7 @@ body {
   display: none;
 }
 
-/* Glassmorphism effect */
+
 .glass {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);

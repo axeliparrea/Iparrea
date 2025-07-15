@@ -14,16 +14,13 @@ const YouTubeVideo = ({
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
 
-  // Extraer videoId si se pasa una URL completa
   const extractVideoId = (url) => {
     if (!url) return null;
     
-    // Si ya es solo un ID, devolverlo
     if (url.length === 11 && !url.includes('/') && !url.includes('=')) {
       return url;
     }
     
-    // Extraer de diferentes formatos de URL de YouTube
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
     

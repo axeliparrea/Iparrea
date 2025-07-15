@@ -42,7 +42,6 @@ const AboutSection = () => {
     'Bootstrap', 'Tailwind CSS', 'Axios', 'Azure', 'Git', 'Linux', 'Agile methodology'
   ];
 
-  // Versiones simplificadas para móvil
   const mobileLanguages = ['Python', 'JavaScript', 'C#', 'Java', 'SQL'];
   const mobileTools = ['React', 'SAP S/4HANA', 'Power BI', 'Azure', 'Git'];
 
@@ -101,7 +100,6 @@ const AboutSection = () => {
           }}></div>
         </motion.div>
 
-        {/* Profile Image */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.8 }}
@@ -132,11 +130,8 @@ const AboutSection = () => {
           </div>
         </motion.div>
 
-        {/* Layout diferente para móvil vs desktop */}
         {isMobile ? (
-          // Layout móvil simplificado
           <div>
-            {/* Current Work - Prioridad en móvil */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
@@ -190,7 +185,6 @@ const AboutSection = () => {
               </div>
             </motion.div>
 
-            {/* Education */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
@@ -243,7 +237,6 @@ const AboutSection = () => {
               </div>
             </motion.div>
 
-            {/* Skills condensadas */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
@@ -347,7 +340,6 @@ const AboutSection = () => {
               </div>
             </motion.div>
 
-            {/* Contact Info simplificada */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
@@ -407,7 +399,6 @@ const AboutSection = () => {
             </motion.div>
           </div>
         ) : (
-          // Layout desktop completo
           <>
             <div style={{
               display: 'grid',
@@ -415,7 +406,6 @@ const AboutSection = () => {
               gap: '2rem',
               alignItems: 'stretch'
             }}>
-              {/* Personal Info */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -50 }}
@@ -474,7 +464,6 @@ const AboutSection = () => {
                 </div>
               </motion.div>
 
-              {/* Current Work */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : 50 }}
@@ -534,7 +523,6 @@ const AboutSection = () => {
               </motion.div>
             </div>
 
-            {/* Education */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
@@ -593,7 +581,6 @@ const AboutSection = () => {
               </div>
             </motion.div>
 
-            {/* About Description */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
@@ -617,14 +604,12 @@ const AboutSection = () => {
               </p>
             </motion.div>
 
-            {/* Skills and Languages */}
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
               gap: '2rem',
               marginTop: '3rem'
             }}>
-              {/* Programming Languages */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
@@ -673,7 +658,6 @@ const AboutSection = () => {
                 </div>
               </motion.div>
 
-              {/* Frameworks & Tools */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
@@ -722,7 +706,7 @@ const AboutSection = () => {
                 </div>
               </motion.div>
 
-              {/* Languages */}
+              
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
