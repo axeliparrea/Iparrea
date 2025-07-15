@@ -8,32 +8,22 @@ import YouTubeVideo from './YouTubeVideo';
 const ProjectsSection = () => {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const [isVisible, setIsVisible] = useState(false);
-  const [hoveredProject, setHoveredProject] = useState(null);
+  const [animationPlayed, setAnimationPlayed] = useState(false);
   const [navigating, setNavigating] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handleScroll = () => {
-      const section = document.getElementById('projects');
-      if (section) {
-        const rect = section.getBoundingClientRect();
-        const isInView = rect.top < window.innerHeight * 0.8;
-        setIsVisible(isInView);
-      }
-    };
-
+    // Set animation to played immediately when component mounts
+    setAnimationPlayed(true);
+    
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
-    window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
-    handleScroll();
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
     };
   }, []);
@@ -104,28 +94,28 @@ const ProjectsSection = () => {
       title: t('projects.cybersecurityIntegration.title'),
       subtitle: t('projects.cybersecurityIntegration.subtitle'),
       description: t('projects.cybersecurityIntegration.description'),
-      descriptionMobile: 'Security integration project with advanced cybersecurity principles.',
+      descriptionMobile: 'App móvil para gestionar y resolver situaciones legales de forma eficiente.',
       image: '/assets/pictures/kali-Linux.jpg',
-      videoId: null,
-      technologies: ['Kotlin', 'Cybersecurity', 'Security Integration', 'Mobile Security'],
-      technologiesMobile: ['Kotlin', 'Security', 'Mobile'],
+      videoId: 'CxuXQe2l5Co',
+      technologies: ['Kotlin', 'Android', 'Material Design', 'RESTful API', 'Room Database'],
+      technologiesMobile: ['Kotlin', 'Android', 'Legal'],
       status: t('completed'),
       category: t('projects.cybersecurityIntegration.category'),
       period: '2024',
       color: '#F59E0B'
     },
     {
-      id: 'portfolio',
-      title: t('projects.portfolio.title'),
-      subtitle: t('projects.portfolio.subtitle'),
-      description: t('projects.portfolio.description'),
-      descriptionMobile: 'Modern responsive portfolio with smooth animations.',
-      image: '/assets/pictures/portfolio.png',
+      id: 'cybersecurity-knowledge',
+      title: t('projects.cybersecurity.title'),
+      subtitle: t('projects.cybersecurity.subtitle'),
+      description: t('projects.cybersecurity.description'),
+      descriptionMobile: 'Comprehensive cybersecurity knowledge and practical experience with security tools.',
+      image: '/assets/pictures/kali-Linux.jpg',
       videoId: null,
-      technologies: ['React', 'Vite', 'CSS3', 'Framer Motion', 'JavaScript'],
-      technologiesMobile: ['React', 'CSS3', 'Animation'],
+      technologies: ['Kali Linux', 'Penetration Testing', 'Network Security', 'Vulnerability Assessment', 'Security Auditing'],
+      technologiesMobile: ['Kali Linux', 'PenTest', 'Security'],
       status: t('completed'),
-      category: t('projects.portfolio.category'),
+      category: t('projects.cybersecurity.category'),
       period: '2024',
       color: '#8B5CF6'
     }
@@ -172,11 +162,19 @@ const ProjectsSection = () => {
   // Componente para versión móvil simplificada (2 columnas)
   const MobileProjectCard = ({ project, index }) => (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
-      transition={{ duration: 0.4, delay: index * 0.05 }}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      initial={{ opacity: 1, y: 0 }}
+      whileHover={{ 
+        y: -8, 
+        scale: 1.02,
+        boxShadow: `0 16px 32px ${project.color}25`
+      }}
+      transition={{ 
+        duration: 0.3, 
+        ease: "easeOut",
+        type: "spring",
+        stiffness: 300,
+        damping: 20
+      }}
       style={{
         background: `linear-gradient(135deg, ${colors.surface} 0%, ${project.color}08 100%)`,
         borderRadius: '16px',
@@ -185,7 +183,9 @@ const ProjectsSection = () => {
         boxShadow: `0 8px 24px ${project.color}15`,
         cursor: navigating ? 'wait' : 'pointer',
         opacity: navigating ? 0.7 : 1,
-        position: 'relative'
+        position: 'relative',
+        transform: 'translateZ(0)',
+        backfaceVisibility: 'hidden'
       }}
       onClick={(e) => handleProjectClick(project.id, e)}
     >
@@ -363,9 +363,19 @@ const ProjectsSection = () => {
   // Componente para versión desktop completa
   const DesktopProjectCard = ({ project, index }) => (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 50 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      initial={{ opacity: 1, y: 0 }}
+      whileHover={{ 
+        y: -12, 
+        scale: 1.03,
+        boxShadow: `0 20px 40px ${project.color}20, 0 8px 16px ${colors.shadow}`
+      }}
+      transition={{ 
+        duration: 0.4, 
+        ease: "easeOut",
+        type: "spring",
+        stiffness: 300,
+        damping: 25
+      }}
       className="project-card"
       style={{
         background: colors.surface,
@@ -375,13 +385,13 @@ const ProjectsSection = () => {
         boxShadow: `0 4px 12px ${colors.shadow}`,
         cursor: navigating ? 'wait' : 'pointer',
         position: 'relative',
-        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-        transform: hoveredProject === project.id ? 'translateY(-8px)' : 'translateY(0)',
         opacity: navigating ? 0.7 : 1,
-        willChange: 'transform, box-shadow'
+        transform: 'translateZ(0)',
+        backfaceVisibility: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%'
       }}
-      onMouseEnter={() => !navigating && setHoveredProject(project.id)}
-      onMouseLeave={() => !navigating && setHoveredProject(null)}
       onClick={(e) => handleProjectClick(project.id, e)}
     >
       {/* Project Image or Video */}
@@ -408,10 +418,7 @@ const ProjectsSection = () => {
             style={{
               width: '100%',
               height: '100%',
-              objectFit: 'cover',
-              transition: 'transform 0.3s ease',
-              transform: hoveredProject === project.id ? 'scale(1.1)' : 'scale(1)',
-              willChange: 'transform'
+              objectFit: 'cover'
             }}
           />
         )}
@@ -470,7 +477,12 @@ const ProjectsSection = () => {
       </div>
 
       {/* Project Content */}
-      <div style={{ padding: '1.5rem' }}>
+      <div style={{ 
+        padding: '1.5rem',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%'
+      }}>
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -524,9 +536,18 @@ const ProjectsSection = () => {
           marginBottom: '1.5rem'
         }}>
           {project.technologies.map((tech, techIndex) => (
-            <span
+            <motion.span
               key={techIndex}
               className="tech-tag"
+              whileHover={{ 
+                scale: 1.1,
+                background: `${colors.primary}20`,
+                boxShadow: `0 2px 8px ${colors.primary}30`
+              }}
+              transition={{ 
+                duration: 0.2, 
+                ease: "easeOut"
+              }}
               style={{
                 background: `${colors.primary}10`,
                 color: colors.primary,
@@ -534,17 +555,27 @@ const ProjectsSection = () => {
                 borderRadius: '12px',
                 fontSize: '12px',
                 fontWeight: '500',
-                border: `1px solid ${colors.primary}30`
+                border: `1px solid ${colors.primary}30`,
+                cursor: 'default'
               }}
             >
               {tech}
-            </span>
+            </motion.span>
           ))}
         </div>
 
-        {/* Action Button */}
-        <div
+        {/* Action Button - Pushed to bottom */}
+        <motion.div
           className="project-button"
+          whileHover={{ 
+            scale: 1.05,
+            boxShadow: `0 4px 20px ${project.color}40`
+          }}
+          whileTap={{ scale: 0.98 }}
+          transition={{ 
+            duration: 0.2, 
+            ease: "easeOut"
+          }}
           style={{
             background: `linear-gradient(135deg, ${project.color}, ${project.color}80)`,
             color: '#fff',
@@ -554,16 +585,14 @@ const ProjectsSection = () => {
             fontWeight: '600',
             fontSize: '14px',
             cursor: navigating ? 'wait' : 'pointer',
-            transition: 'transform 0.2s ease, box-shadow 0.2s ease',
             opacity: navigating ? 0.7 : 1,
-            transform: hoveredProject === project.id ? 'translateY(-2px)' : 'translateY(0)',
-            boxShadow: hoveredProject === project.id ? `0 6px 20px ${project.color}40` : `0 2px 10px ${project.color}20`,
-            willChange: 'transform, box-shadow'
+            boxShadow: `0 2px 10px ${project.color}20`,
+            marginTop: 'auto'
           }}
           onClick={(e) => handleProjectClick(project.id, e)}
         >
           {navigating ? t('loading') : t('viewProjectDetails')}
-        </div>
+        </motion.div>
       </div>
     </motion.div>
   );
@@ -579,9 +608,7 @@ const ProjectsSection = () => {
     >
       <div className="container">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 1, y: 0 }}
           style={{ textAlign: 'center', marginBottom: isMobile ? '2rem' : '4rem' }}
         >
           <h2 style={{
@@ -632,9 +659,7 @@ const ProjectsSection = () => {
 
         {/* Hackathons Section - Simplificado en móvil */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          initial={{ opacity: 1, y: 0 }}
           style={{
             background: colors.surface,
             padding: isMobile ? '1.5rem' : '2rem',
@@ -663,16 +688,28 @@ const ProjectsSection = () => {
             {hackathons.map((hackathon, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.9 }}
-                transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-                whileHover={{ scale: isMobile ? 1 : 1.05 }}
+                initial={{ opacity: 1, scale: 1 }}
+                whileHover={{ 
+                  y: -4, 
+                  scale: 1.02,
+                  boxShadow: `0 8px 24px ${hackathon.color}20`
+                }}
+                transition={{ 
+                  duration: 0.3, 
+                  ease: "easeOut",
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 20
+                }}
                 style={{
                   background: colors.background,
                   padding: isMobile ? '1rem' : '1.5rem',
                   borderRadius: '12px',
                   border: `1px solid ${colors.border}`,
-                  textAlign: 'center'
+                  textAlign: 'center',
+                  cursor: 'pointer',
+                  transform: 'translateZ(0)',
+                  backfaceVisibility: 'hidden'
                 }}
               >
                 <h4 style={{

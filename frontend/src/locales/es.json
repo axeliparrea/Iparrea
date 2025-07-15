@@ -11,6 +11,7 @@
   "phone": "+52 (81) 8888-8888",
   "location": "Monterrey, México",
   "projectDetails": "Ver Detalles del Proyecto →",
+  "viewProjectDetails": "Ver Detalles del Proyecto →",
   "loading": "Cargando...",
   "hackathonsTitle": "Hackathons y Competencias",
   "winner": "Ganador",
@@ -49,7 +50,7 @@
       "category": "IA y Empresarial"
     },
     "awakDashboard": {
-      "title": "AWAQ WEB ALL",
+      "title": "AWAQ WEB",
       "subtitle": "Visualización de Progreso de Usuario",
       "description": "Un dashboard integral para visualizar el progreso de los usuarios en su proceso de incorporación. Construido con C# y tecnologías web modernas, esta herramienta proporciona información detallada sobre el engagement y análisis de progresión del usuario.",
       "category": "Aplicación Web"
@@ -67,16 +68,16 @@
       "category": "IA y Simulación"
     },
     "cybersecurityIntegration": {
-      "title": "Integración de Ciberseguridad",
-      "subtitle": "Proyecto de Clase de Seguridad",
-      "description": "Proyecto integral de ciberseguridad desarrollado en Kotlin enfocándose en integración e implementación de seguridad. Este proyecto académico demuestra conceptos avanzados de seguridad y aplicación práctica de principios de ciberseguridad.",
-      "category": "Ciberseguridad"
+      "title": "BuffetTEC",
+      "subtitle": "App Móvil de Asistencia Legal", 
+      "description": "Una aplicación móvil para la divulgación y gestión de situaciones legales, que permite a los usuarios reconocer y abordar sus problemas legales de manera eficiente y segura. Desarrollada para la Clínica Penal del Tecnológico de Monterrey.",
+      "category": "Desarrollo Móvil"
     },
-    "portfolio": {
-      "title": "Portafolio Personal",
-      "subtitle": "Portafolio Web Profesional",
-      "description": "Un sitio web de portafolio moderno y responsivo que muestra mi trabajo profesional y habilidades técnicas. Construido con React y optimizado para rendimiento con animaciones suaves y elementos interactivos.",
-      "category": "Frontend"
+    "cybersecurity": {
+      "title": "Experiencia en Ciberseguridad",
+      "subtitle": "Análisis de Seguridad y Pruebas de Penetración",
+      "description": "Conocimiento integral en ciberseguridad con experiencia práctica en pruebas de penetración, evaluación de vulnerabilidades y auditorías de seguridad. Competente en Kali Linux y diversas herramientas de seguridad para identificar y mitigar amenazas.",
+      "category": "Ciberseguridad"
     }
   },
   "hackathons": {

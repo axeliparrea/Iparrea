@@ -6,30 +6,16 @@ import { motion } from 'framer-motion';
 const ExperienceSection = () => {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const [isVisible, setIsVisible] = useState(false);
-  const [hoveredExp, setHoveredExp] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const section = document.getElementById('experience');
-      if (section) {
-        const rect = section.getBoundingClientRect();
-        const isInView = rect.top < window.innerHeight * 0.8;
-        setIsVisible(isInView);
-      }
-    };
-
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
-    window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
-    handleScroll();
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
     };
   }, []);
@@ -155,9 +141,7 @@ const ExperienceSection = () => {
   // Componente para versión desktop
   const DesktopExperience = ({ exp, index }) => (
     <motion.div
-      initial={{ opacity: 0, x: -50 }}
-      animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -50 }}
-      transition={{ duration: 0.6, delay: index * 0.2 }}
+      initial={{ opacity: 1, x: 0 }}
       style={{
         background: colors.surface,
         borderRadius: '16px',
@@ -166,12 +150,8 @@ const ExperienceSection = () => {
         marginLeft: '4rem',
         border: `1px solid ${colors.border}`,
         boxShadow: `0 8px 32px ${colors.primary}15`,
-        position: 'relative',
-        transform: hoveredExp === exp.id ? 'translateX(10px)' : 'translateX(0)',
-        transition: 'all 0.3s ease'
+        position: 'relative'
       }}
-      onMouseEnter={() => setHoveredExp(exp.id)}
-      onMouseLeave={() => setHoveredExp(null)}
     >
       {/* Year Badge */}
       <div
@@ -338,17 +318,14 @@ const ExperienceSection = () => {
   // Componente para versión móvil simplificada
   const MobileExperience = ({ exp, index }) => (
     <motion.div
-      initial={{ opacity: 0, x: -30 }}
-      animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -30 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      initial={{ opacity: 1, y: 0 }}
       style={{
         background: colors.surface,
         borderRadius: '12px',
-        padding: '1rem',
-        marginBottom: '1rem',
-        marginLeft: '2rem',
+        padding: '1.5rem',
+        marginBottom: '1.5rem',
         border: `1px solid ${colors.border}`,
-        boxShadow: `0 4px 16px ${colors.primary}10`,
+        boxShadow: `0 4px 12px ${colors.shadow}`,
         position: 'relative'
       }}
     >
@@ -469,9 +446,7 @@ const ExperienceSection = () => {
     >
       <div className="container">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 1, y: 0 }}
           style={{ textAlign: 'center', marginBottom: isMobile ? '2rem' : '4rem' }}
         >
           <h2 style={{
@@ -510,16 +485,21 @@ const ExperienceSection = () => {
           position: 'relative'
         }}>
           {/* Timeline Line */}
-          <div style={{
-            position: 'absolute',
-            left: isMobile ? '0.5rem' : '2rem',
-            top: '0',
-            bottom: '0',
-            width: '3px',
-            background: `linear-gradient(to bottom, ${colors.primary}, ${colors.secondary || colors.primary})`,
-            zIndex: 1,
-            borderRadius: '2px'
-          }}></div>
+          {!isMobile && (
+            <motion.div
+              initial={{ height: '100%' }}
+              style={{
+                position: 'absolute',
+                left: '0.5rem',
+                top: '0',
+                width: '2px',
+                height: '100%',
+                background: `linear-gradient(to bottom, ${colors.primary}90, ${colors.primary}30)`,
+                zIndex: 1,
+                borderRadius: '2px'
+              }}
+            ></motion.div>
+          )}
 
           {/* Renderizar versión según dispositivo */}
           {isMobile ? 
@@ -534,9 +514,7 @@ const ExperienceSection = () => {
 
         {/* Current Status - Simplificado en móvil */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          initial={{ opacity: 1, y: 0 }}
           style={{
             textAlign: 'center',
             marginTop: isMobile ? '2rem' : '4rem',

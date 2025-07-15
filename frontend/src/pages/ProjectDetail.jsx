@@ -48,10 +48,10 @@ const ProjectDetail = () => {
       ]
     },
     'awak-dashboard': {
-      title: 'AWAQ WEB ALL',
+      title: 'AWAQ WEB',
       subtitle: 'User Progress Visualization',
       description: 'A comprehensive dashboard for visualizing user progress in their onboarding process. Built with C# and modern web technologies, this tool provides detailed insights into user engagement and progression analytics.',
-      fullDescription: 'The AWAQ WEB ALL is a sophisticated web application designed to visualize and track user progress throughout their onboarding journey. Built using C# and modern web technologies, this dashboard provides administrators with comprehensive insights into user engagement, progression analytics, and performance metrics. The application features interactive charts, real-time data updates, and customizable reporting tools that help organizations understand user behavior patterns and optimize their onboarding processes.',
+      fullDescription: 'The AWAQ WEB is a sophisticated web application designed to visualize and track user progress throughout their onboarding journey. Built using C# and modern web technologies, this dashboard provides administrators with comprehensive insights into user engagement, progression analytics, and performance metrics. The application features interactive charts, real-time data updates, and customizable reporting tools that help organizations understand user behavior patterns and optimize their onboarding processes.',
       detailedDescription: 'This enterprise-grade dashboard solution transforms how organizations monitor and improve their user onboarding processes. Built with ASP.NET Core and modern frontend technologies, the system provides real-time tracking of user interactions, engagement metrics, and completion rates. The dashboard features customizable widgets, drill-down analytics, automated reporting, and alert systems for identifying users who may need additional support. Integration with SQL Server ensures robust data management and quick query performance even with large datasets.',
       image: '/assets/pictures/AWAQ WEB ALL.png',
       videoId: 'HiyWYd23EK4', // Video demo de AWAQ WEB Dashboard
@@ -147,36 +147,36 @@ const ProjectDetail = () => {
       ]
     },
     'cybersecurity-integration': {
-      title: 'Cybersecurity Integration',
-      subtitle: 'Security Class Project',
-      description: 'Comprehensive cybersecurity project developed in Kotlin focusing on security integration and implementation. This academic project demonstrates advanced security concepts and practical application of cybersecurity principles.',
-      fullDescription: 'This comprehensive cybersecurity project was developed as part of advanced security coursework, focusing on practical implementation of cybersecurity principles and security integration techniques. Built using Kotlin, the project demonstrates understanding of modern security practices, threat assessment, vulnerability management, and security architecture design. The project includes implementation of various security protocols, encryption techniques, and security monitoring systems.',
-      detailedDescription: 'This advanced cybersecurity implementation project showcases practical application of security principles in mobile and web environments. The project includes implementation of multiple encryption algorithms, secure authentication systems, threat detection mechanisms, and vulnerability assessment tools. Built with Kotlin for Android platforms, the application demonstrates secure coding practices, data protection techniques, and security protocol implementation. The project also includes comprehensive security testing, penetration testing scenarios, and security audit capabilities.',
+      title: 'BuffetTEC',
+      subtitle: 'App Móvil de Asistencia Legal',
+      description: 'Aplicación móvil para la divulgación y gestión de situaciones legales, permitiendo a los usuarios reconocer y abordar sus problemas legales de manera eficiente y segura. Desarrollada para la Clínica Penal del Tecnológico de Monterrey.',
+      fullDescription: 'BuffetTEC es una aplicación móvil integral diseñada para ayudar a los usuarios con necesidades legales. Proporciona acceso a información relevante, facilita la solicitud de asesoría y clasifica los problemas legales en categorías específicas. Desarrollada en colaboración con la Clínica Penal del Tecnológico de Monterrey.',
+      detailedDescription: 'La app BuffetTEC ofrece una interfaz moderna basada en Material Design, autenticación segura, gestión de casos legales, plantillas de documentos y comunicación directa con profesionales del derecho. Incluye sincronización offline, notificaciones push y un enfoque en la privacidad y seguridad de los datos del usuario.',
       image: '/assets/pictures/kali-Linux.jpg',
-      videoId: null, // Sin video - usar imagen como preview
-      technologies: ['Kotlin', 'Cybersecurity', 'Security Integration', 'Mobile Security', 'Encryption', 'Security Protocols', 'Threat Assessment'],
-      status: 'Completed',
-      category: 'Cybersecurity',
+      videoId: 'CxuXQe2l5Co', // Video demo de Legal Match
+      technologies: ['Kotlin', 'Android', 'Material Design', 'RESTful API', 'Room Database'],
+      status: 'Completado',
+      category: 'Desarrollo Móvil',
       period: '2024',
       color: '#F59E0B',
       githubUrl: 'https://github.com/A01285442/Repositorio-Integracion-Seguridad-403',
       demoUrl: null,
       features: [
-        'Advanced security implementation',
-        'Threat assessment capabilities',
-        'Security protocol integration',
-        'Mobile security features',
-        'Encryption and decryption systems',
-        'Security monitoring tools',
-        'Vulnerability assessment',
-        'Penetration testing scenarios'
+        'Gestión de casos legales',
+        'Biblioteca de plantillas de documentos',
+        'Comunicación directa con profesionales legales',
+        'Autenticación segura de usuarios',
+        'Sincronización de datos offline',
+        'Notificaciones push para actualizaciones legales',
+        'Interfaz moderna con Material Design',
+        'Soporte multiidioma para términos legales'
       ],
       challenges: [
-        'Implementing robust security measures without compromising usability',
-        'Ensuring system vulnerability protection against known attacks',
-        'Integrating multiple security protocols seamlessly',
-        'Maintaining performance with security overhead',
-        'Creating comprehensive security testing suites'
+        'Implementar manejo seguro de información legal sensible',
+        'Diseñar una interfaz accesible para usuarios con diferentes niveles de conocimiento legal',
+        'Integrar con proveedores de servicios legales y APIs',
+        'Cumplir con regulaciones legales y leyes de privacidad de datos',
+        'Crear un sistema escalable para futuras expansiones'
       ]
     },
     'portfolio': {
@@ -198,18 +198,51 @@ const ProjectDetail = () => {
         'Modern React architecture',
         'Smooth animations with Framer Motion',
         'Responsive design implementation',
-        'Performance optimized bundle',
-        'Interactive user interface',
-        'Professional presentation',
         'Multi-language support',
-        'Dark/Light theme switching'
+        'Dark/light theme switching',
+        'SEO optimization',
+        'Performance optimization',
+        'Interactive UI components'
       ],
       challenges: [
-        'Optimizing performance and bundle size for fast loading',
-        'Implementing smooth animations without affecting performance',
-        'Ensuring cross-browser compatibility across all devices',
-        'Creating engaging user experiences with accessibility in mind',
-        'Balancing visual appeal with professional presentation'
+        'Implementing smooth animations without performance impact',
+        'Creating responsive design for all device sizes',
+        'Optimizing bundle size and load times',
+        'Ensuring accessibility compliance',
+        'Managing state across multiple components'
+      ]
+    },
+    'cybersecurity-knowledge': {
+      title: 'Cybersecurity Expertise',
+      subtitle: 'Security Analysis & Penetration Testing',
+      description: 'Comprehensive cybersecurity knowledge with hands-on experience in penetration testing, vulnerability assessment, and security auditing. Proficient in Kali Linux and various security tools for identifying and mitigating security threats.',
+      fullDescription: 'My cybersecurity expertise encompasses a wide range of security practices and tools. I have extensive experience with Kali Linux, penetration testing methodologies, and vulnerability assessment techniques. This knowledge allows me to identify security weaknesses and implement effective countermeasures.',
+      detailedDescription: 'Through academic coursework and practical experience, I have developed proficiency in various cybersecurity domains including network security, ethical hacking, and security auditing. My skills include using industry-standard tools for vulnerability scanning, penetration testing, and security analysis. I understand both offensive and defensive security strategies, enabling me to build more secure applications and systems.',
+      image: '/assets/pictures/kali-Linux.jpg',
+      videoId: null,
+      technologies: ['Kali Linux', 'Penetration Testing', 'Network Security', 'Vulnerability Assessment', 'Security Auditing', 'Ethical Hacking'],
+      status: 'Ongoing',
+      category: 'Cybersecurity',
+      period: '2024',
+      color: '#8B5CF6',
+      githubUrl: null,
+      demoUrl: null,
+      features: [
+        'Network vulnerability assessment',
+        'Penetration testing methodologies',
+        'Security auditing and compliance',
+        'Kali Linux proficiency',
+        'Ethical hacking techniques',
+        'Security tool utilization',
+        'Risk assessment and mitigation',
+        'Security best practices implementation'
+      ],
+      challenges: [
+        'Staying updated with evolving security threats',
+        'Balancing security with system usability',
+        'Understanding complex network architectures',
+        'Implementing comprehensive security measures',
+        'Maintaining ethical standards in security testing'
       ]
     }
   };
