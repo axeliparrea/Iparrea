@@ -113,7 +113,7 @@ const Home = () => {
                 lineHeight: '1.4'
               }}
             >
-              {t('dataEngineer')} & {t('fullStackDev')}
+              {t('technicalLead')} & {t('fullStackDev')}
             </motion.p>
             
             <motion.p
@@ -165,8 +165,8 @@ const Home = () => {
               </button>
               
               <a
-                href="/Axel_Iparrea_ComputerScience.pdf"
-                download="Axel_Iparrea_CV.pdf"
+                href="/AxelIparrea-Software-Engineer-2025.pdf"
+                download="AxelIparrea-Software-Engineer-2025.pdf"
                 className="btn btn-secondary"
                 style={{
                   background: 'transparent',

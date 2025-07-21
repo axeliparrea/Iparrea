@@ -628,7 +628,7 @@ const ProjectsSection = () => {
           }}>
             {isMobile ? 
               'Key projects and achievements' : 
-              'A collection of projects showcasing my expertise in data engineering, full-stack development, and innovative solutions.'
+              'A collection of projects showcasing my expertise in AI solutions, ERP integration, and innovative automation.'
             }
           </p>
         </motion.div>

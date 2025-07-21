@@ -75,7 +75,7 @@ const ExperienceSection = () => {
       description: 'Achieved significant recognition by winning the SAP Labs Final Showcase with SAPitos 2.0. Currently working as Data Automation & Cloud Engineer at ESAB, applying enterprise-level solutions in real-world scenarios.',
       learnings: 'Enterprise software development, SAP ecosystem integration, cloud automation, data pipeline optimization, AI integration in business processes',
       projects: 'SAPitos 2.0: AI-powered smart supply chain solution, automated data workflows using Python and SQL, Power BI dashboards for business insights',
-      skills: ['SAP S/4HANA', 'Python', 'SQL', 'Power BI', 'Power Query', 'Azure', 'Data Engineering', 'Cloud Automation']
+      skills: ['SAP S/4HANA', 'Python', 'SQL', 'Power BI', 'Power Query', 'Azure', 'AI Integration', 'Microsoft Copilot']
     }
   ];
 
@@ -123,7 +123,7 @@ const ExperienceSection = () => {
       title: 'Professional Success',
       company: 'SAP Labs & ESAB',
       period: '2025',
-      keyPoint: 'SAP Winner & Data Engineer',
+      keyPoint: 'SAP Winner & Solutions Architect',
       skills: ['SAP', 'Python', 'Azure']
     }
   ];
@@ -548,7 +548,7 @@ const ExperienceSection = () => {
             color: colors.text,
             marginBottom: '1rem'
           }}>
-            {isMobile ? '4.0 GPA & Data Engineer' : '4.0 GPA Student & Professional Data Engineer'}
+            {isMobile ? '4.0 GPA & Solutions Architect' : '4.0 GPA Student & Solutions Architect'}
           </h3>
           
           <p style={{
@@ -559,8 +559,8 @@ const ExperienceSection = () => {
             margin: '0 auto'
           }}>
             {isMobile ? 
-              'Excelling academically while working professionally as Data Engineer at ESAB. SAP Labs winner and innovative solutions developer.' :
-              'Currently excelling academically in my 3rd year at Tecnológico de Monterrey while working professionally as a Data Automation & Cloud Engineer at ESAB. My journey from curious beginner to recognized developer and professional engineer demonstrates my commitment to continuous learning, innovation, and real-world application of technology.'
+              'Excelling academically while working professionally as Solutions Architect at ESAB. SAP Labs winner and innovative solutions developer.' :
+              'Currently excelling academically in my 3rd year at Tecnológico de Monterrey while working professionally as a Solutions Architect at ESAB. My journey from curious beginner to recognized developer and professional engineer demonstrates my commitment to continuous learning, innovation, and real-world application of technology.'
             }
           </p>
 

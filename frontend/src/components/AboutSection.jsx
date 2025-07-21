@@ -52,11 +52,11 @@ const AboutSection = () => {
   ];
 
   const currentWork = {
-    title: 'Data Automation & Cloud Engineer',
+    title: 'Solutions Architect',
     company: 'ESAB',
     period: 'Jan 2025 - Present',
-    description: 'Developing automated data workflows using Python and SQL, enhancing operational efficiency and accuracy. Creating dynamic dashboards with Power BI and Power Query, delivering actionable insights and real-time visualization.',
-    descriptionMobile: 'Automated data workflows and dynamic dashboards with Python, SQL, and Power BI.'
+    description: 'Developing intelligent chatbots using Microsoft Copilot, building AI agents integrated with ERP systems, and creating custom Power Apps solutions for field workers. Automating data workflows using Python and SQL, enhancing operational efficiency across ERP systems.',
+    descriptionMobile: 'Intelligent chatbots, AI agents with ERP systems, and custom Power Apps solutions.'
   };
 
   const education = {
