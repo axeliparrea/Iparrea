@@ -3,16 +3,39 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../hook/ThemeContext';
 import { motion } from 'framer-motion';
+import { useResponsive } from '../utils/responsive';
+import { projects as projectsData } from '../data/projects';
 import YouTubeVideo from '../components/YouTubeVideo';
+import TechTag from '../components/ui/TechTag';
+import StatusBadge from '../components/ui/StatusBadge';
 
 const ProjectDetail = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { colors } = useTheme();
+  const { isMobile } = useResponsive();
   const [project, setProject] = useState(null);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const currentLanguage = i18n.language;
 
+  // Create project data map from centralized data
+  const projectDataMap = projectsData.reduce((acc, proj) => {
+    acc[proj.id] = {
+      ...proj,
+      title: proj.title[currentLanguage] || proj.title.en,
+      subtitle: proj.subtitle[currentLanguage] || proj.subtitle.en,
+      description: proj.description[currentLanguage] || proj.description.en,
+      fullDescription: proj.fullDescription[currentLanguage] || proj.fullDescription.en,
+      detailedDescription: proj.detailedDescription[currentLanguage] || proj.detailedDescription.en,
+      status: proj.status[currentLanguage] || proj.status.en,
+      category: proj.category[currentLanguage] || proj.category.en,
+      features: proj.features[currentLanguage] || proj.features.en,
+      challenges: proj.challenges[currentLanguage] || proj.challenges.en
+    };
+    return acc;
+  }, {});
+
+  // Legacy projectData for backward compatibility (will be removed)
   const projectData = {
     'sapitos': {
       title: 'SAPitos 2.0',
@@ -248,21 +271,13 @@ const ProjectDetail = () => {
   };
 
   useEffect(() => {
-    const currentProject = projectData[projectId];
+    // Try to get from centralized data first, fallback to legacy data
+    const currentProject = projectDataMap[projectId] || projectData[projectId];
     if (currentProject) {
       setProject(currentProject);
     }
     window.scrollTo(0, 0);
-  }, [projectId]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [projectId, currentLanguage, projectDataMap]);
 
   if (!project) {
     return (
@@ -582,21 +597,14 @@ const ProjectDetail = () => {
                 gap: '0.5rem'
               }}>
                 {project.technologies.map((tech, index) => (
-                  <motion.span
+                  <motion.div
                     key={index}
                     whileHover={{ scale: 1.05 }}
-                    style={{
-                      background: `${project.color}20`,
-                      color: project.color,
-                      padding: '0.5rem 1rem',
-                      borderRadius: '20px',
-                      fontSize: '14px',
-                      fontWeight: '500',
-                      border: `1px solid ${project.color}30`
-                    }}
                   >
-                    {tech}
-                  </motion.span>
+                    <TechTag size="medium" variant="outline">
+                      {tech}
+                    </TechTag>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>

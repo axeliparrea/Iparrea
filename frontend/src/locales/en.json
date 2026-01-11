@@ -1,6 +1,6 @@
 {
   "aboutTitle": "About Me",
-  "experience": "Experience", 
+  "experience": "Experience",
   "projectsNav": "Projects",
   "contact": "Contact",
   "about": "About",
@@ -18,8 +18,9 @@
   "completed": "Completed",
   "inProgress": "In Progress",
   "planning": "Planning",
-  "technicalLead": "Solutions Architect",
-  "fullStackDev": "Full Stack Developer",
+  "ongoing": "Ongoing",
+  "technicalLead": "AI Engineer & Cybersecurity Expert",
+  "fullStackDev": "Final Semester Student",
   "specialized": "Specialized",
   "in": "in",
   "solutions": "solutions",
@@ -32,16 +33,26 @@
   "contactDescription": "I'm always open to discussing new opportunities, innovative projects, or potential collaborations. Let's connect and explore how we can work together!",
   "sendEmail": "Send Email",
   "connectOnLinkedIn": "Connect on LinkedIn",
-  "aboutDescription": "I'm a passionate Computer Science student at Tecnológico de Monterrey with expertise in end-to-end web application development and intelligent automation. Currently working as Technical Lead & AI Ambassador at ESAB, I specialize in developing intelligent chatbots, building AI agents integrated with ERP systems, and creating custom Power Apps solutions that drive business value.",
+  "aboutDescription": "Experienced AI Engineer specialized in designing and deploying intelligent automation and workflow solutions across enterprise environments. Skilled in full-stack development with Python, TypeScript, React and modern frameworks to deliver scalable, production grade systems across multiple countries and business units. Final semester Computer Science student at Tecnológico de Monterrey, combining technical expertise with strategic alignment to operations, security, and business objectives.",
   "languages": "Languages",
   "terminalInteractiveBelow": "Interactive terminal available below",
   "exploreSkillsProjects": "Explore my skills and projects",
-  "terminalWhoami": "Axel Eduardo Iparrea Ramos\nTechnical Lead & AI Ambassador\nTecnológico de Monterrey Student\nBased in Monterrey, México",
-  "terminalSkills": "JavaScript, Python, C#, C++, Java, Kotlin\nReact, Node.js, .NET Core, Unity\nSQL, MongoDB, Power BI, SAP S/4HANA\nAzure, Git, Linux, Agile, Microsoft Copilot",
-  "terminalLocation": "📍 Monterrey, Nuevo León, México\n🏢 Currently at ESAB\n🎓 Tecnológico de Monterrey",
+  "terminalWhoami": "Axel Eduardo Iparrea Ramos\nAI Engineer & Cybersecurity Expert\nFull-Time Student & Working Professional\nBased in Monterrey, México",
+  "terminalSkills": "Python, TypeScript, JavaScript, C++, C#, Java, Kotlin\nReact, Node.js, .NET Core 8.0, Unity, FastAPI\nSAP S/4HANA, SAP ABAP, SAP Analytics Cloud\nMicrosoft Copilot, AI Agents, Computer Vision\nKali Linux, Ethical Hacking, ISO 27001",
+  "terminalLocation": "📍 Monterrey, Nuevo León, México\n🏢 Currently at Envia.com\n🎓 Tecnológico de Monterrey - Final Semester",
   "terminalGitStatus": "On branch main\nYour branch is up to date with 'origin/main'\n✅ All skills up to date\n🚀 Ready for new challenges",
-  "terminalPassion": "Building innovative solutions that make a difference\n💡 Always learning and exploring new technologies\n🎯 Focused on creating value through code",
+  "terminalPassion": "Building innovative AI solutions that transform businesses\n💡 Always learning and exploring new technologies\n🎯 Focused on creating value through intelligent automation",
   "viewProjectDetails": "View Project Details →",
+  "linkedinPostsTitle": "Latest Posts",
+  "linkedinPostsSubtitle": "Follow me on LinkedIn for updates",
+  "linkedinViewPost": "View on LinkedIn",
+  "experienceTitle": "My Professional Journey",
+  "experienceSubtitle": "From curious beginner to award-winning developer and professional engineer - a journey of continuous learning and innovation",
+  "experienceMobileSubtitle": "Key milestones and achievements",
+  "currentStatus": "Current Status",
+  "currentStatusTitle": "Full-Time Student & AI Engineer",
+  "currentStatusDescription": "Working full-time as an AI Engineer at Envia.com while completing my final semester at Tecnológico de Monterrey with a 4.0 GPA. Building solutions that impact thousands of users across multiple countries.",
+  "currentStatusMobileDescription": "Excelling academically while working professionally as AI Engineer at Envia.com. SAP Labs winner and innovative solutions developer.",
   "projects": {
     "sapitos": {
       "title": "SAPitos 2.0",
@@ -49,9 +60,21 @@
       "description": "Winner of SAP Labs Final Showcase 2025. An award-winning smart supply chain solution for boutique apparel SME, focused on automating and optimizing logistics using SAP technologies with AI-powered features.",
       "category": "AI & Enterprise"
     },
+    "opsight": {
+      "title": "Opsight",
+      "subtitle": "AI-Powered Aviation Logistics",
+      "description": "HACK Monterrey 2025 - AI, Computer Vision the new real-life vision. Opsight redefined aviation logistics by engineering an autonomous AI system that orchestrates, analyzes, and optimizes in-flight inventory through computer vision and neural networks.",
+      "category": "AI & Computer Vision"
+    },
+    "urbanMobility": {
+      "title": "Urban Mobility Multi-Agent Simulation",
+      "subtitle": "Real-time Urban Intersection Simulation",
+      "description": "Engineered a real-time urban intersection simulation using Python (AgentPy) and Unity. Modeled autonomous vehicles, pedestrians, and traffic lights to optimize flow and safety. Integrated a FastAPI for backend-frontend communication.",
+      "category": "AI & Simulation"
+    },
     "awakDashboard": {
       "title": "AWAQ WEB",
-      "subtitle": "User Progress Visualization", 
+      "subtitle": "User Progress Visualization",
       "description": "A comprehensive dashboard for visualizing user progress in their onboarding process. Built with C# and modern web technologies, this tool provides detailed insights into user engagement and progression analytics.",
       "category": "Web Application"
     },
@@ -61,15 +84,9 @@
       "description": "Interactive Unity game project developed as part of a collaborative team effort. Features engaging gameplay mechanics and modern game development practices using Unity engine and C#.",
       "category": "Game Development"
     },
-    "sistemaMultiagente": {
-      "title": "Multi-Agent System",
-      "subtitle": "Multi-Agent System Simulation", 
-      "description": "Advanced multi-agent system simulation developed in C#. This project demonstrates complex interactions between autonomous agents and showcases understanding of artificial intelligence and distributed systems concepts.",
-      "category": "AI & Simulation"
-    },
-    "cybersecurityIntegration": {
+    "buffettec": {
       "title": "BuffetTEC",
-      "subtitle": "Mobile Legal Assistance App", 
+      "subtitle": "Mobile Legal Assistance App",
       "description": "A mobile application for the dissemination and management of legal situations, allowing users to recognize and address their legal problems efficiently and securely. Developed for the Criminal Clinic of Tecnologico de Monterrey.",
       "category": "Mobile Development"
     },
@@ -81,15 +98,20 @@
     }
   },
   "hackathons": {
+    "hackMonterrey2025": {
+      "title": "HACK Monterrey 2025",
+      "status": "Winner",
+      "description": "Opsight redefined aviation logistics by engineering an autonomous AI system that orchestrates, analyzes, and optimizes in-flight inventory through computer vision and neural networks."
+    },
     "sapLabs": {
       "title": "SAP Labs Final Showcase 2025",
       "status": "Winner",
       "description": "AI-powered smart supply chain solution for boutique apparel SME using SAP technologies"
     },
     "hackMty": {
-      "title": "Hack MTY 2022", 
+      "title": "Hack MTY 2022",
       "status": "Participant",
       "description": "Developed engaging web application for attracting and retaining younger demographics"
     }
   }
-} 
+}

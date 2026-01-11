@@ -1,7 +1,7 @@
 {
   "aboutTitle": "Acerca de Mí",
   "experience": "Experiencia",
-  "projectsNav": "Proyectos", 
+  "projectsNav": "Proyectos",
   "contact": "Contacto",
   "about": "Acerca de",
   "projectsTitle": "Proyectos Destacados",
@@ -15,12 +15,13 @@
   "loading": "Cargando...",
   "hackathonsTitle": "Hackathons y Competencias",
   "winner": "Ganador",
-  "participant": "Participante", 
+  "participant": "Participante",
   "completed": "Completado",
   "inProgress": "En Progreso",
   "planning": "Planeando",
-  "technicalLead": "Arquitecto de Soluciones",
-  "fullStackDev": "Desarrollador Full Stack",
+  "ongoing": "En Curso",
+  "technicalLead": "Ingeniero de IA y Experto en Ciberseguridad",
+  "fullStackDev": "Estudiante de Último Semestre",
   "specialized": "Especializado",
   "in": "en",
   "solutions": "soluciones",
@@ -33,21 +34,43 @@
   "contactDescription": "Siempre estoy abierto a discutir nuevas oportunidades, proyectos innovadores o posibles colaboraciones. ¡Conectemos y exploremos cómo podemos trabajar juntos!",
   "sendEmail": "Enviar Email",
   "connectOnLinkedIn": "Conectar en LinkedIn",
-  "aboutDescription": "Soy un estudiante apasionado de Ciencias de la Computación en el Tecnológico de Monterrey con experiencia en desarrollo de aplicaciones web de extremo a extremo y automatización inteligente. Actualmente trabajando como Líder Técnico y Embajador de IA en ESAB, me especializo en desarrollar chatbots inteligentes, construir agentes de IA integrados con sistemas ERP, y crear soluciones personalizadas de Power Apps que generan valor empresarial.",
+  "aboutDescription": "Ingeniero de IA con experiencia especializado en diseñar e implementar soluciones de automatización inteligente y flujos de trabajo en entornos empresariales. Experto en desarrollo full-stack con Python, TypeScript, React y frameworks modernos para entregar sistemas escalables y de grado de producción en múltiples países y unidades de negocio. Estudiante de último semestre de Ciencias de la Computación en el Tecnológico de Monterrey, combinando experiencia técnica con alineación estratégica a operaciones, seguridad y objetivos de negocio.",
   "languages": "Idiomas",
   "terminalInteractiveBelow": "Terminal interactiva disponible abajo",
   "exploreSkillsProjects": "Explora mis habilidades y proyectos",
-  "terminalWhoami": "Axel Eduardo Iparrea Ramos\nLíder Técnico y Embajador de IA\nEstudiante del Tecnológico de Monterrey\nBaseado en Monterrey, México",
-  "terminalSkills": "JavaScript, Python, C#, C++, Java, Kotlin\nReact, Node.js, .NET Core, Unity\nSQL, MongoDB, Power BI, SAP S/4HANA\nAzure, Git, Linux, Agile, Microsoft Copilot",
-  "terminalLocation": "📍 Monterrey, Nuevo León, México\n🏢 Actualmente en ESAB\n🎓 Tecnológico de Monterrey",
+  "terminalWhoami": "Axel Eduardo Iparrea Ramos\nIngeniero de IA y Experto en Ciberseguridad\nEstudiante de Tiempo Completo y Profesional Activo\nBasado en Monterrey, México",
+  "terminalSkills": "Python, TypeScript, JavaScript, C++, C#, Java, Kotlin\nReact, Node.js, .NET Core 8.0, Unity, FastAPI\nSAP S/4HANA, SAP ABAP, SAP Analytics Cloud\nMicrosoft Copilot, Agentes de IA, Computer Vision\nKali Linux, Hacking Ético, ISO 27001",
+  "terminalLocation": "📍 Monterrey, Nuevo León, México\n🏢 Actualmente en Envia.com\n🎓 Tecnológico de Monterrey - Último Semestre",
   "terminalGitStatus": "En rama main\nTu rama está actualizada con 'origin/main'\n✅ Todas las habilidades actualizadas\n🚀 Listo para nuevos desafíos",
-  "terminalPassion": "Construyendo soluciones innovadoras que marcan la diferencia\n💡 Siempre aprendiendo y explorando nuevas tecnologías\n🎯 Enfocado en crear valor a través del código",
+  "terminalPassion": "Construyendo soluciones innovadoras de IA que transforman negocios\n💡 Siempre aprendiendo y explorando nuevas tecnologías\n🎯 Enfocado en crear valor a través de automatización inteligente",
+  "linkedinPostsTitle": "Últimos Posts",
+  "linkedinPostsSubtitle": "Sígueme en LinkedIn para actualizaciones",
+  "linkedinViewPost": "Ver en LinkedIn",
+  "experienceTitle": "Mi Jornada Profesional",
+  "experienceSubtitle": "De principiante curioso a desarrollador galardonado e ingeniero profesional - una jornada de aprendizaje continuo e innovación",
+  "experienceMobileSubtitle": "Hitos clave y logros",
+  "currentStatus": "Estado Actual",
+  "currentStatusTitle": "Estudiante de Tiempo Completo e Ingeniero de IA",
+  "currentStatusDescription": "Trabajando tiempo completo como Ingeniero de IA en Envia.com mientras completo mi último semestre en el Tecnológico de Monterrey con 4.0 GPA. Construyendo soluciones que impactan a miles de usuarios en múltiples países.",
+  "currentStatusMobileDescription": "Destacando académicamente mientras trabajo profesionalmente como Ingeniero de IA en Envia.com. Ganador de SAP Labs y desarrollador de soluciones innovadoras.",
   "projects": {
     "sapitos": {
       "title": "SAPitos 2.0",
       "subtitle": "Cadena de Suministro Inteligente con IA",
       "description": "Ganador del SAP Labs Final Showcase 2025. Una solución galardonada de cadena de suministro inteligente para PYME de ropa boutique, enfocada en automatizar y optimizar la logística usando tecnologías SAP con características impulsadas por IA.",
       "category": "IA y Empresarial"
+    },
+    "opsight": {
+      "title": "Opsight",
+      "subtitle": "Logística de Aviación con IA",
+      "description": "HACK Monterrey 2025 - IA, Computer Vision la nueva visión de la vida real. Opsight redefinió la logística de aviación al diseñar un sistema autónomo de IA que orquesta, analiza y optimiza el inventario en vuelo a través de visión por computadora y redes neuronales.",
+      "category": "IA y Visión por Computadora"
+    },
+    "urbanMobility": {
+      "title": "Simulación Multi-Agente de Movilidad Urbana",
+      "subtitle": "Simulación de Intersecciones Urbanas en Tiempo Real",
+      "description": "Diseñé una simulación de intersecciones urbanas en tiempo real usando Python (AgentPy) y Unity. Modelé vehículos autónomos, peatones y semáforos para optimizar flujo y seguridad. Integré FastAPI para comunicación backend-frontend.",
+      "category": "IA y Simulación"
     },
     "awakDashboard": {
       "title": "AWAQ WEB",
@@ -61,15 +84,9 @@
       "description": "Proyecto de juego interactivo en Unity desarrollado como parte de un esfuerzo colaborativo en equipo. Presenta mecánicas de juego atractivas y prácticas modernas de desarrollo de juegos usando el motor Unity y C#.",
       "category": "Desarrollo de Juegos"
     },
-    "sistemaMultiagente": {
-      "title": "Sistema Multi-Agente",
-      "subtitle": "Simulación de Sistema Multi-Agente",
-      "description": "Simulación avanzada de sistema multi-agente desarrollada en C#. Este proyecto demuestra interacciones complejas entre agentes autónomos y muestra comprensión de conceptos de inteligencia artificial y sistemas distribuidos.",
-      "category": "IA y Simulación"
-    },
-    "cybersecurityIntegration": {
+    "buffettec": {
       "title": "BuffetTEC",
-      "subtitle": "App Móvil de Asistencia Legal", 
+      "subtitle": "App Móvil de Asistencia Legal",
       "description": "Una aplicación móvil para la divulgación y gestión de situaciones legales, que permite a los usuarios reconocer y abordar sus problemas legales de manera eficiente y segura. Desarrollada para la Clínica Penal del Tecnológico de Monterrey.",
       "category": "Desarrollo Móvil"
     },
@@ -81,6 +98,11 @@
     }
   },
   "hackathons": {
+    "hackMonterrey2025": {
+      "title": "HACK Monterrey 2025",
+      "status": "Ganador",
+      "description": "Opsight redefinió la logística de aviación al diseñar un sistema autónomo de IA que orquesta, analiza y optimiza el inventario en vuelo a través de visión por computadora y redes neuronales."
+    },
     "sapLabs": {
       "title": "SAP Labs Final Showcase 2025",
       "status": "Ganador",
@@ -92,4 +114,4 @@
       "description": "Desarrollé una aplicación web atractiva para atraer y retener demografías más jóvenes"
     }
   }
-} 
+}

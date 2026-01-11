@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../hook/ThemeContext';
+import { useResponsive } from '../utils/responsive';
+import { scrollToSection } from '../utils/scroll';
+import { BREAKPOINTS, SOCIAL_LINKS } from '../config/constants';
+import Button from './ui/Button';
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
   const { isDarkMode, toggleTheme, colors } = useTheme();
+  const { isMobile } = useResponsive();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [scrolled, setScrolled] = useState(false);
 
   const changeLanguage = (lng) => {
@@ -14,24 +18,21 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-      if (window.innerWidth > 768) {
-        setIsMenuOpen(false);
-      }
-    };
-
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener('resize', handleResize);
     window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    if (!isMobile) {
+      setIsMenuOpen(false);
+    }
+  }, [isMobile]);
 
   const navbarStyle = {
     position: 'fixed',
@@ -135,18 +136,8 @@ const Navbar = () => {
     borderRadius: '6px',
   };
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const headerOffset = 120;
-      const elementPosition = element.offsetTop;
-      const offsetPosition = elementPosition - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
+  const handleScrollToSection = (sectionId) => {
+    scrollToSection(sectionId);
     setIsMenuOpen(false);
   };
 
@@ -167,41 +158,6 @@ const Navbar = () => {
     </span>
   );
 
-  const Button = ({ onClick, children, variant = 'secondary' }) => (
-    <button
-      style={{
-        ...buttonStyle,
-        background: variant === 'primary' ? colors.primary : 'transparent',
-        color: variant === 'primary' ? '#ffffff' : colors.text,
-        borderColor: variant === 'primary' ? colors.primary : colors.border,
-      }}
-      onClick={onClick}
-      onMouseEnter={(e) => {
-        if (variant === 'primary') {
-          e.target.style.transform = 'translateY(-2px)';
-          e.target.style.boxShadow = `0 4px 12px ${colors.primary}40`;
-        } else {
-          e.target.style.background = colors.primary;
-          e.target.style.color = '#ffffff';
-          e.target.style.borderColor = colors.primary;
-          e.target.style.transform = 'translateY(-2px)';
-        }
-      }}
-      onMouseLeave={(e) => {
-        if (variant === 'primary') {
-          e.target.style.transform = 'translateY(0)';
-          e.target.style.boxShadow = 'none';
-        } else {
-          e.target.style.background = 'transparent';
-          e.target.style.color = colors.text;
-          e.target.style.borderColor = colors.border;
-          e.target.style.transform = 'translateY(0)';
-        }
-      }}
-    >
-      {children}
-    </button>
-  );
 
   const SocialLink = ({ href, children }) => (
     <a
@@ -254,24 +210,24 @@ const Navbar = () => {
           </a>
           
           <div style={navLinksStyle}>
-            <NavLink onClick={() => scrollToSection('about')}>
+            <NavLink onClick={() => handleScrollToSection('about')}>
               {t('about')}
             </NavLink>
-            <NavLink onClick={() => scrollToSection('experience')}>
+            <NavLink onClick={() => handleScrollToSection('experience')}>
               {t('experience')}
             </NavLink>
-            <NavLink onClick={() => scrollToSection('projects')}>
+            <NavLink onClick={() => handleScrollToSection('projects')}>
               {t('projectsNav')}
             </NavLink>
-            <NavLink onClick={() => scrollToSection('contact')}>
+            <NavLink onClick={() => handleScrollToSection('contact')}>
               {t('contact')}
             </NavLink>
             
             
-            <SocialLink href="https://linkedin.com/in/axel-iparrea">
+            <SocialLink href={SOCIAL_LINKS.LINKEDIN}>
               LinkedIn
             </SocialLink>
-            <SocialLink href="https://github.com/axeliparrea">
+            <SocialLink href={SOCIAL_LINKS.GITHUB}>
               GitHub
             </SocialLink>
             
@@ -310,7 +266,7 @@ const Navbar = () => {
               borderBottom: `1px solid ${colors.border}`,
               textAlign: 'center',
             }}
-            onClick={() => scrollToSection('about')}
+            onClick={() => handleScrollToSection('about')}
           >
             {t('about')}
           </span>
@@ -322,7 +278,7 @@ const Navbar = () => {
               borderBottom: `1px solid ${colors.border}`,
               textAlign: 'center',
             }}
-            onClick={() => scrollToSection('experience')}
+            onClick={() => handleScrollToSection('experience')}
           >
             {t('experience')}
           </span>
@@ -334,7 +290,7 @@ const Navbar = () => {
               borderBottom: `1px solid ${colors.border}`,
               textAlign: 'center',
             }}
-            onClick={() => scrollToSection('projects')}
+            onClick={() => handleScrollToSection('projects')}
           >
             {t('projectsNav')}
           </span>
@@ -346,7 +302,7 @@ const Navbar = () => {
               borderBottom: `1px solid ${colors.border}`,
               textAlign: 'center',
             }}
-            onClick={() => scrollToSection('contact')}
+            onClick={() => handleScrollToSection('contact')}
           >
             {t('contact')}
           </span>
@@ -371,10 +327,10 @@ const Navbar = () => {
             marginTop: '1rem', 
             justifyContent: 'center'
           }}>
-            <SocialLink href="https://linkedin.com/in/axel-iparrea">
+            <SocialLink href={SOCIAL_LINKS.LINKEDIN}>
               LinkedIn
             </SocialLink>
-            <SocialLink href="https://github.com/axeliparrea">
+            <SocialLink href={SOCIAL_LINKS.GITHUB}>
               GitHub
             </SocialLink>
           </div>

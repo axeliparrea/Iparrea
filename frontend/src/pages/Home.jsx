@@ -8,47 +8,39 @@ import ExperienceSection from '../components/ExperienceSection';
 import ProjectsSection from '../components/ProjectsSection';
 import TerminalComponent from '../components/TerminalComponent';
 import MatrixBackground from '../components/MatrixBackground';
+import TypingEffect from '../components/ui/TypingEffect';
+import { useResponsive } from '../utils/responsive';
+import { scrollToSection } from '../utils/scroll';
+import { LOADING_SCREEN_DURATION, SOCIAL_LINKS } from '../config/constants';
+import { personalInfo } from '../data/personalInfo';
+import Button from '../components/ui/Button';
 
 const Home = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { colors } = useTheme();
+  const { isMobile } = useResponsive();
   const [isLoading, setIsLoading] = useState(true);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, LOADING_SCREEN_DURATION);
 
     return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   if (isLoading) {
     return <LoadingScreen />;
   }
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const headerOffset = 120;
-      const elementPosition = element.offsetTop;
-      const offsetPosition = elementPosition - headerOffset;
+  const currentLanguage = i18n.language;
+  const title = personalInfo.title[currentLanguage] || personalInfo.title.en;
+  const subtitle = personalInfo.subtitle[currentLanguage] || personalInfo.subtitle.en;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
+  // Typing effect words based on language
+  const typingWords = currentLanguage === 'es' 
+    ? ['Ingeniero de IA', 'Desarrollador Full-Stack', 'Experto en Ciberseguridad', 'Arquitecto de Soluciones']
+    : ['AI Engineer', 'Full-Stack Developer', 'Cybersecurity Expert', 'Solutions Architect'];
 
   return (
     <div style={{
@@ -95,7 +87,12 @@ const Home = () => {
                 marginBottom: '1rem',
                 letterSpacing: '-0.02em',
                 lineHeight: '1.1',
-                color: colors.text
+                color: colors.text,
+                background: 'none',
+                backgroundColor: 'transparent',
+                WebkitBackgroundClip: 'unset',
+                WebkitTextFillColor: 'unset',
+                backgroundClip: 'unset'
               }}
             >
               Axel Iparrea
@@ -107,13 +104,20 @@ const Home = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               style={{
                 fontSize: isMobile ? 'clamp(1rem, 4vw, 1.2rem)' : 'clamp(1.2rem, 2vw, 1.8rem)',
-                color: colors.textSecondary,
+                color: colors.primary,
                 marginBottom: '1rem',
                 fontWeight: '500',
-                lineHeight: '1.4'
+                lineHeight: '1.4',
+                minHeight: isMobile ? '1.5rem' : '2rem'
               }}
             >
-              {t('technicalLead')} & {t('fullStackDev')}
+              <TypingEffect 
+                words={typingWords}
+                typingSpeed={80}
+                deletingSpeed={40}
+                pauseDuration={2500}
+                cursorColor={colors.primary}
+              />
             </motion.p>
             
             <motion.p
@@ -123,14 +127,63 @@ const Home = () => {
               style={{
                 fontSize: isMobile ? 'clamp(0.9rem, 3vw, 1rem)' : 'clamp(1rem, 1.5vw, 1.2rem)',
                 color: colors.textSecondary,
-                marginBottom: '2rem',
+                marginBottom: '1.5rem',
                 lineHeight: '1.6',
                 maxWidth: isMobile ? '100%' : '90%'
               }}
             >
-              {t('specialized')} {t('in')} SAP data {t('solutions')}, AI/ML, {t('and')} cybersecurity. 
-              Award-winning developer {t('building')} innovative {t('solutions')} {t('in')} Monterrey, Mexico.
+              {subtitle}
             </motion.p>
+
+            {/* Quick Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+              style={{
+                display: 'flex',
+                gap: isMobile ? '1rem' : '2rem',
+                marginBottom: '2rem',
+                justifyContent: isMobile ? 'center' : 'flex-start',
+                flexWrap: 'wrap'
+              }}
+            >
+              {[
+                { value: '4.0', label: 'GPA' },
+                { value: currentLanguage === 'es' ? '10+' : '10+', label: currentLanguage === 'es' ? 'Proyectos' : 'Projects' },
+                { value: currentLanguage === 'es' ? '3+' : '3+', label: currentLanguage === 'es' ? 'Hackathons' : 'Hackathons' }
+              ].map((stat, index) => (
+                <div 
+                  key={index}
+                  style={{
+                    textAlign: 'center',
+                    padding: isMobile ? '0.5rem' : '0.75rem',
+                    background: `${colors.primary}08`,
+                    borderRadius: '8px',
+                    border: `1px solid ${colors.primary}20`,
+                    minWidth: isMobile ? '70px' : '80px'
+                  }}
+                >
+                  <div style={{
+                    fontSize: isMobile ? '1.25rem' : '1.5rem',
+                    fontWeight: '700',
+                    color: colors.primary,
+                    lineHeight: '1'
+                  }}>
+                    {stat.value}
+                  </div>
+                  <div style={{
+                    fontSize: isMobile ? '0.65rem' : '0.75rem',
+                    color: colors.textSecondary,
+                    marginTop: '0.25rem',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.5px'
+                  }}>
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </motion.div>
             
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -144,29 +197,17 @@ const Home = () => {
                 justifyContent: isMobile ? 'center' : 'flex-start'
               }}
             >
-              <button
+              <Button
                 onClick={() => scrollToSection('projects')}
-                className="btn btn-primary"
-                style={{
-                  background: colors.primary,
-                  color: '#ffffff',
-                  border: 'none',
-                  borderRadius: '8px',
-                  padding: isMobile ? '0.6rem 1.2rem' : '0.75rem 1.5rem',
-                  fontSize: isMobile ? '0.85rem' : '0.95rem',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                  boxShadow: `0 2px 8px ${colors.primary}30`,
-                  fontFamily: 'Inter, sans-serif'
-                }}
+                variant="primary"
+                size={isMobile ? 'small' : 'medium'}
               >
                 {t('viewMyWork')}
-              </button>
+              </Button>
               
               <a
-                href="/AxelIparrea-Software-Engineer-2025.pdf"
-                download="AxelIparrea-Software-Engineer-2025.pdf"
+                href="/Axel-Iparrea-AI-Engineer-Cybersecurity-Expert.pdf"
+                download="Axel-Iparrea-AI-Engineer-Cybersecurity-Expert.pdf"
                 className="btn btn-secondary"
                 style={{
                   background: 'transparent',
@@ -276,6 +317,7 @@ const Home = () => {
       <section id="projects">
         <ProjectsSection />
       </section>
+
       <section id="contact" style={{
         padding: isMobile ? '3rem 1rem' : '5rem 0',
         background: colors.surface,
@@ -326,42 +368,29 @@ const Home = () => {
             }}
           >
             <a
-              href="mailto:axeliparrea@gmail.com"
-              className="btn btn-primary"
-              style={{
-                background: colors.primary,
-                color: '#ffffff',
-                textDecoration: 'none',
-                padding: isMobile ? '0.6rem 1.2rem' : '0.75rem 1.5rem',
-                borderRadius: '8px',
-                fontWeight: '600',
-                transition: 'all 0.3s ease',
-                display: 'inline-block',
-                fontSize: isMobile ? '0.85rem' : '0.95rem'
-              }}
+              href={`mailto:${SOCIAL_LINKS.EMAIL}`}
+              style={{ textDecoration: 'none' }}
             >
-              {t('sendEmail')}
+              <Button
+                variant="primary"
+                size={isMobile ? 'small' : 'medium'}
+              >
+                {t('sendEmail')}
+              </Button>
             </a>
             
             <a
-              href="https://linkedin.com/in/axel-iparrea"
+              href={SOCIAL_LINKS.LINKEDIN}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-secondary"
-              style={{
-                background: 'transparent',
-                color: colors.text,
-                textDecoration: 'none',
-                padding: isMobile ? '0.6rem 1.2rem' : '0.75rem 1.5rem',
-                borderRadius: '8px',
-                fontWeight: '600',
-                transition: 'all 0.3s ease',
-                display: 'inline-block',
-                border: `1px solid ${colors.border}`,
-                fontSize: isMobile ? '0.85rem' : '0.95rem'
-              }}
+              style={{ textDecoration: 'none' }}
             >
-              {t('connectOnLinkedIn')}
+              <Button
+                variant="secondary"
+                size={isMobile ? 'small' : 'medium'}
+              >
+                {t('connectOnLinkedIn')}
+              </Button>
             </a>
           </motion.div>
         </div>

@@ -317,6 +317,14 @@ body {
   background-clip: text;
 }
 
+/* Override gradient styles for headings in light mode */
+@media (prefers-color-scheme: light) {
+  h1, h2, h3, h4, h5, h6 {
+    background: none !important;
+    -webkit-text-fill-color: inherit !important;
+  }
+}
+
 .text-glow {
   text-shadow: 0 0 10px var(--primary);
 }

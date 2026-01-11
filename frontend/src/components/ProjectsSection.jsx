@@ -1,139 +1,43 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../hook/ThemeContext';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { useResponsive } from '../utils/responsive';
+import { projects as projectsData } from '../data/projects';
+import { hackathons as hackathonsData } from '../data/hackathons';
 import YouTubeVideo from './YouTubeVideo';
+import SectionHeader from './ui/SectionHeader';
+import TechTag from './ui/TechTag';
+import StatusBadge from './ui/StatusBadge';
 
 const ProjectsSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { colors } = useTheme();
-  const [animationPlayed, setAnimationPlayed] = useState(false);
+  const { isMobile } = useResponsive();
   const [navigating, setNavigating] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const navigate = useNavigate();
+  const currentLanguage = i18n.language;
 
-  useEffect(() => {
-    setAnimationPlayed(true);
-    
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
+  // Map projects data with translations
+  const projects = projectsData.map(project => ({
+    ...project,
+    title: project.title[currentLanguage] || project.title.en,
+    subtitle: project.subtitle[currentLanguage] || project.subtitle.en,
+    description: project.description[currentLanguage] || project.description.en,
+    descriptionMobile: project.descriptionMobile[currentLanguage] || project.descriptionMobile.en,
+    status: project.status[currentLanguage] || project.status.en,
+    category: project.category[currentLanguage] || project.category.en
+  }));
 
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  const projects = [
-    {
-      id: 'sapitos',
-      title: t('projects.sapitos.title'),
-      subtitle: t('projects.sapitos.subtitle'),
-      description: t('projects.sapitos.description'),
-      descriptionMobile: 'SAP Labs winner 2025. AI-powered supply chain solution using SAP technologies.',
-      image: '/assets/pictures/sapitos.jpg',
-      videoId: null,
-      technologies: ['JavaScript', 'SAP S/4HANA', 'SAP Analytics Cloud', 'Machine Learning', 'AI Assistant'],
-      technologiesMobile: ['SAP', 'AI', 'JavaScript'],
-      status: t('completed'),
-      category: t('projects.sapitos.category'),
-      period: '2025',
-      color: '#00A86B'
-    },
-    {
-      id: 'awak-dashboard',
-      title: t('projects.awakDashboard.title'),
-      subtitle: t('projects.awakDashboard.subtitle'),
-      description: t('projects.awakDashboard.description'),
-      descriptionMobile: 'Dashboard for user progress visualization with real-time analytics.',
-      image: '/assets/pictures/AWAQ WEB ALL.png',
-      videoId: null,
-      technologies: ['C#', '.NET', 'SQL Server', 'Bootstrap', 'Chart.js', 'JavaScript', 'HTML5', 'CSS3'],
-      technologiesMobile: ['C#', '.NET', 'SQL'],
-      status: t('completed'),
-      category: t('projects.awakDashboard.category'),
-      period: '2024',
-      color: '#4F46E5'
-    },
-    {
-      id: 'awak-game',
-      title: t('projects.awakGame.title'),
-      subtitle: t('projects.awakGame.subtitle'),
-      description: t('projects.awakGame.description'),
-      descriptionMobile: 'Interactive Unity game with modern gameplay mechanics.',
-      image: '/assets/pictures/awaq game.jpg',
-      videoId: 'LzgI_GqKoh4',
-      technologies: ['Unity', 'C#', 'Game Development', 'Collaborative Development'],
-      technologiesMobile: ['Unity', 'C#', 'Game Dev'],
-      status: t('completed'),
-      category: t('projects.awakGame.category'),
-      period: '2024',
-      color: '#FF6B6B'
-    },
-    {
-      id: 'sistema-multiagente',
-      title: t('projects.sistemaMultiagente.title'),
-      subtitle: t('projects.sistemaMultiagente.subtitle'),
-      description: t('projects.sistemaMultiagente.description'),
-      descriptionMobile: 'AI multi-agent system simulation with complex agent interactions.',
-      image: '/assets/pictures/MuliAgentes.jpg',
-      videoId: null,
-      technologies: ['C#', '.NET', 'AI Algorithms', 'System Simulation', 'Multi-Agent Systems'],
-      technologiesMobile: ['C#', 'AI', 'Simulation'],
-      status: t('completed'),
-      category: t('projects.sistemaMultiagente.category'),
-      period: '2024',
-      color: '#10B981'
-    },
-    {
-      id: 'cybersecurity-integration',
-      title: t('projects.cybersecurityIntegration.title'),
-      subtitle: t('projects.cybersecurityIntegration.subtitle'),
-      description: t('projects.cybersecurityIntegration.description'),
-      descriptionMobile: 'App móvil para gestionar y resolver situaciones legales de forma eficiente.',
-      image: '/assets/pictures/kali-Linux.jpg',
-      videoId: 'CxuXQe2l5Co',
-      technologies: ['Kotlin', 'Android', 'Material Design', 'RESTful API', 'Room Database'],
-      technologiesMobile: ['Kotlin', 'Android', 'Legal'],
-      status: t('completed'),
-      category: t('projects.cybersecurityIntegration.category'),
-      period: '2024',
-      color: '#F59E0B'
-    },
-    {
-      id: 'cybersecurity-knowledge',
-      title: t('projects.cybersecurity.title'),
-      subtitle: t('projects.cybersecurity.subtitle'),
-      description: t('projects.cybersecurity.description'),
-      descriptionMobile: 'Comprehensive cybersecurity knowledge and practical experience with security tools.',
-      image: '/assets/pictures/kali-Linux.jpg',
-      videoId: null,
-      technologies: ['Kali Linux', 'Penetration Testing', 'Network Security', 'Vulnerability Assessment', 'Security Auditing'],
-      technologiesMobile: ['Kali Linux', 'PenTest', 'Security'],
-      status: t('completed'),
-      category: t('projects.cybersecurity.category'),
-      period: '2024',
-      color: '#8B5CF6'
-    }
-  ];
-
-  const hackathons = [
-    {
-      title: t('hackathons.sapLabs.title'),
-      status: t('hackathons.sapLabs.status'),
-      description: t('hackathons.sapLabs.description'),
-      color: '#22c55e'
-    },
-    {
-      title: t('hackathons.hackMty.title'),
-      status: t('hackathons.hackMty.status'),
-      description: t('hackathons.hackMty.description'),
-      color: '#3b82f6'
-    }
-  ];
+  // Map hackathons data with translations
+  const hackathons = hackathonsData.map(hackathon => ({
+    ...hackathon,
+    title: hackathon.title[currentLanguage] || hackathon.title.en,
+    subtitle: hackathon.subtitle[currentLanguage] || hackathon.subtitle.en,
+    status: hackathon.status[currentLanguage] || hackathon.status.en,
+    description: hackathon.description[currentLanguage] || hackathon.description.en
+  }));
 
   const handleProjectClick = (projectId, e) => {
     e.preventDefault();
@@ -149,14 +53,6 @@ const ProjectsSection = () => {
     }, 150);
   };
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'Completed': return '#22c55e';
-      case 'In Progress': return '#f59e0b';
-      case 'Planning': return '#8b5cf6';
-      default: return colors.textSecondary;
-    }
-  };
 
   const MobileProjectCard = ({ project, index }) => (
     <motion.div
@@ -294,20 +190,10 @@ const ProjectsSection = () => {
           gap: '0.2rem',
           marginBottom: '0.6rem'
         }}>
-          {project.technologiesMobile.slice(0, 2).map((tech, techIndex) => (
-            <span
-              key={techIndex}
-              style={{
-                background: `${colors.primary}15`,
-                color: colors.primary,
-                padding: '0.1rem 0.3rem',
-                borderRadius: '4px',
-                fontSize: '7px',
-                fontWeight: '600'
-              }}
-            >
+          {(project.technologiesMobile || project.technologies.slice(0, 2)).slice(0, 2).map((tech, techIndex) => (
+            <TechTag key={techIndex} size="small">
               {tech}
-            </span>
+            </TechTag>
           ))}
           <span style={{
             color: colors.textSecondary,
@@ -340,16 +226,16 @@ const ProjectsSection = () => {
       </div>
 
       
-      <div style={{
-        position: 'absolute',
-        top: '0.4rem',
-        left: '0.4rem',
-        width: '6px',
-        height: '6px',
-        background: getStatusColor(project.status),
-        borderRadius: '50%',
-        boxShadow: `0 0 8px ${getStatusColor(project.status)}`
-      }}></div>
+        <div style={{
+          position: 'absolute',
+          top: '0.4rem',
+          left: '0.4rem',
+          width: '6px',
+          height: '6px',
+          background: project.color,
+          borderRadius: '50%',
+          boxShadow: `0 0 8px ${project.color}`
+        }}></div>
     </motion.div>
   );
 
@@ -420,15 +306,9 @@ const ProjectsSection = () => {
           position: 'absolute',
           top: '1rem',
           right: '1rem',
-          background: getStatusColor(project.status),
-          color: '#fff',
-          padding: '0.5rem 1rem',
-          borderRadius: '20px',
-          fontSize: '12px',
-          fontWeight: '600',
           zIndex: 2
         }}>
-          {project.status}
+          <StatusBadge status={project.status} size="medium" />
         </div>
         
         <div style={{
@@ -529,31 +409,9 @@ const ProjectsSection = () => {
           marginBottom: '1.5rem'
         }}>
           {project.technologies.map((tech, techIndex) => (
-            <motion.span
-              key={techIndex}
-              className="tech-tag"
-              whileHover={{ 
-                scale: 1.1,
-                background: `${colors.primary}20`,
-                boxShadow: `0 2px 8px ${colors.primary}30`
-              }}
-              transition={{ 
-                duration: 0.2, 
-                ease: "easeOut"
-              }}
-              style={{
-                background: `${colors.primary}10`,
-                color: colors.primary,
-                padding: '0.25rem 0.75rem',
-                borderRadius: '12px',
-                fontSize: '12px',
-                fontWeight: '500',
-                border: `1px solid ${colors.primary}30`,
-                cursor: 'default'
-              }}
-            >
+            <TechTag key={techIndex} size="medium">
               {tech}
-            </motion.span>
+            </TechTag>
           ))}
         </div>
 
@@ -600,38 +458,14 @@ const ProjectsSection = () => {
       }}
     >
       <div className="container">
-        <motion.div
-          initial={{ opacity: 1, y: 0 }}
-          style={{ textAlign: 'center', marginBottom: isMobile ? '2rem' : '4rem' }}
-        >
-          <h2 style={{
-            fontSize: isMobile ? '2rem' : '2.5rem',
-            fontWeight: '600',
-            color: colors.text,
-            marginBottom: '1rem'
-          }}>
-            {t('projectsTitle')}
-          </h2>
-          <div style={{
-            width: '60px',
-            height: '4px',
-            background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`,
-            margin: '0 auto',
-            borderRadius: '2px'
-          }}></div>
-          <p style={{
-            fontSize: isMobile ? '0.9rem' : '1.1rem',
-            color: colors.textSecondary,
-            marginTop: '1rem',
-            maxWidth: '600px',
-            margin: '1rem auto 0'
-          }}>
-            {isMobile ? 
-              'Key projects and achievements' : 
-              'A collection of projects showcasing my expertise in AI solutions, ERP integration, and innovative automation.'
-            }
-          </p>
-        </motion.div>
+        <SectionHeader
+          title={t('projectsTitle')}
+          subtitle={isMobile ? 
+            'Key projects and achievements' : 
+            'A collection of projects showcasing my expertise in AI solutions, ERP integration, and innovative automation.'
+          }
+          align="center"
+        />
 
         
         <div style={{
@@ -715,18 +549,10 @@ const ProjectsSection = () => {
                   {isMobile ? hackathon.title.replace('Final Showcase', '').trim() : hackathon.title}
                 </h4>
                 
-                <span style={{
-                  background: hackathon.color,
-                  color: '#fff',
-                  padding: isMobile ? '0.25rem 0.75rem' : '0.5rem 1rem',
-                  borderRadius: '20px',
-                  fontSize: isMobile ? '10px' : '12px',
-                  fontWeight: '600',
-                  display: 'inline-block',
-                  marginBottom: '1rem'
-                }}>
-                  {hackathon.status}
-                </span>
+                <StatusBadge 
+                  status={hackathon.status} 
+                  size={isMobile ? 'small' : 'medium'}
+                />
                 
                 {!isMobile && (
                   <p style={{

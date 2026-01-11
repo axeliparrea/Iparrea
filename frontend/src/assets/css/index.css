@@ -47,6 +47,40 @@ body {
   background: #00d4ff;
 }
 
+/* Fix text selection in light mode */
+::selection {
+  background: rgba(37, 99, 235, 0.2);
+  color: inherit;
+}
+
+::-moz-selection {
+  background: rgba(37, 99, 235, 0.2);
+  color: inherit;
+}
+
+/* Ensure h1 elements don't inherit gradient styles */
+h1, h2, h3, h4, h5, h6 {
+  -webkit-text-fill-color: inherit !important;
+  background-clip: border-box !important;
+  -webkit-background-clip: border-box !important;
+  background: none !important;
+  background-color: transparent !important;
+}
+
+/* Remove any highlight/mark styling */
+mark {
+  background: transparent;
+  color: inherit;
+}
+
+/* Prevent unwanted text highlighting */
+.no-highlight {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 
 @keyframes pulse {
   0%, 100% { 

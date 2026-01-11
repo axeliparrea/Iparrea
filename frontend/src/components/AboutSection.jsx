@@ -2,12 +2,19 @@ import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../hook/ThemeContext';
 import { motion } from 'framer-motion';
+import { useResponsive } from '../utils/responsive';
+import { personalInfo } from '../data/personalInfo';
+import { skills, mobileSkills } from '../data/skills';
+import { IMAGE_PATHS, SOCIAL_LINKS } from '../config/constants';
+import SectionHeader from './ui/SectionHeader';
+import TechTag from './ui/TechTag';
 
 const AboutSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { colors } = useTheme();
+  const { isMobile } = useResponsive();
   const [isVisible, setIsVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const currentLanguage = i18n.language;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,52 +26,32 @@ const AboutSection = () => {
       }
     };
 
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleResize);
     handleScroll();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
-  const programmingLanguages = [
-    'Python', 'JavaScript', 'C#', 'C++', 'Java', 'Kotlin', 'HTML5', 'CSS3', 'SQL', 'TypeScript'
-  ];
-
-  const frameworksTools = [
-    'React', 'Node.js', '.NET Core', 'Unity', 'Express.js', 'SAP S/4HANA', 'Power BI', 'Power Query',
-    'Bootstrap', 'Tailwind CSS', 'Axios', 'Azure', 'Git', 'Linux', 'Agile methodology'
-  ];
-
-  const mobileLanguages = ['Python', 'JavaScript', 'C#', 'Java', 'SQL'];
-  const mobileTools = ['React', 'SAP S/4HANA', 'Power BI', 'Azure', 'Git'];
-
-  const languages = [
-    { name: 'English', level: 'Native' },
-    { name: 'Spanish', level: 'Native' },
-    { name: 'Italian', level: 'Basic' }
-  ];
+  const programmingLanguages = isMobile ? mobileSkills.programmingLanguages : skills.programmingLanguages;
+  const frameworksTools = isMobile ? mobileSkills.frameworksTools : skills.frameworksTools;
+  const languages = skills.languages;
 
   const currentWork = {
-    title: 'Solutions Architect',
-    company: 'ESAB',
-    period: 'Jan 2025 - Present',
-    description: 'Developing intelligent chatbots using Microsoft Copilot, building AI agents integrated with ERP systems, and creating custom Power Apps solutions for field workers. Automating data workflows using Python and SQL, enhancing operational efficiency across ERP systems.',
-    descriptionMobile: 'Intelligent chatbots, AI agents with ERP systems, and custom Power Apps solutions.'
+    title: personalInfo.currentWork.title[currentLanguage] || personalInfo.currentWork.title.en,
+    company: personalInfo.currentWork.company,
+    period: personalInfo.currentWork.period,
+    description: personalInfo.currentWork.description[currentLanguage] || personalInfo.currentWork.description.en,
+    descriptionMobile: personalInfo.currentWork.descriptionMobile[currentLanguage] || personalInfo.currentWork.descriptionMobile.en
   };
 
   const education = {
-    degree: 'Computer Science Engineering',
-    university: 'Tecnológico de Monterrey',
-    period: '2022 - 2026',
-    gpa: '4.0',
-    note: 'Ranked as the top university in Mexico and among the most prestigious in Latin America'
+    degree: personalInfo.education.degree[currentLanguage] || personalInfo.education.degree.en,
+    university: personalInfo.education.university,
+    period: personalInfo.education.period,
+    gpa: personalInfo.education.gpa,
+    note: personalInfo.education.note[currentLanguage] || personalInfo.education.note.en
   };
 
   return (
@@ -77,28 +64,10 @@ const AboutSection = () => {
       }}
     >
       <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
-          transition={{ duration: 0.8 }}
-          style={{ textAlign: 'center', marginBottom: isMobile ? '2rem' : '4rem' }}
-        >
-          <h2 style={{
-            fontSize: isMobile ? '2rem' : '2.5rem',
-            fontWeight: '600',
-            color: colors.text,
-            marginBottom: '1rem'
-          }}>
-            {t('aboutTitle')}
-          </h2>
-          <div style={{
-            width: '60px',
-            height: '4px',
-            background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary || colors.primary})`,
-            margin: '0 auto',
-            borderRadius: '2px'
-          }}></div>
-        </motion.div>
+        <SectionHeader
+          title={t('aboutTitle')}
+          align="center"
+        />
 
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -119,8 +88,8 @@ const AboutSection = () => {
             boxShadow: `0 8px 24px ${colors.primary}25`
           }}>
             <img
-              src="/assets/pictures/poseaxel.png"
-              alt="Axel Eduardo Iparrea Ramos"
+              src={IMAGE_PATHS.PROFILE}
+              alt={personalInfo.fullName}
               style={{
                 width: '100%',
                 height: '100%',
@@ -151,7 +120,7 @@ const AboutSection = () => {
                 color: colors.text,
                 marginBottom: '1rem'
               }}>
-                Current Work
+                {t('currentWork') || 'Current Work'}
               </h3>
               <div style={{
                 background: `${colors.primary}10`,
@@ -273,21 +242,10 @@ const AboutSection = () => {
                   flexWrap: 'wrap',
                   gap: '0.25rem'
                 }}>
-                  {mobileLanguages.map((skill, index) => (
-                    <span
-                      key={skill}
-                      style={{
-                        background: `${colors.primary}15`,
-                        color: colors.primary,
-                        padding: '0.25rem 0.5rem',
-                        borderRadius: '8px',
-                        fontSize: '0.75rem',
-                        fontWeight: '500',
-                        border: `1px solid ${colors.primary}30`
-                      }}
-                    >
+                  {programmingLanguages.map((skill, index) => (
+                    <TechTag key={skill} size="small">
                       {skill}
-                    </span>
+                    </TechTag>
                   ))}
                   <span style={{
                     color: colors.textSecondary,
@@ -313,21 +271,10 @@ const AboutSection = () => {
                   flexWrap: 'wrap',
                   gap: '0.25rem'
                 }}>
-                  {mobileTools.map((skill, index) => (
-                    <span
-                      key={skill}
-                      style={{
-                        background: `${colors.primary}15`,
-                        color: colors.primary,
-                        padding: '0.25rem 0.5rem',
-                        borderRadius: '8px',
-                        fontSize: '0.75rem',
-                        fontWeight: '500',
-                        border: `1px solid ${colors.primary}30`
-                      }}
-                    >
+                  {frameworksTools.map((skill, index) => (
+                    <TechTag key={skill} size="small">
                       {skill}
-                    </span>
+                    </TechTag>
                   ))}
                   <span style={{
                     color: colors.textSecondary,
@@ -369,7 +316,7 @@ const AboutSection = () => {
                 </p>
                 <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
                   <a 
-                    href="https://linkedin.com/in/axel-iparrea" 
+                    href={SOCIAL_LINKS.LINKEDIN} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     style={{ 
@@ -382,7 +329,7 @@ const AboutSection = () => {
                     LinkedIn
                   </a>
                   <a 
-                    href="https://github.com/axeliparrea" 
+                    href={SOCIAL_LINKS.GITHUB} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     style={{ 
@@ -424,7 +371,7 @@ const AboutSection = () => {
                   color: colors.text,
                   marginBottom: '1.5rem'
                 }}>
-                  Personal Information
+                  {t('personalInformation') || 'Personal Information'}
                 </h3>
                 <div style={{ color: colors.textSecondary, lineHeight: '1.6' }}>
                   <p style={{ marginBottom: '1rem' }}>
@@ -442,7 +389,7 @@ const AboutSection = () => {
                   <p style={{ marginBottom: '1rem' }}>
                     <strong style={{ color: colors.text }}>LinkedIn:</strong> 
                     <a 
-                      href="https://linkedin.com/in/axel-iparrea" 
+                      href={SOCIAL_LINKS.LINKEDIN} 
                       target="_blank" 
                       rel="noopener noreferrer"
                       style={{ color: colors.primary, textDecoration: 'none', marginLeft: '0.5rem' }}
@@ -453,7 +400,7 @@ const AboutSection = () => {
                   <p style={{ marginBottom: '1rem' }}>
                     <strong style={{ color: colors.text }}>GitHub:</strong> 
                     <a 
-                      href="https://github.com/axeliparrea" 
+                      href={SOCIAL_LINKS.GITHUB} 
                       target="_blank" 
                       rel="noopener noreferrer"
                       style={{ color: colors.primary, textDecoration: 'none', marginLeft: '0.5rem' }}
@@ -482,7 +429,7 @@ const AboutSection = () => {
                   color: colors.text,
                   marginBottom: '1.5rem'
                 }}>
-                  Current Work
+                  {t('currentWork') || 'Current Work'}
                 </h3>
                 <div style={{
                   background: `${colors.primary}10`,
@@ -642,17 +589,10 @@ const AboutSection = () => {
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.8 }}
                       transition={{ duration: 0.5, delay: index * 0.05 }}
-                      style={{
-                        background: `${colors.primary}15`,
-                        color: colors.primary,
-                        padding: '0.5rem 1rem',
-                        borderRadius: '20px',
-                        fontSize: '0.9rem',
-                        fontWeight: '500',
-                        border: `1px solid ${colors.primary}30`
-                      }}
                     >
-                      {skill}
+                      <TechTag size="medium">
+                        {skill}
+                      </TechTag>
                     </motion.div>
                   ))}
                 </div>
@@ -690,17 +630,10 @@ const AboutSection = () => {
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0.8 }}
                       transition={{ duration: 0.5, delay: index * 0.05 }}
-                      style={{
-                        background: `${colors.primary}15`,
-                        color: colors.primary,
-                        padding: '0.5rem 1rem',
-                        borderRadius: '20px',
-                        fontSize: '0.9rem',
-                        fontWeight: '500',
-                        border: `1px solid ${colors.primary}30`
-                      }}
                     >
-                      {skill}
+                      <TechTag size="medium">
+                        {skill}
+                      </TechTag>
                     </motion.div>
                   ))}
                 </div>

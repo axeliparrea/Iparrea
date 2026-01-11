@@ -1,141 +1,36 @@
-import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../hook/ThemeContext';
 import { motion } from 'framer-motion';
+import { useResponsive } from '../utils/responsive';
+import { experiences as experiencesData, mobileExperiences as mobileExperiencesData } from '../data/experiences';
+import { YEAR_COLORS } from '../config/constants';
+import SectionHeader from './ui/SectionHeader';
+import TechTag from './ui/TechTag';
 
 const ExperienceSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { colors } = useTheme();
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const { isMobile } = useResponsive();
+  const currentLanguage = i18n.language;
 
 
-  const experiences = [
-    {
-      id: 1,
-      year: '2022',
-      title: 'Starting my CS Journey',
-      company: 'Tecnológico de Monterrey',
-      period: 'Aug 2022',
-      description: 'Began my Computer Science Engineering degree with curiosity about technology and a passion for problem-solving. Ranked as the top university in Mexico and among the most prestigious in Latin America.',
-      learnings: 'Programming fundamentals in C++ and Java, discrete mathematics, data structures, and algorithms',
-      projects: 'Calculator application in C++, basic sorting algorithms implementation, console-based student management system',
-      skills: ['C++', 'Java', 'Data Structures', 'Algorithms', 'Object-Oriented Programming']
-    },
-    {
-      id: 2,
-      year: '2022',
-      title: 'First Hackathon Experience',
-      company: 'Hack MTY 2022',
-      period: 'Sep 2022',
-      description: 'Just one month into university, I participated in my first hackathon. This experience opened my eyes to collaborative development and real-world applications, working in a team of 4 developers.',
-      learnings: 'Team collaboration, rapid prototyping, web development basics, project management under pressure',
-      projects: 'Banorte web application focused on attracting and retaining younger demographics with interactive features',
-      skills: ['HTML', 'CSS', 'JavaScript', 'Team Collaboration', 'Rapid Prototyping']
-    },
-    {
-      id: 3,
-      year: '2023',
-      title: 'Expanding into Full Stack Development',
-      company: 'Personal & Academic Development',
-      period: 'Jan 2023 - Present',
-      description: 'Started developing more complex applications, exploring different technologies and building a solid foundation in both frontend and backend development. Focus on creating scalable and maintainable systems.',
-      learnings: 'React ecosystem, C# and .NET framework, Unity game development, database design and management, UI/UX principles',
-      projects: 'AWAK Dashboard with real-time analytics, Unity-based games, various web applications with full authentication systems',
-      skills: ['React', 'C#', '.NET', 'Unity', 'SQL Server', 'UI/UX Design', 'Database Management']
-    },
-    {
-      id: 4,
-      year: '2024',
-      title: 'Deepening Technical Specialization',
-      company: 'Academic Excellence & Industry Focus',
-      period: 'Jan 2024 - Present',
-      description: 'Focused on maintaining academic excellence while specializing in AI, cybersecurity, and system architecture. Started working on more sophisticated projects with real-world applications.',
-      learnings: 'Advanced AI/ML algorithms, cybersecurity principles, system architecture design, cloud computing fundamentals',
-      projects: 'Multi-agent system simulations, cybersecurity integration projects, machine learning models for data analysis',
-      skills: ['Python', 'Machine Learning', 'Cybersecurity', 'System Architecture', 'Cloud Computing', 'AI/ML']
-    },
-    {
-      id: 5,
-      year: '2025',
-      title: 'Professional Recognition & Excellence',
-      company: 'SAP Labs & ESAB',
-      period: 'Jan 2025 - Present',
-      description: 'Achieved significant recognition by winning the SAP Labs Final Showcase with SAPitos 2.0. Currently working as Data Automation & Cloud Engineer at ESAB, applying enterprise-level solutions in real-world scenarios.',
-      learnings: 'Enterprise software development, SAP ecosystem integration, cloud automation, data pipeline optimization, AI integration in business processes',
-      projects: 'SAPitos 2.0: AI-powered smart supply chain solution, automated data workflows using Python and SQL, Power BI dashboards for business insights',
-      skills: ['SAP S/4HANA', 'Python', 'SQL', 'Power BI', 'Power Query', 'Azure', 'AI Integration', 'Microsoft Copilot']
-    }
-  ];
+  // Map experiences data with translations
+  const experiences = experiencesData.map(exp => ({
+    ...exp,
+    title: exp.title[currentLanguage] || exp.title.en,
+    description: exp.description[currentLanguage] || exp.description.en,
+    learnings: exp.learnings[currentLanguage] || exp.learnings.en,
+    projects: exp.projects[currentLanguage] || exp.projects.en
+  }));
 
-
-  const mobileExperiences = [
-    {
-      id: 1,
-      year: '2022',
-      title: 'CS Journey Begins',
-      company: 'Tecnológico de Monterrey',
-      period: 'Aug 2022',
-      keyPoint: 'Started Computer Science degree',
-      skills: ['C++', 'Java', 'Algorithms']
-    },
-    {
-      id: 2,
-      year: '2022',
-      title: 'First Hackathon',
-      company: 'Hack MTY 2022',
-      period: 'Sep 2022',
-      keyPoint: 'Team collaboration & web development',
-      skills: ['HTML', 'CSS', 'JavaScript']
-    },
-    {
-      id: 3,
-      year: '2023',
-      title: 'Full Stack Development',
-      company: 'Academic & Personal',
-      period: '2023',
-      keyPoint: 'Complex applications & scalable systems',
-      skills: ['React', 'C#', '.NET', 'Unity']
-    },
-    {
-      id: 4,
-      year: '2024',
-      title: 'Technical Specialization',
-      company: 'Academic Excellence',
-      period: '2024',
-      keyPoint: 'AI, cybersecurity & architecture',
-      skills: ['Python', 'ML', 'Cybersecurity']
-    },
-    {
-      id: 5,
-      year: '2025',
-      title: 'Professional Success',
-      company: 'SAP Labs & ESAB',
-      period: '2025',
-      keyPoint: 'SAP Winner & Solutions Architect',
-      skills: ['SAP', 'Python', 'Azure']
-    }
-  ];
+  const mobileExperiences = mobileExperiencesData.map(exp => ({
+    ...exp,
+    title: exp.title[currentLanguage] || exp.title.en,
+    keyPoint: exp.keyPoint || exp.description[currentLanguage] || exp.description?.en || ''
+  }));
 
   const getYearColor = (year) => {
-    const yearColors = {
-      '2022': '#e11d48', // Red - Beginning
-      '2023': '#0ea5e9', // Blue - Growth
-      '2024': '#f59e0b', // Orange - Specialization  
-      '2025': '#10b981'  // Green - Achievement
-    };
-    return yearColors[year] || colors.primary;
+    return YEAR_COLORS[year] || colors.primary;
   };
 
 
@@ -235,20 +130,9 @@ const ExperienceSection = () => {
         marginBottom: '2rem'
       }}>
         {exp.skills.map((skill, skillIndex) => (
-          <span
-            key={skillIndex}
-            style={{
-              background: `${colors.primary}15`,
-              color: colors.primary,
-              padding: '0.25rem 0.75rem',
-              borderRadius: '12px',
-              fontSize: '0.8rem',
-              fontWeight: '500',
-              border: `1px solid ${colors.primary}30`
-            }}
-          >
+          <TechTag key={skillIndex} size="medium">
             {skill}
-          </span>
+          </TechTag>
         ))}
       </div>
 
@@ -408,19 +292,9 @@ const ExperienceSection = () => {
         gap: '0.25rem'
       }}>
         {exp.skills.slice(0, 3).map((skill, skillIndex) => (
-          <span
-            key={skillIndex}
-            style={{
-              background: `${colors.primary}15`,
-              color: colors.primary,
-              padding: '0.15rem 0.5rem',
-              borderRadius: '8px',
-              fontSize: '0.7rem',
-              fontWeight: '500'
-            }}
-          >
+          <TechTag key={skillIndex} size="small">
             {skill}
-          </span>
+          </TechTag>
         ))}
         {exp.skills.length > 3 && (
           <span style={{
@@ -445,38 +319,11 @@ const ExperienceSection = () => {
       }}
     >
       <div className="container">
-        <motion.div
-          initial={{ opacity: 1, y: 0 }}
-          style={{ textAlign: 'center', marginBottom: isMobile ? '2rem' : '4rem' }}
-        >
-          <h2 style={{
-            fontSize: isMobile ? '2rem' : '2.5rem',
-            fontWeight: '600',
-            color: colors.text,
-            marginBottom: '1rem'
-          }}>
-            My Professional Journey
-          </h2>
-          <div style={{
-            width: '60px',
-            height: '4px',
-            background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary || colors.primary})`,
-            margin: '0 auto',
-            borderRadius: '2px'
-          }}></div>
-          <p style={{
-            fontSize: isMobile ? '0.9rem' : '1.1rem',
-            color: colors.textSecondary,
-            marginTop: '1rem',
-            maxWidth: '700px',
-            margin: '1rem auto 0'
-          }}>
-            {isMobile ? 
-              'Key milestones and achievements' : 
-              'From curious beginner to award-winning developer and professional engineer - a journey of continuous learning and innovation'
-            }
-          </p>
-        </motion.div>
+        <SectionHeader
+          title={t('experienceTitle')}
+          subtitle={isMobile ? t('experienceMobileSubtitle') : t('experienceSubtitle')}
+          align="center"
+        />
 
         
         <div style={{
@@ -538,7 +385,7 @@ const ExperienceSection = () => {
               color: colors.primary,
               fontWeight: '600'
             }}>
-              Current Status
+              {t('currentStatus')}
             </span>
           </div>
           
@@ -548,7 +395,7 @@ const ExperienceSection = () => {
             color: colors.text,
             marginBottom: '1rem'
           }}>
-            {isMobile ? '4.0 GPA & Solutions Architect' : '4.0 GPA Student & Solutions Architect'}
+            {t('currentStatusTitle')}
           </h3>
           
           <p style={{
@@ -558,10 +405,7 @@ const ExperienceSection = () => {
             maxWidth: '800px',
             margin: '0 auto'
           }}>
-            {isMobile ? 
-              'Excelling academically while working professionally as Solutions Architect at ESAB. SAP Labs winner and innovative solutions developer.' :
-              'Currently excelling academically in my 3rd year at Tecnológico de Monterrey while working professionally as a Solutions Architect at ESAB. My journey from curious beginner to recognized developer and professional engineer demonstrates my commitment to continuous learning, innovation, and real-world application of technology.'
-            }
+            {isMobile ? t('currentStatusMobileDescription') : t('currentStatusDescription')}
           </p>
 
           <div style={{
