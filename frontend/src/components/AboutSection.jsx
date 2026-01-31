@@ -252,7 +252,7 @@ const AboutSection = () => {
                     fontSize: '0.75rem',
                     alignSelf: 'center'
                   }}>
-                    +{programmingLanguages.length - mobileLanguages.length} más
+                    +{skills.programmingLanguages.length - programmingLanguages.length} más
                   </span>
                 </div>
               </div>
@@ -281,7 +281,7 @@ const AboutSection = () => {
                     fontSize: '0.75rem',
                     alignSelf: 'center'
                   }}>
-                    +{frameworksTools.length - mobileTools.length} más
+                    +{skills.frameworksTools.length - frameworksTools.length} más
                   </span>
                 </div>
               </div>
