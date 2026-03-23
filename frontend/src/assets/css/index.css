@@ -139,6 +139,31 @@ mark {
   }
 }
 
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.96) translateY(24px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);    }
+}
+
+@keyframes borderGlow {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 1;   }
+}
+
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1);    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+  50%      { transform: scale(1.08); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);  }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0);     }
+}
+
+@keyframes shine {
+  from { background-position: -200% center; }
+  to   { background-position:  200% center; }
+}
+
 
 .text-glow {
   text-shadow: 0 0 10px currentColor;
@@ -225,11 +250,56 @@ mark {
 }
 
 
+/* ─── 3D Card Perspective ─────────────────────────────── */
+.perspective-container {
+  perspective: 1200px;
+}
+
+.card-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
+}
+
+.card-3d:hover {
+  transform: translateY(-12px) translateZ(20px) rotateX(-2deg) scale(1.02);
+}
+
+/* ─── Featured banner shimmer ─────────────────────────── */
+.featured-banner {
+  background: linear-gradient(
+    90deg,
+    #00cc6a 0%,
+    #00e67a 40%,
+    #00cc6a 60%,
+    #00a65a 100%
+  );
+  background-size: 200% auto;
+  animation: shine 3s linear infinite;
+}
+
+/* ─── Timeline dot pulse ──────────────────────────────── */
+.timeline-dot-active {
+  animation: dotPulse 2.5s ease-in-out infinite;
+}
+
+/* ─── Gradient top border on cards ───────────────────── */
+.card-accent-top {
+  border-top: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+/* ─── Mobile project grid ────────────────────────────── */
+@media (max-width: 480px) {
+  .projects-mobile-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 @media (max-width: 768px) {
   .text-responsive {
     font-size: 1.5rem !important;
   }
-  
   .container-responsive {
     padding: 0 16px;
   }

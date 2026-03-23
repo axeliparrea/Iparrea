@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '../hook/ThemeContext';
@@ -18,22 +18,23 @@ const ProjectDetail = () => {
   const [project, setProject] = useState(null);
   const currentLanguage = i18n.language;
 
-  // Create project data map from centralized data
-  const projectDataMap = projectsData.reduce((acc, proj) => {
+  const projectDataMap = useMemo(() => projectsData.reduce((acc, proj) => {
+    const lang = currentLanguage;
+    const pick = (field) => field?.[lang] || field?.en || '';
     acc[proj.id] = {
       ...proj,
-      title: proj.title[currentLanguage] || proj.title.en,
-      subtitle: proj.subtitle[currentLanguage] || proj.subtitle.en,
-      description: proj.description[currentLanguage] || proj.description.en,
-      fullDescription: proj.fullDescription[currentLanguage] || proj.fullDescription.en,
-      detailedDescription: proj.detailedDescription[currentLanguage] || proj.detailedDescription.en,
-      status: proj.status[currentLanguage] || proj.status.en,
-      category: proj.category[currentLanguage] || proj.category.en,
-      features: proj.features[currentLanguage] || proj.features.en,
-      challenges: proj.challenges[currentLanguage] || proj.challenges.en
+      title: pick(proj.title),
+      subtitle: pick(proj.subtitle),
+      description: pick(proj.description),
+      fullDescription: pick(proj.fullDescription) || pick(proj.description),
+      detailedDescription: pick(proj.detailedDescription) || pick(proj.fullDescription) || pick(proj.description),
+      status: pick(proj.status),
+      category: pick(proj.category),
+      features: pick(proj.features) || [],
+      challenges: pick(proj.challenges) || [],
     };
     return acc;
-  }, {});
+  }, {}), [currentLanguage]);
 
   // Legacy projectData for backward compatibility (will be removed)
   const projectData = {
@@ -216,7 +217,7 @@ const ProjectDetail = () => {
       period: '2024',
       color: '#8B5CF6',
       githubUrl: 'https://github.com/axeliparrea/Iparrea',
-      demoUrl: window.location.origin, 
+      demoUrl: typeof window !== 'undefined' ? window.location.origin : '',
       features: [
         'Modern React architecture',
         'Smooth animations with Framer Motion',
@@ -277,7 +278,7 @@ const ProjectDetail = () => {
       setProject(currentProject);
     }
     window.scrollTo(0, 0);
-  }, [projectId, currentLanguage, projectDataMap]);
+  }, [projectId, currentLanguage]);
 
   if (!project) {
     return (
@@ -314,25 +315,29 @@ const ProjectDetail = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.03, borderColor: colors.text }}
+            whileTap={{ scale: 0.97 }}
             onClick={() => navigate('/')}
             className="back-button"
             style={{
-              background: 'none',
-              border: `2px solid ${colors.border}`,
+              background: colors.surface,
+              border: `1.5px solid ${colors.border}`,
               color: colors.text,
-              padding: isMobile ? '0.5rem 1rem' : '0.75rem 1.5rem',
+              padding: isMobile ? '0.5rem 1rem' : '0.6rem 1.25rem',
               borderRadius: '8px',
               cursor: 'pointer',
-              fontSize: isMobile ? '12px' : '14px',
-              fontWeight: '500',
-              display: 'flex',
+              fontSize: isMobile ? '12px' : '13px',
+              fontWeight: '600',
+              display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.5rem'
+              gap: '0.4rem',
+              letterSpacing: '0.02em',
+              transition: 'border-color 0.2s ease',
+              boxShadow: `0 1px 4px ${colors.shadow}`
             }}
           >
-            ← Back to Portfolio
+            <span style={{ fontSize: '1em', lineHeight: 1 }}>&#8592;</span>
+            Back to Portfolio
           </motion.button>
         </div>
       </section>
@@ -348,12 +353,13 @@ const ProjectDetail = () => {
             transition={{ duration: 0.8 }}
             style={{
               display: 'grid',
-              gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
+              gridTemplateColumns: isMobile ? '1fr' : 'minmax(0, 1fr) minmax(0, 1fr)',
               gap: isMobile ? '2rem' : '3rem',
-              alignItems: 'center'
+              alignItems: 'center',
+              overflow: 'hidden'
             }}
           >
-            <div>
+            <div style={{ minWidth: 0, overflow: 'hidden' }}>
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -500,6 +506,7 @@ const ProjectDetail = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               style={{
                 width: '100%',
+                minWidth: 0,
                 aspectRatio: '16/9',
                 borderRadius: '12px',
                 overflow: 'hidden',
@@ -537,7 +544,7 @@ const ProjectDetail = () => {
         <div className="container">
           <div style={{
             display: 'grid',
-            gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
+            gridTemplateColumns: isMobile ? '1fr' : 'minmax(0, 1fr) minmax(0, 1fr)',
             gap: isMobile ? '1.5rem' : '3rem'
           }}>
             <div style={{ gridColumn: '1 / -1' }}>
@@ -689,7 +696,7 @@ const ProjectDetail = () => {
             </h3>
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(min(250px, 100%), 1fr))',
               gap: '1.5rem'
             }}>
               {project.challenges.map((challenge, index) => (

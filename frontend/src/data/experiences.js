@@ -53,6 +53,34 @@ export const experiences = [
   },
   {
     id: 3,
+    year: '2025',
+    title: {
+      en: 'Founder & AI Security Architect',
+      es: 'Fundador y Arquitecto de Seguridad IA'
+    },
+    company: 'Cispar-IA',
+    period: '2025 – Present',
+    location: 'Monterrey, Mexico',
+    description: {
+      en: 'Founded Cispar-IA, an AI-native cybersecurity startup. Architected an autonomous cybersecurity agent that executes red-team pentesting and real-time threat mitigation via proprietary ML models. Built a custom AI-powered SIEM for automated log correlation, anomaly detection, and threat intelligence. Enabled non-technical users to perform enterprise-grade security analysis through natural language interaction.',
+      es: 'Fundé Cispar-IA, un startup de ciberseguridad nativo de IA. Diseñé un agente autónomo de ciberseguridad que ejecuta pentesting de red team y mitigación de amenazas en tiempo real mediante modelos ML propietarios. Construí un SIEM potenciado por IA para correlación automática de logs, detección de anomalías e inteligencia de amenazas. Permití a usuarios no técnicos realizar análisis de seguridad de nivel empresarial mediante interacción en lenguaje natural.'
+    },
+    learnings: {
+      en: 'Proprietary ML model development, red-team automation, AI-powered threat detection, SIEM architecture, natural language security interfaces, startup leadership',
+      es: 'Desarrollo de modelos ML propietarios, automatización de red team, detección de amenazas con IA, arquitectura SIEM, interfaces de seguridad en lenguaje natural, liderazgo de startup'
+    },
+    projects: {
+      en: 'Autonomous pentesting agent, AI-powered SIEM platform, natural language security analysis interface, threat intelligence pipeline',
+      es: 'Agente autónomo de pentesting, plataforma SIEM potenciada por IA, interfaz de análisis de seguridad en lenguaje natural, pipeline de inteligencia de amenazas'
+    },
+    skills: ['Cybersecurity AI', 'SIEM Architecture', 'Red Team Automation', 'Threat Detection', 'Agentic Systems', 'Proprietary ML', 'Entrepreneurship'],
+    achievements: {
+      en: 'Built enterprise-grade AI security tools accessible to non-technical users via natural language',
+      es: 'Construí herramientas de seguridad IA de nivel empresarial accesibles a usuarios no técnicos mediante lenguaje natural'
+    }
+  },
+  {
+    id: 4,
     year: '2024',
     title: {
       en: 'Full Stack Developer',
@@ -76,7 +104,7 @@ export const experiences = [
     skills: ['Node.js', 'TypeScript', 'React', 'Prisma', 'Express.js', 'Tailwind CSS', 'Axios', 'MVC Architecture']
   },
   {
-    id: 4,
+    id: 5,
     year: '2022',
     title: {
       en: 'Starting my CS Journey',
@@ -100,7 +128,7 @@ export const experiences = [
     skills: ['C++', 'Java', 'Data Structures', 'Algorithms', 'Object-Oriented Programming']
   },
   {
-    id: 5,
+    id: 6,
     year: '2022',
     title: {
       en: 'First Hackathon Experience',

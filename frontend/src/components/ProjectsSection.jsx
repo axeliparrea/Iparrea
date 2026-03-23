@@ -11,6 +11,29 @@ import SectionHeader from './ui/SectionHeader';
 import TechTag from './ui/TechTag';
 import StatusBadge from './ui/StatusBadge';
 
+// ─── Animation Variants ───────────────────────────────────────────────────────
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 48, scale: 0.96 },
+  visible: {
+    opacity: 1, y: 0, scale: 1,
+    transition: { duration: 0.55, ease: [0.23, 1, 0.32, 1] }
+  }
+};
+
+const hackathonVariants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: {
+    opacity: 1, scale: 1,
+    transition: { duration: 0.45, ease: [0.23, 1, 0.32, 1] }
+  }
+};
+
+// ─── Component ────────────────────────────────────────────────────────────────
 const ProjectsSection = () => {
   const { t, i18n } = useTranslation();
   const { colors } = useTheme();
@@ -19,7 +42,6 @@ const ProjectsSection = () => {
   const navigate = useNavigate();
   const currentLanguage = i18n.language;
 
-  // Map projects data with translations
   const projects = projectsData.map(project => ({
     ...project,
     title: project.title[currentLanguage] || project.title.en,
@@ -30,7 +52,6 @@ const ProjectsSection = () => {
     category: project.category[currentLanguage] || project.category.en
   }));
 
-  // Map hackathons data with translations
   const hackathons = hackathonsData.map(hackathon => ({
     ...hackathon,
     title: hackathon.title[currentLanguage] || hackathon.title.en,
@@ -42,534 +63,444 @@ const ProjectsSection = () => {
   const handleProjectClick = (projectId, e) => {
     e.preventDefault();
     e.stopPropagation();
-    
     if (navigating) return;
-    
     setNavigating(true);
-    
     setTimeout(() => {
       navigate(`/project/${projectId}`);
       setNavigating(false);
     }, 150);
   };
 
-
-  const MobileProjectCard = ({ project, index }) => (
+  // ─── Mobile Card ────────────────────────────────────────────────────────────
+  const MobileProjectCard = ({ project }) => (
     <motion.div
-      initial={{ opacity: 1, y: 0 }}
-      whileHover={{ 
-        y: -8, 
-        scale: 1.02,
-        boxShadow: `0 16px 32px ${project.color}25`
-      }}
-      transition={{ 
-        duration: 0.3, 
-        ease: "easeOut",
-        type: "spring",
-        stiffness: 300,
-        damping: 20
-      }}
+      variants={cardVariants}
+      whileTap={{ scale: 0.96 }}
       style={{
-        background: `linear-gradient(135deg, ${colors.surface} 0%, ${project.color}08 100%)`,
-        borderRadius: '16px',
+        background: `linear-gradient(145deg, ${colors.surface} 0%, ${project.color}08 100%)`,
+        borderRadius: '14px',
         overflow: 'hidden',
         border: `1px solid ${project.color}30`,
-        boxShadow: `0 8px 24px ${project.color}15`,
+        borderTop: `3px solid ${project.color}`,
+        boxShadow: `0 4px 20px ${project.color}12`,
         cursor: navigating ? 'wait' : 'pointer',
         opacity: navigating ? 0.7 : 1,
-        position: 'relative',
-        transform: 'translateZ(0)',
-        backfaceVisibility: 'hidden'
+        display: 'flex',
+        flexDirection: 'column'
       }}
       onClick={(e) => handleProjectClick(project.id, e)}
     >
+      {/* Image / Video */}
       <div style={{
-        height: '80px',
-        background: `linear-gradient(135deg, ${project.color}25, ${project.color}15)`,
+        height: '130px',
+        background: `linear-gradient(135deg, ${project.color}28, ${project.color}14)`,
         position: 'relative',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        flexShrink: 0
       }}>
-        <div style={{
-          position: 'absolute',
-          top: '-20px',
-          right: '-20px',
-          width: '60px',
-          height: '60px',
-          background: `${project.color}20`,
-          borderRadius: '50%',
-          filter: 'blur(15px)'
-        }}></div>
-        
         {project.videoId ? (
-          <YouTubeVideo 
+          <YouTubeVideo
             videoId={project.videoId}
-            title={`${project.title} - Demo Video`}
-            width="100%"
-            height="100%"
+            title={project.title}
+            width="100%" height="100%"
             aspectRatio="16/9"
-            showControls={false}
-            autoplay={false}
+            showControls={false} autoplay={false}
           />
         ) : (
           <img
-            src={project.image}
-            alt={project.title}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              borderRadius: '8px'
-            }}
+            src={project.image} alt={project.title}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
         )}
-        
         <div style={{
-          position: 'absolute',
-          top: '0.4rem',
-          right: '0.4rem',
-          background: project.color,
-          color: '#fff',
-          padding: '0.2rem 0.4rem',
-          borderRadius: '8px',
-          fontSize: '8px',
-          fontWeight: '700',
-          boxShadow: `0 2px 8px ${project.color}40`
+          position: 'absolute', bottom: 0, left: 0, right: 0, height: '40px',
+          background: `linear-gradient(to top, ${colors.surface}dd, transparent)`
+        }} />
+        <div style={{
+          position: 'absolute', top: '0.5rem', right: '0.5rem',
+          background: `${project.color}ee`, color: '#fff',
+          padding: '0.15rem 0.45rem', borderRadius: '6px',
+          fontSize: '10px', fontWeight: '700'
         }}>
           {project.period}
         </div>
       </div>
 
-      <div style={{ padding: '0.8rem' }}>
-        <div style={{ marginBottom: '0.5rem' }}>
-          <h3 style={{
-            fontSize: '0.85rem',
-            fontWeight: '700',
-            color: colors.text,
-            marginBottom: '0.2rem',
-            lineHeight: '1.2',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap'
-          }}>
-            {project.title}
-          </h3>
-          <span style={{
-            background: `${project.color}20`,
-            color: project.color,
-            padding: '0.1rem 0.4rem',
-            borderRadius: '6px',
-            fontSize: '7px',
-            fontWeight: '600',
-            textTransform: 'uppercase',
-            letterSpacing: '0.5px'
-          }}>
-            {project.category.split(' ')[0]}
-          </span>
-        </div>
+      {/* Body */}
+      <div style={{ padding: '0.85rem', display: 'flex', flexDirection: 'column', flex: 1 }}>
+        <span style={{
+          background: `${project.color}18`, color: project.color,
+          padding: '0.12rem 0.45rem', borderRadius: '6px',
+          fontSize: '9px', fontWeight: '700',
+          textTransform: 'uppercase', letterSpacing: '0.5px',
+          alignSelf: 'flex-start', marginBottom: '0.4rem'
+        }}>
+          {project.category.split(' ')[0]}
+        </span>
+
+        <h3 style={{
+          fontSize: '0.88rem', fontWeight: '700', color: colors.text,
+          marginBottom: '0.3rem', lineHeight: '1.2',
+          overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'
+        }}>
+          {project.title}
+        </h3>
 
         <p style={{
-          fontSize: '0.7rem',
-          color: colors.textSecondary,
-          lineHeight: '1.3',
-          marginBottom: '0.6rem',
-          display: '-webkit-box',
-          WebkitLineClamp: 2,
-          WebkitBoxOrient: 'vertical',
-          overflow: 'hidden'
+          fontSize: '0.71rem', color: colors.textSecondary, lineHeight: '1.45',
+          marginBottom: '0.6rem', flex: 1,
+          display: '-webkit-box', WebkitLineClamp: 2,
+          WebkitBoxOrient: 'vertical', overflow: 'hidden'
         }}>
           {project.descriptionMobile}
         </p>
 
-        
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '0.2rem',
-          marginBottom: '0.6rem'
-        }}>
-          {(project.technologiesMobile || project.technologies.slice(0, 2)).slice(0, 2).map((tech, techIndex) => (
-            <TechTag key={techIndex} size="small">
-              {tech}
-            </TechTag>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.25rem', marginBottom: '0.65rem' }}>
+          {(project.technologiesMobile || project.technologies).slice(0, 3).map((tech, i) => (
+            <TechTag key={i} size="small">{tech}</TechTag>
           ))}
-          <span style={{
-            color: colors.textSecondary,
-            fontSize: '7px',
-            alignSelf: 'center',
-            fontWeight: '500'
-          }}>
-            +{project.technologies.length - 2}
-          </span>
+          {project.technologies.length > 3 && (
+            <span style={{ color: colors.textSecondary, fontSize: '10px', alignSelf: 'center' }}>
+              +{project.technologies.length - 3}
+            </span>
+          )}
         </div>
 
-        
-        <div
-          style={{
-            background: `linear-gradient(135deg, ${project.color}, ${project.color}cc)`,
-            color: '#fff',
-            padding: '0.4rem',
-            borderRadius: '8px',
-            textAlign: 'center',
-            fontWeight: '700',
-            fontSize: '8px',
-            cursor: navigating ? 'wait' : 'pointer',
-            boxShadow: `0 4px 12px ${project.color}30`,
-            textTransform: 'uppercase',
-            letterSpacing: '0.5px'
-          }}
-        >
-          {navigating ? t('loading') : 'Ver →'}
+        <div style={{
+          background: `linear-gradient(135deg, ${project.color}, ${project.color}cc)`,
+          color: '#fff', padding: '0.42rem', borderRadius: '8px',
+          textAlign: 'center', fontWeight: '700', fontSize: '11px',
+          textTransform: 'uppercase', letterSpacing: '0.5px',
+          boxShadow: `0 3px 12px ${project.color}30`
+        }}>
+          {navigating ? '...' : 'Ver →'}
         </div>
       </div>
-
-      
-        <div style={{
-          position: 'absolute',
-          top: '0.4rem',
-          left: '0.4rem',
-          width: '6px',
-          height: '6px',
-          background: project.color,
-          borderRadius: '50%',
-          boxShadow: `0 0 8px ${project.color}`
-        }}></div>
     </motion.div>
   );
 
+  // ─── Desktop Card ───────────────────────────────────────────────────────────
+  const DesktopProjectCard = ({ project }) => {
+    const isFeatured = project.id === 'sapitos';
 
-  const DesktopProjectCard = ({ project, index }) => (
-    <motion.div
-      initial={{ opacity: 1, y: 0 }}
-      whileHover={{ 
-        y: -12, 
-        scale: 1.03,
-        boxShadow: `0 20px 40px ${project.color}20, 0 8px 16px ${colors.shadow}`
-      }}
-      transition={{ 
-        duration: 0.4, 
-        ease: "easeOut",
-        type: "spring",
-        stiffness: 300,
-        damping: 25
-      }}
-      className="project-card"
-      style={{
-        background: colors.surface,
-        borderRadius: '16px',
-        overflow: 'hidden',
-        border: `1px solid ${colors.border}`,
-        boxShadow: `0 4px 12px ${colors.shadow}`,
-        cursor: navigating ? 'wait' : 'pointer',
-        position: 'relative',
-        opacity: navigating ? 0.7 : 1,
-        transform: 'translateZ(0)',
-        backfaceVisibility: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%'
-      }}
-      onClick={(e) => handleProjectClick(project.id, e)}
-    >
-      
-      <div style={{
-        height: '200px',
-        background: `linear-gradient(135deg, ${project.color}20, ${project.color}40)`,
-        position: 'relative',
-        overflow: 'hidden'
-      }}>
-        {project.videoId ? (
-          <YouTubeVideo 
-            videoId={project.videoId}
-            title={`${project.title} - Demo Video`}
-            width="100%"
-            height="100%"
-            aspectRatio="16/9"
-            showControls={false}
-            autoplay={false}
-          />
-        ) : (
-          <img
-            src={project.image}
-            alt={project.title}
+    return (
+      <motion.div
+        variants={cardVariants}
+        whileHover={{
+          y: -14,
+          rotateX: -2,
+          scale: 1.015,
+          boxShadow: `0 28px 56px ${project.color}22, 0 8px 24px ${colors.shadow}`
+        }}
+        transition={{ type: 'spring', stiffness: 280, damping: 22 }}
+        className="project-card"
+        style={{
+          background: colors.surface,
+          borderRadius: '18px',
+          overflow: 'hidden',
+          border: `1px solid ${isFeatured ? project.color + '45' : colors.border}`,
+          borderTop: `3px solid ${project.color}`,
+          boxShadow: isFeatured
+            ? `0 8px 32px ${project.color}20`
+            : `0 4px 16px ${colors.shadow}`,
+          cursor: navigating ? 'wait' : 'pointer',
+          opacity: navigating ? 0.7 : 1,
+          display: 'flex', flexDirection: 'column',
+          height: '100%',
+          transformStyle: 'preserve-3d'
+        }}
+        onClick={(e) => handleProjectClick(project.id, e)}
+      >
+        {/* Featured banner */}
+        {isFeatured && (
+          <div
+            className="featured-banner"
             style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover'
+              color: '#fff', textAlign: 'center',
+              padding: '0.4rem', fontSize: '11px',
+              fontWeight: '800', letterSpacing: '1.5px',
+              textTransform: 'uppercase'
             }}
-          />
+          >
+            🏆 SAP Labs Winner 2025
+          </div>
         )}
-        
-        <div style={{
-          position: 'absolute',
-          top: '1rem',
-          right: '1rem',
-          zIndex: 2
-        }}>
-          <StatusBadge status={project.status} size="medium" />
-        </div>
-        
-        <div style={{
-          position: 'absolute',
-          bottom: '1rem',
-          left: '1rem',
-          background: `${colors.surface}f0`,
-          backdropFilter: 'blur(10px)',
-          padding: '0.5rem 1rem',
-          borderRadius: '8px',
-          fontSize: '14px',
-          fontWeight: '500',
-          color: colors.text,
-          zIndex: 2
-        }}>
-          {project.period}
-        </div>
 
-        {project.videoId && (
+        {/* Image / Video */}
+        <div style={{
+          height: '210px',
+          background: `linear-gradient(135deg, ${project.color}22, ${project.color}40)`,
+          position: 'relative', overflow: 'hidden'
+        }}>
+          {project.videoId ? (
+            <YouTubeVideo
+              videoId={project.videoId} title={project.title}
+              width="100%" height="100%"
+              aspectRatio="16/9" showControls={false} autoplay={false}
+            />
+          ) : (
+            <img src={project.image} alt={project.title}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          )}
+
+          {/* Gradient overlay */}
           <div style={{
-            position: 'absolute',
-            top: '1rem',
-            left: '1rem',
-            background: `${colors.primary}f0`,
-            backdropFilter: 'blur(10px)',
-            padding: '0.5rem 1rem',
-            borderRadius: '8px',
-            fontSize: '12px',
-            fontWeight: '600',
-            color: '#fff',
-            zIndex: 2,
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem'
-          }}>
-            ▶️ Video Demo
-          </div>
-        )}
-      </div>
+            position: 'absolute', bottom: 0, left: 0, right: 0, height: '60px',
+            background: `linear-gradient(to top, ${colors.surface}cc, transparent)`
+          }} />
 
-      
-      <div style={{ 
-        padding: '1.5rem',
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%'
-      }}>
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start',
-          marginBottom: '1rem'
-        }}>
-          <div>
-            <h3 style={{
-              fontSize: '1.3rem',
-              fontWeight: '600',
-              color: colors.text,
-              marginBottom: '0.25rem'
-            }}>
-              {project.title}
-            </h3>
-            <p style={{
-              fontSize: '1rem',
-              color: colors.primary,
-              fontWeight: '500'
-            }}>
-              {project.subtitle}
-            </p>
+          <div style={{ position: 'absolute', top: '1rem', right: '1rem', zIndex: 2 }}>
+            <StatusBadge status={project.status} size="medium" />
           </div>
-          
-          <span style={{
-            background: `${project.color}20`,
-            color: project.color,
-            padding: '0.25rem 0.75rem',
-            borderRadius: '20px',
-            fontSize: '12px',
-            fontWeight: '600'
+
+          <div style={{
+            position: 'absolute', bottom: '1rem', left: '1rem',
+            background: `${colors.surface}e8`, backdropFilter: 'blur(10px)',
+            padding: '0.4rem 0.9rem', borderRadius: '8px',
+            fontSize: '13px', fontWeight: '500', color: colors.text, zIndex: 2
           }}>
-            {project.category}
-          </span>
+            {project.period}
+          </div>
+
+          {project.videoId && (
+            <div style={{
+              position: 'absolute', top: '1rem', left: '1rem',
+              background: `${colors.primary}e8`, backdropFilter: 'blur(10px)',
+              padding: '0.4rem 0.9rem', borderRadius: '8px',
+              fontSize: '12px', fontWeight: '700', color: '#fff', zIndex: 2,
+              display: 'flex', alignItems: 'center', gap: '0.4rem'
+            }}>
+              ▶ Demo
+            </div>
+          )}
         </div>
 
-        <p style={{
-          fontSize: '0.95rem',
-          color: colors.textSecondary,
-          lineHeight: '1.6',
-          marginBottom: '1.5rem'
-        }}>
-          {project.description}
-        </p>
-
-        
+        {/* Body */}
         <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '0.5rem',
-          marginBottom: '1.5rem'
+          padding: '1.5rem', display: 'flex',
+          flexDirection: 'column', flex: 1
         }}>
-          {project.technologies.map((tech, techIndex) => (
-            <TechTag key={techIndex} size="medium">
-              {tech}
-            </TechTag>
-          ))}
+          <div style={{
+            display: 'flex', justifyContent: 'space-between',
+            alignItems: 'flex-start', marginBottom: '0.85rem'
+          }}>
+            <div style={{ flex: 1, paddingRight: '1rem' }}>
+              <h3 style={{
+                fontSize: '1.25rem', fontWeight: '700',
+                color: colors.text, marginBottom: '0.3rem', lineHeight: '1.2'
+              }}>
+                {project.title}
+              </h3>
+              <p style={{ fontSize: '0.95rem', color: project.color, fontWeight: '600' }}>
+                {project.subtitle}
+              </p>
+            </div>
+            <span style={{
+              background: `${project.color}18`, color: project.color,
+              padding: '0.3rem 0.8rem', borderRadius: '20px',
+              fontSize: '11px', fontWeight: '700',
+              whiteSpace: 'nowrap', border: `1px solid ${project.color}25`
+            }}>
+              {project.category}
+            </span>
+          </div>
+
+          <p style={{
+            fontSize: '0.9rem', color: colors.textSecondary,
+            lineHeight: '1.65', marginBottom: '1.25rem',
+            display: '-webkit-box', WebkitLineClamp: 3,
+            WebkitBoxOrient: 'vertical', overflow: 'hidden'
+          }}>
+            {project.description}
+          </p>
+
+          <div style={{
+            display: 'flex', flexWrap: 'wrap', gap: '0.45rem',
+            marginBottom: '1.5rem'
+          }}>
+            {project.technologies.slice(0, 5).map((tech, i) => (
+              <TechTag key={i} size="medium">{tech}</TechTag>
+            ))}
+            {project.technologies.length > 5 && (
+              <span style={{
+                color: colors.textSecondary, fontSize: '0.78rem',
+                alignSelf: 'center', fontWeight: '500'
+              }}>
+                +{project.technologies.length - 5}
+              </span>
+            )}
+          </div>
+
+          <motion.div
+            className="project-button"
+            whileHover={{ scale: 1.03, boxShadow: `0 6px 24px ${project.color}45` }}
+            whileTap={{ scale: 0.97 }}
+            style={{
+              background: `linear-gradient(135deg, ${project.color}, ${project.color}aa)`,
+              color: '#fff', padding: '0.85rem 1.5rem',
+              borderRadius: '10px', textAlign: 'center',
+              fontWeight: '700', fontSize: '14px',
+              cursor: navigating ? 'wait' : 'pointer',
+              boxShadow: `0 4px 16px ${project.color}25`,
+              marginTop: 'auto', letterSpacing: '0.3px'
+            }}
+            onClick={(e) => handleProjectClick(project.id, e)}
+          >
+            {navigating ? '...' : `${t('viewProjectDetails')} →`}
+          </motion.div>
         </div>
+      </motion.div>
+    );
+  };
 
-        
-        <motion.div
-          className="project-button"
-          whileHover={{ 
-            scale: 1.05,
-            boxShadow: `0 4px 20px ${project.color}40`
-          }}
-          whileTap={{ scale: 0.98 }}
-          transition={{ 
-            duration: 0.2, 
-            ease: "easeOut"
-          }}
-          style={{
-            background: `linear-gradient(135deg, ${project.color}, ${project.color}80)`,
-            color: '#fff',
-            padding: '0.75rem 1.5rem',
-            borderRadius: '8px',
-            textAlign: 'center',
-            fontWeight: '600',
-            fontSize: '14px',
-            cursor: navigating ? 'wait' : 'pointer',
-            opacity: navigating ? 0.7 : 1,
-            boxShadow: `0 2px 10px ${project.color}20`,
-            marginTop: 'auto'
-          }}
-          onClick={(e) => handleProjectClick(project.id, e)}
-        >
-          {navigating ? t('loading') : t('viewProjectDetails')}
-        </motion.div>
-      </div>
-    </motion.div>
-  );
-
+  // ─── Render ─────────────────────────────────────────────────────────────────
   return (
     <section
       id="projects"
       style={{
-        padding: isMobile ? '2rem 1rem' : '5rem 0',
-        background: `linear-gradient(135deg, ${colors.surface} 0%, ${colors.background} 100%)`,
+        padding: isMobile ? '2.5rem 1rem' : '5.5rem 0',
+        background: `linear-gradient(180deg, ${colors.surface} 0%, ${colors.background} 100%)`,
         borderBottom: `1px solid ${colors.border}`
       }}
     >
       <div className="container">
         <SectionHeader
           title={t('projectsTitle')}
-          subtitle={isMobile ? 
-            'Key projects and achievements' : 
-            'A collection of projects showcasing my expertise in AI solutions, ERP integration, and innovative automation.'
+          subtitle={
+            isMobile
+              ? 'Proyectos clave y logros'
+              : 'AI solutions, ERP integration & innovative automation — built for impact.'
           }
           align="center"
         />
 
-        
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: isMobile ? '0.75rem' : '2rem',
-          marginBottom: isMobile ? '2rem' : '4rem',
-          padding: isMobile ? '0' : '0'
-        }}>
-          {projects.map((project, index) => 
-            isMobile ? (
-              <MobileProjectCard key={project.id} project={project} index={index} />
-            ) : (
-              <DesktopProjectCard key={project.id} project={project} index={index} />
-            )
-          )}
-        </div>
-
-        
+        {/* Projects grid */}
         <motion.div
-          initial={{ opacity: 1, y: 0 }}
+          className={isMobile ? 'projects-mobile-grid' : ''}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+          style={{
+            display: 'grid',
+            gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: isMobile ? '0.85rem' : '2rem',
+            marginBottom: isMobile ? '2.5rem' : '4.5rem',
+            perspective: '1200px'
+          }}
+        >
+          {projects.map((project) =>
+            isMobile
+              ? <MobileProjectCard key={project.id} project={project} />
+              : <DesktopProjectCard key={project.id} project={project} />
+          )}
+        </motion.div>
+
+        {/* Hackathons */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
           style={{
             background: colors.surface,
-            padding: isMobile ? '1.5rem' : '2rem',
-            borderRadius: '16px',
+            padding: isMobile ? '1.5rem' : '2.5rem',
+            borderRadius: '20px',
             border: `1px solid ${colors.border}`,
-            boxShadow: `0 4px 12px ${colors.shadow}`
+            boxShadow: `0 8px 32px ${colors.shadow}`
           }}
         >
           <h3 style={{
-            fontSize: isMobile ? '1.3rem' : '1.8rem',
-            fontWeight: '600',
-            color: colors.text,
-            marginBottom: '1rem',
+            fontSize: isMobile ? '1.2rem' : '1.6rem',
+            fontWeight: '700', color: colors.text,
+            marginBottom: isMobile ? '1rem' : '1.5rem',
             textAlign: 'center'
           }}>
             {isMobile ? 'Competitions' : 'Hackathons & Competitions'}
           </h3>
-          
-          <div style={{
-            display: isMobile ? 'flex' : 'grid',
-            flexDirection: isMobile ? 'column' : undefined,
-            gridTemplateColumns: isMobile ? undefined : 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: isMobile ? '1rem' : '1.5rem',
-            marginTop: isMobile ? '1rem' : '2rem'
-          }}>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: isMobile
+                ? 'repeat(auto-fit, minmax(140px, 1fr))'
+                : 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: isMobile ? '0.75rem' : '1.5rem'
+            }}
+          >
             {hackathons.map((hackathon, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 1, scale: 1 }}
-                whileHover={{ 
-                  y: -4, 
-                  scale: 1.02,
-                  boxShadow: `0 8px 24px ${hackathon.color}20`
-                }}
-                transition={{ 
-                  duration: 0.3, 
-                  ease: "easeOut",
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 20
-                }}
+                variants={hackathonVariants}
+                whileHover={{ y: -6, scale: 1.02, rotateX: -1 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 style={{
                   background: colors.background,
                   padding: isMobile ? '1rem' : '1.5rem',
-                  borderRadius: '12px',
-                  border: `1px solid ${colors.border}`,
+                  borderRadius: '14px',
+                  border: `1px solid ${hackathon.color}25`,
+                  borderTop: `3px solid ${hackathon.color}`,
                   textAlign: 'center',
-                  cursor: 'pointer',
-                  transform: 'translateZ(0)',
-                  backfaceVisibility: 'hidden'
+                  transformStyle: 'preserve-3d'
                 }}
               >
-                <h4 style={{
-                  fontSize: isMobile ? '1rem' : '1.2rem',
-                  fontWeight: '600',
-                  color: colors.text,
-                  marginBottom: '0.75rem',
-                  lineHeight: '1.2'
+                <div style={{
+                  width: '36px', height: '36px',
+                  background: `${hackathon.color}18`,
+                  borderRadius: '50%',
+                  margin: '0 auto 0.75rem',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  border: `2px solid ${hackathon.color}30`
                 }}>
-                  {isMobile ? hackathon.title.replace('Final Showcase', '').trim() : hackathon.title}
+                  <div style={{
+                    width: '10px', height: '10px',
+                    background: hackathon.color,
+                    borderRadius: '50%',
+                    boxShadow: `0 0 8px ${hackathon.color}`
+                  }} />
+                </div>
+
+                <h4 style={{
+                  fontSize: isMobile ? '0.85rem' : '1.1rem',
+                  fontWeight: '700', color: colors.text,
+                  marginBottom: '0.6rem', lineHeight: '1.3'
+                }}>
+                  {isMobile
+                    ? hackathon.title.replace('Final Showcase', '').replace('2025', '').trim()
+                    : hackathon.title}
                 </h4>
-                
-                <StatusBadge 
-                  status={hackathon.status} 
-                  size={isMobile ? 'small' : 'medium'}
-                />
-                
+
+                <StatusBadge status={hackathon.status} size={isMobile ? 'small' : 'medium'} />
+
                 {!isMobile && (
                   <p style={{
-                    fontSize: '0.95rem',
-                    color: colors.textSecondary,
-                    lineHeight: '1.5'
+                    fontSize: '0.88rem', color: colors.textSecondary,
+                    lineHeight: '1.55', marginTop: '0.75rem',
+                    display: '-webkit-box', WebkitLineClamp: 3,
+                    WebkitBoxOrient: 'vertical', overflow: 'hidden'
                   }}>
                     {hackathon.description}
                   </p>
                 )}
+
+                <div style={{
+                  marginTop: '0.75rem',
+                  fontSize: '0.78rem', color: hackathon.color,
+                  fontWeight: '600'
+                }}>
+                  {hackathon.period}
+                </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
   );
 };
 
-export default ProjectsSection; 
+export default ProjectsSection;

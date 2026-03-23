@@ -4,6 +4,7 @@ import { LanguageProvider } from './hook/LanguageContext';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import ProjectDetail from './pages/ProjectDetail';
+import AgenticChat from './components/AgenticChat';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/project/:projectId" element={<ProjectDetail />} />
             </Routes>
+            <AgenticChat />
           </div>
         </Router>
       </ThemeProvider>
